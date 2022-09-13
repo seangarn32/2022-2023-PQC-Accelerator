@@ -13,6 +13,8 @@ architecture rtl of pqc_accelerator_top is
     signal ena :  std_logic;
 
     signal A0       : std_logic_vector(N_SIZE-1 downto 0);
+    signal B        : b_matrix;
+
     signal A1       : a_matrix;
     signal A2       : a_matrix;
     signal A3       : a_matrix;
@@ -20,15 +22,6 @@ architecture rtl of pqc_accelerator_top is
     signal A5       : a_matrix;
     signal A6       : a_matrix;
     signal A7       : a_matrix;
-
-    signal B        : b_matrix := ("11000101",
-                                   "00000000",
-                                   "00000000",
-                                   "10111000",
-                                   "00000000",
-                                   "00000000",
-                                   "00000000",
-                                   "00000000");
 
 --    signal C0       : b_matrix;
     signal C1       : b_matrix;
