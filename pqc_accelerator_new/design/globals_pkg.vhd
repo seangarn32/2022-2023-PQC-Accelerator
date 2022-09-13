@@ -6,4 +6,7 @@ package globals_pkg is
 
     constant N_SIZE : integer := 8;
 
+    type a_matrix is array (0 to N_SIZE-1) of std_logic_vector(1 downto 0);
+    type b_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
+
 end package;
