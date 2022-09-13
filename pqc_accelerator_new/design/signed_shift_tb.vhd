@@ -8,7 +8,7 @@ end entity;
 
 architecture tb of signed_shift_tb is
 
-    signal A_in : a_matrix := ("00", "00", "00", "00", "00", "00", "00", "00");
+    signal A_in : a_matrix := ("01", "00", "00", "00", "00", "00", "00", "01");
     signal A_nxt: a_matrix;
 
 begin

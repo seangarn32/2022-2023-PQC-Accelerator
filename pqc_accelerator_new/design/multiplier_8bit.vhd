@@ -21,7 +21,7 @@ begin
         for i in 0 to N_SIZE-1 loop
             for j in 0 to 7 loop
                 C_hold(i)(j) <= (A(i)(0)) AND B(j);
-                wait;
+                wait for 1 ns;
             end loop;
 
             if((A(i)(1)) = '1') then

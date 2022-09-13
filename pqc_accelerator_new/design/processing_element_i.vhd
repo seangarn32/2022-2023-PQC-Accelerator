@@ -27,8 +27,8 @@ begin
     -- Sign A
     process begin
         for i in 0 to N_SIZE-1 loop
-            A_sign(i) <= '0' & A(i);
-            wait;
+            A_sign(N_SIZE-1-i) <= '0' & A(i);
+            wait for 1 ns;
         end loop;
     end process;
 

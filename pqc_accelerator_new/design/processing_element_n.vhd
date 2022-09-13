@@ -43,7 +43,7 @@ begin
     process begin
         for i in 0 to N_SIZE-1 loop
             C_sum(i) <= C_in(i) + C_mult(i);
-            wait;
+            wait for 1 ns;
         end loop;
     end process;
 

@@ -18,7 +18,7 @@ begin
 
         for i in 1 to N_SIZE-1 loop
             A_nxt(i) <= A_in(i-1);
-            wait;
+            wait for 1 ns;
         end loop;
 
     end process;

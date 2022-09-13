@@ -21,10 +21,10 @@ architecture rtl of pqc_accelerator_top is
     signal A6       : a_matrix;
     signal A7       : a_matrix;
 
-    signal B        : b_matrix := ("00000000",
+    signal B        : b_matrix := ("11000101",
                                    "00000000",
                                    "00000000",
-                                   "00000000",
+                                   "10111000",
                                    "00000000",
                                    "00000000",
                                    "00000000",
