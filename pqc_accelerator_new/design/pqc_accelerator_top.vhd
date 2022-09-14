@@ -24,7 +24,7 @@ architecture rtl of pqc_accelerator_top is
 
 begin
 
-    PE0 :   entity work.processing_element_i(rtl)
+    PE_0 :   entity work.processing_element_i(rtl)
         port map(
             clk,
             rst,
@@ -36,7 +36,7 @@ begin
         );
 
     PE_GEN : for i in 1 to N_SIZE-2 generate
-        PE_N : entity work.processing_element_n(rtl)
+        PE : entity work.processing_element_n(rtl)
             port map(
                 clk,
                 rst,
@@ -49,14 +49,14 @@ begin
             );
     end generate PE_GEN;
 
-    PE_F :   entity work.processing_element_n(rtl)
+    PE_N :   entity work.processing_element_n(rtl)
         port map(
             clk,
             rst,
             ena,
-            A(7),
-            B(7),
-            C(7),
+            A(N_SIZE-1),
+            B(N_SIZE-1),
+            C(N_SIZE-1),
             A_out,
             C_out
         );
