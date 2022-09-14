@@ -6,62 +6,68 @@ use work.globals_pkg.all;
 entity fsm is
     port ( 
         reset : in  STD_LOGIC;
-        input : in  STD_LOGIC;
-        output : out  STD_LOGIC;
+        start : in  STD_LOGIC;
         clk : in  STD_LOGIC
     );
 end fsm;
 
-architecture Behavioral of fsm is
+architecture rtl of fsm is
 
-    type state_available is (PE0,PE1,PE2,PE3,PE4,PE5,PE6,PE7);  --type of state machine.
+    type state_available is (SETUP, DATA_IN, PE, DATA_OUT);  --type of state machine.
     signal present_state,next_state: state_available;
+    signal counter: STD_LOGIC_VECTOR(7 downto 0);
+    signal counter_ena: STD_LOGIC;
+    signal counter_reset: STD_LOGIC;
 
 begin
     process (clk,reset)
     begin
         if (reset='1') then
-            present_state<= A;  --default state on reset.
+            present_state<= SETUP;  --default state on reset.
         elsif (rising_edge(clk)) then
             present_state<= next_state;   --state change.
         end if;
     end process;
 
-    process (present_state,input)
+    STATE_COUNTER: entity work.counter(rtl)
+            port map (
+                clk, counter_reset, counter_ena, counter
+            );
+
+    process (present_state)
     begin
         case present_state is
-            when A =>        --when current state is "A"
-                if(input ='0') then
-                    output <= '1';
-                    next_state<= C;
+            when SETUP =>        --when current state is "A"
+                counter_reset <= '1';
+                if(start ='0') then
+                    next_state <= SETUP;
                 else
-                    output <= '0';
-                    next_state<= B;
+                    next_state <= DATA_IN; -- once we flip a switch, it will move to DATA_IN
                 end if;  
-            when B =>        --when current state is "B"
-                if(input ='0') then
-                    output <= '0';
-                    next_state<= D;
+            when DATA_IN =>        --when current state is "B"
+                counter_ena <= '1';
+                if(counter > "00010000") then
+                    next_state <= PE;
+                    counter_ena <= '0';
                 else
-                    output <= '1';
-                    next_state<= B;
+                    next_state<= DATA_IN;
                 end if;
-            when C =>       --when current state is "C"
-                if(input ='0') then
-                    output <= '1';
-                    next_state<= D;
+            when PE =>       --when current state is "C"
+                counter_ena <= '1';
+                if(counter = "11111111") then
+                    next_state <= DATA_OUT;
+                    counter_ena <= '0';
                 else
-                    output <= '1';
-                    next_state<= C;
+                    next_state<= PE;
                 end if;
-            when D =>         --when current state is "D"
-                if(input ='0') then
-                    output <= '1';
-                    next_state<= A;
+            when DATA_OUT =>         --when current state is "D"
+                counter_ena <= '1';
+                if(counter = "11111111") then
+                    next_state <= SETUP;
+                    counter_ena <= '0';
                 else
-                    output <= '0';
-                    next_state<= D;
+                    next_state<= DATA_OUT;
                 end if;
         end case;
     end process;
-end Behavioral;
+end rtl;
