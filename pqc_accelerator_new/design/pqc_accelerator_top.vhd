@@ -19,44 +19,15 @@ end entity;
 
 architecture rtl of pqc_accelerator_top is
 
-    signal A    : a_wire;
-    signal C    : c_wire;
-
 begin
 
-    PE_0 :   entity work.processing_element_i(rtl)
+    PE_CHAIN : entity work.pe_chain(rtl)
         port map(
             clk,
             rst,
             ena,
             A0,
-            B(0),
-            A(1),
-            C(1)
-        );
-
-    PE_GEN : for i in 1 to N_SIZE-2 generate
-        PE : entity work.processing_element_n(rtl)
-            port map(
-                clk,
-                rst,
-                ena,
-                A(i),
-                B(i),
-                C(i),
-                A(i+1),
-                C(i+1)
-            );
-    end generate PE_GEN;
-
-    PE_N :   entity work.processing_element_n(rtl)
-        port map(
-            clk,
-            rst,
-            ena,
-            A(N_SIZE-1),
-            B(N_SIZE-1),
-            C(N_SIZE-1),
+            B,
             A_out,
             C_out
         );
