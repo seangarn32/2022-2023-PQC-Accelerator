@@ -14,24 +14,22 @@ end entity;
 architecture rtl of multiplier_8bit is
 
     signal C_hold   : b_matrix;
+    signal C_inv    : b_matrix;
 
 begin
-    process begin
-    
-        for i in 0 to N_SIZE-1 loop
-            for j in 0 to 7 loop
-                C_hold(i)(j) <= (A(i)(0)) AND B(j);
-                wait for 1 ns;
-            end loop;
 
-            if((A(i)(1)) = '1') then
-                C_hold(i) <= NOT(C_hold(i)) + "00000001";
-            end if;
+    LOOP_N : for i in 0 to N_SIZE-1 generate
 
-        end loop;
+        LOOP_8 : for j in 0 to 7 generate
+            C_hold(i)(j) <= (A(i)(0)) AND B(j);
+        end generate LOOP_8;
 
-        C <= C_hold;
+        C_inv(i) <= NOT(C_hold(i)) + "00000001" 
+                    when (A(i)(1)) = '1'
+                    else C_hold(i);
 
-    end process;
+    end generate LOOP_N;
+
+    C <= C_inv;
 
 end rtl;
