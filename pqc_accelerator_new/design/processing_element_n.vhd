@@ -40,12 +40,9 @@ begin
         );
 
     -- Accumulate (+) C values -> C_sum
-    process begin
-        for i in 0 to N_SIZE-1 loop
-            C_sum(i) <= C_in(i) + C_mult(i);
-            wait for 1 ns;
-        end loop;
-    end process;
+    SUM : for i in 0 to N_SIZE-1 generate
+        C_sum(i) <= C_in(i) + C_mult(i);
+    end generate SUM;
 
     -- Register Output -> C_out
     REG_SUM :   entity work.reg_aclr_en_8bit(arch)
