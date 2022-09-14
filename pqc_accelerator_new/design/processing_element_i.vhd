@@ -25,12 +25,9 @@ architecture rtl of processing_element_i is
 begin
 
     -- Sign A
-    process begin
-        for i in 0 to N_SIZE-1 loop
-            A_sign(N_SIZE-1-i) <= '0' & A(i);
-            wait for 1 ns;
-        end loop;
-    end process;
+    SIGN_A : for i in 0 to N_SIZE-1 generate
+        A_sign(N_SIZE-1-i) <= '0' & A(i);
+    end generate SIGN_A;
 
     -- Determine A(n+1) -> A_nxt
     OUT_A_NXT : entity work.signed_shift(rtl)

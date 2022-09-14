@@ -4,7 +4,7 @@ force clk 0 0 ns, 1 10 ns -r 20 ns
 force rst 1 0 ns, 0 10 ns
 force ena 1
 
-force A0 	"00010001"
+force A0 	"11111111"
 force B(0) 	"00000000"
 force B(1) 	"00000000"
 force B(2) 	"00000000"

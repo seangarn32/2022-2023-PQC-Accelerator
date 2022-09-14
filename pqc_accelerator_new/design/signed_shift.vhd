@@ -12,14 +12,11 @@ end entity;
 
 architecture rtl of signed_shift is
 begin
-    process begin
 
-        A_nxt(0) <= (NOT(A_in(N_SIZE-1)(1)) & NOT(A_in(N_SIZE-1)(0))) + "01";
+    A_nxt(0) <= NOT(A_in(N_SIZE-1)) + "01";
 
-        for i in 1 to N_SIZE-1 loop
-            A_nxt(i) <= A_in(i-1);
-            wait for 1 ns;
-        end loop;
+    SHIFT : for i in 1 to N_SIZE-1 generate
+        A_nxt(i) <= A_in(i-1);
+    end generate SHIFT;
 
-    end process;
 end rtl;
