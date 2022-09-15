@@ -15,20 +15,24 @@ end entity;
 
 architecture rtl of counter is
 
-    signal counter  : std_logic_vector(7 downto 0) := "00000000";
+    signal count        : std_logic_vector(7 downto 0) := "00000000";
+    signal count_nxt    : std_logic_vector(7 downto 0) := "00000000";
 
 begin
 
+    count_nxt <= count + "00000001" when count < "11111111"
+                 else "00000000";
+
     process (clk, rst, ena) begin
-        if (rst = '0') then
-            counter <= "00000000"; 
+        if (rst = '1') then
+            count <= "00000000"; 
         else 
             if (clk'event and clk = '1' and ena = '1') then
-                counter <= counter + "00000001";
+                count <= count_nxt;
             end if;
         end if;
     end process;
 
-    cnt <= counter;
+    cnt <= count;
 
 end rtl;
