@@ -20,7 +20,7 @@ architecture rtl of counter is
 
 begin
 
-    count_nxt <= count + "00000001" when count < "11111111"
+    count_nxt <= count + "00000001" when count < N_SIZE-1
                  else "00000000";
 
     process (clk, rst, ena) begin
