@@ -8,6 +8,7 @@ entity processing_element_n is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
+        
         A       : in    a_matrix;
         B       : in    std_logic_vector(7 downto 0);
         C_in    : in    b_matrix;
