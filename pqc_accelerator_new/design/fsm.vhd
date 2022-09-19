@@ -5,9 +5,13 @@ use work.globals_pkg.all;
 
 entity fsm is
     port ( 
-        reset : in  STD_LOGIC;
-        start : in  STD_LOGIC;
-        clk : in  STD_LOGIC
+        clk : in  STD_LOGIC;
+        rst : in  STD_LOGIC;
+        ena : in  STD_LOGIC;
+
+        dsi_ena : out   std_logic;
+        pe_ena  : out   std_logic;
+        dso_ena : out   std_logic
     );
 end fsm;
 
@@ -26,10 +30,10 @@ begin
                 clk, counter_reset, counter_ena, counter
             );
 
-    process (clk, reset)
+    process (clk, rst)
     begin
         if falling_edge(clk) then
-            if (reset='1') then
+            if (rst='1') then
                 present_state <= SETUP;  --default state on reset.
                 counter_reset <= '0';
             else 
@@ -38,10 +42,14 @@ begin
 
                     when SETUP =>        --when current state is "A"
                         counter_reset <= '1';
-                        if(start = '0') then
+                        if(ena = '0') then
                             present_state <= SETUP;
+                            dsi_ena <= '0';
+                            pe_ena <= '0';
+                            dso_ena <= '0';
                         else
                             present_state <= DATA_IN; -- once we flip a switch, it will move to DATA_IN
+                            dsi_ena <= '1';
                         end if;  
 
                     when DATA_IN =>        --when current state is "B"
@@ -49,6 +57,8 @@ begin
                         counter_reset <= '0';
                         if(counter = N_SIZE-1) then
                             present_state <= PE;
+                            pe_ena <= '1';
+                            dsi_ena <= '0';
                         else
                             present_state<= DATA_IN;
                         end if;
@@ -57,6 +67,8 @@ begin
                         counter_ena <= '1';
                         if(counter = N_SIZE-1) then
                             present_state <= DATA_OUT;
+                            pe_ena <= '0';
+                            dso_ena <= '1';
                         else
                             present_state<= PE;
                         end if;
@@ -65,6 +77,7 @@ begin
                         counter_ena <= '1';
                         if(counter = N_SIZE-1) then
                             present_state <= SETUP;
+                            dso_ena <= '0';
                         else
                             present_state<= DATA_OUT;
                         end if;
