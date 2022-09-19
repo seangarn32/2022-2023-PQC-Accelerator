@@ -16,7 +16,7 @@ end entity;
 
 architecture rtl of data_shift_in is
 
-    signal d    : b_matrix;
+    signal d       : b_matrix;
 
 begin
 
