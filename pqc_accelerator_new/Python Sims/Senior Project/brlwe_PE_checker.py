@@ -15,7 +15,7 @@ def ring(value):
     while value >= MAXVAL:
         value -= MAXVAL
     while value <= -1*MAXVAL:
-        value+= -1*MAXVAL
+        value += MAXVAL
     return value
 
 matA = circulant([random.randint(0, 1) for i in range(N)])
