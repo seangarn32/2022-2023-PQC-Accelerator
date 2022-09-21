@@ -5,9 +5,9 @@ use work.globals_pkg.all;
 
 entity fsm is
     port ( 
-        clk : in  STD_LOGIC;
-        rst : in  STD_LOGIC;
-        ena : in  STD_LOGIC;
+        clk : in  std_logic;
+        rst : in  std_logic;
+        ena : in  std_logic;
 
         dsi_ena : out   std_logic;
         pe_ena  : out   std_logic;
@@ -19,9 +19,10 @@ architecture rtl of fsm is
 
     type state_available is (SETUP, DATA_IN, PE, DATA_OUT);  --type of state machine.
     signal present_state: state_available;
-    signal counter: STD_LOGIC_VECTOR(7 downto 0);
-    signal counter_ena: STD_LOGIC;
-    signal counter_reset: STD_LOGIC;
+    
+    signal counter : std_logic_vector(7 downto 0);
+    signal counter_ena : std_logic;
+    signal counter_reset : std_logic;
 
 begin
 
