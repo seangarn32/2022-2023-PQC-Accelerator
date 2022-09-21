@@ -13,7 +13,6 @@ entity processing_element_n is
         B       : in    std_logic_vector(7 downto 0);
         C_in    : in    b_matrix;
 
-        A_nxt   : out   a_matrix;
         C_out   : out   b_matrix
     );
 end entity;
@@ -24,14 +23,6 @@ architecture rtl of processing_element_n is
     signal C_sum  : b_matrix;
 
 begin
-
-    -- Determine A(n+1) -> A_nxt
-    OUT_A_NXT : entity work.signed_shift(rtl)
-        port map(
-            A,
-            A_nxt
-        );
-
     -- Multiply AxB -> C_mult
     MULT :      entity work.multiplier_8bit(rtl)
         port map(
