@@ -12,34 +12,19 @@ entity processing_element_i is
         A       : in    std_logic_vector(N_SIZE-1 downto 0);
         B       : in    std_logic_vector(7 downto 0);
 
-        A_nxt   : out   a_matrix;
         C_out   : out   b_matrix
     );
 end entity;
 
 architecture rtl of processing_element_i is
 
-    signal A_sign : a_matrix;
     signal C_mult : b_matrix;
 
 begin
-
-    -- Sign A
-    SIGN_A : for i in 0 to N_SIZE-1 generate
-        A_sign(N_SIZE-1-i) <= '0' & A(i);
-    end generate SIGN_A;
-
-    -- Determine A(n+1) -> A_nxt
-    OUT_A_NXT : entity work.signed_shift(rtl)
-        port map(
-            A_sign,
-            A_nxt
-        );
-
     -- Multiply AxB -> C_mult
     MULT :      entity work.multiplier_8bit(rtl)
         port map(
-            A_sign,
+            A,
             B,
             C_mult
         );
