@@ -8,7 +8,6 @@ from PE_checker_do_maker import *
 N = 8 
 MAXVAL = 127
 
-
 #Definition of ring method
 #ring truncates 
 def ring(value):
