@@ -19,18 +19,42 @@ from fileCreate import *
 
 N = 8
 
-matA = circulant([1 for i in range(N)])
+def bool2int(x):
+    y = 0
+    for i,j in enumerate(x):
+        y += j<<i
+    return y
+
+
+matA = circulant([1,0,1,1,0,1,1,1])
 for i in range(N):
     for j in range(N):
         if j > i:
              matA[i][j] = - matA[i][j]
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
-#matA = np.array([1,1,1,1,1,1,1,1])
-matB = np.array([0,1,0,0,0,0,0,1])
+matA = np.flip(matA)
+matB = np.array([[0,0,0,1,1,1,1,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[1,0,1,0,1,0,0,0],[0,0,0,0,0,0,0,0],[0,0,1,1,1,1,0,0],[0,0,0,0,0,0,0,1],[0,0,1,1,1,1,0,0]])
 
 print("\nMatrix B", matB)
 
-matD = numpy.matmul(matA,matB)
+#matA = np.transpose(matA)
+#print("\nTransposed Matrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
-print("\nResult:\n", matD)
+i = 0
+j = 0
+matC = np.empty((8,8))
+#sumS = np.empty((1,8))
+while i < N:
+    while j < N:
+        matC[i][j] = matA[j][i]*matB[i] #matC row 0 is a list of B0 x a1,a2,a3...
+        j+=1
+    i+=1
+        
+        
+        
+        
+print(matC)
+sumS[i] = [bool2int(matC[::-1]) for x in matC]
+i+=1
+print(sumS)
