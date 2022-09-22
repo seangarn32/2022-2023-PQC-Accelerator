@@ -6,7 +6,7 @@ from scipy.linalg import circulant
 from PE_checker_do_maker import *
 
 N = 8 
-MAXVAL = 127
+MAXVAL = 128
 
 #Definition of ring method
 #ring truncates 
@@ -14,11 +14,7 @@ def ring(value):
     while value >= MAXVAL:
         value -= MAXVAL
     while value <= -1*MAXVAL:
-<<<<<<< HEAD
-        value+= MAXVAL
-=======
         value += MAXVAL
->>>>>>> 50b13e31941e49d36ddb244b8fea06a13fa328f1
     return value
 
 matA = circulant([random.randint(0, 1) for i in range(N)])
@@ -42,20 +38,19 @@ print("\nMatrix D  (", len(matD[:]), "x", len(matD[0]), "):\n", matD)
 
 matE = np.zeros([N])
 
-
 for i in range(N):
     matE[i] = np.sum(matD[i])
 for k in range(N):
     matE[k] = ring(matE[k])
-
-print("\nMatrix E (Sums of D rows) ( 1 x",len(matE),"):\n", matE)
+matE[-1] = 0
+print("\nMatrix E (Sums of D rows, last value is 0 since the final sum is not used) ( 1 x",len(matE),"):\n", matE)
 
 matF = np.zeros([N])
 for i in range(N):
-    matF[i] = np.sum(matD[i]+matE[i])
+    matF[i] = sum(matD[i])+matE[i-1]
 for k in range(N):
     matF[k] = ring(matF[k])
 
-print("\nMatrix F (Final Accumulator) ( 1 x",len(matF),"):\n", matF)
+print("\nMatrix F (Final Accumulation, Dn+En-1) (",len(matF),"x 1 ):\n", matF)
 
 createFile(matA, matB, "PE_checker.do")
