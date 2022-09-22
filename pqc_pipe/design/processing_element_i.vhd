@@ -9,7 +9,7 @@ entity processing_element_i is
         rst     : in    std_logic;
         ena     : in    std_logic;
         
-        A       : in    std_logic_vector(N_SIZE-1 downto 0);
+        A       : in    a_matrix;
         B       : in    std_logic_vector(7 downto 0);
 
         C_out   : out   b_matrix
