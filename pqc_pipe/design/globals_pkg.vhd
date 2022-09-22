@@ -13,6 +13,6 @@ package globals_pkg is
     type a_wire is array (1 to N_SIZE-1) of a_matrix;
     type c_wire is array (1 to N_SIZE-1) of b_matrix;
 
-    type a_mux_input is array (0 to (N_SIZE / DIVIDE) - 1) of std_logic_vector(N_SIZE-1 downto 0);
+    type a_mux_input is array (0 to (N_SIZE / DIVIDE)/4) of std_logic_vector(1 downto 0);
 
 end package;
