@@ -6,7 +6,7 @@ from scipy.linalg import circulant
 from PE_checker_do_maker import *
 
 N = 8 
-MAXVAL = 127
+MAXVAL = 128
 
 #Definition of ring method
 #ring truncates 
@@ -37,7 +37,6 @@ matD = np.transpose(matD)
 print("\nMatrix D  (", len(matD[:]), "x", len(matD[0]), "):\n", matD)
 
 matE = np.zeros([N])
-
 
 for i in range(N):
     matE[i] = np.sum(matD[i])
