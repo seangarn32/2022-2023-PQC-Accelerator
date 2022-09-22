@@ -42,15 +42,15 @@ for i in range(N):
     matE[i] = np.sum(matD[i])
 for k in range(N):
     matE[k] = ring(matE[k])
-
-print("\nMatrix E (Sums of D rows) ( 1 x",len(matE),"):\n", matE)
+matE[-1] = 0
+print("\nMatrix E (Sums of D rows, last value is 0 since the final sum is not used) ( 1 x",len(matE),"):\n", matE)
 
 matF = np.zeros([N])
 for i in range(N):
-    matF[i] = np.sum(matD[i]+matE[i])
+    matF[i] = sum(matD[i])+matE[i-1]
 for k in range(N):
     matF[k] = ring(matF[k])
 
-print("\nMatrix F (Final Accumulator) ( 1 x",len(matF),"):\n", matF)
+print("\nMatrix F (Final Accumulation, Dn+En-1) (",len(matF),"x 1 ):\n", matF)
 
 createFile(matA, matB, "PE_checker.do")
