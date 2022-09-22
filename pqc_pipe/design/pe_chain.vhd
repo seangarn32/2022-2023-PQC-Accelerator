@@ -48,7 +48,7 @@ begin
 
         A_MUX : entity work.a_mux(rtl)
             port map(
-                A_hold(DIVIDE*i),
+                A_hold(i),
                 A_sel(i),
 
                 A_mux2pe(i)
@@ -63,7 +63,7 @@ begin
 
         B_MUX : entity work.b_mux(rtl)
             port map(
-                B_hold(DIVIDE*i),
+                B_hold(i),
                 B_sel(i),
 
                 B_mux2pe(i)

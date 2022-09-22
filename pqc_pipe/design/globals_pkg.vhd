@@ -14,9 +14,10 @@ package globals_pkg is
 
     type a_matrix is array (0 to N_SIZE-1) of std_logic_vector(1 downto 0);
     type b_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
+    type c_matrix is array (0 to MUX_NUM-1) of std_logic_vector(7 downto 0);
 
     type a_wire is array (0 to N_SIZE-1) of a_matrix;
-    type c_wire is array (0 to N_SIZE-1) of b_matrix;
+    type c_wire is array (0 to MUX_NUM-1) of c_matrix;
 
     type a_wire_mux2pe is array (0 to MUX_NUM-1) of a_matrix;
     type b_wire_mux2pe is array (0 to MUX_NUM-1) of std_logic_vector(7 downto 0);
@@ -26,8 +27,8 @@ package globals_pkg is
 
     type b_mux_input is array (0 to DIVIDE-1) of std_logic_vector(7 downto 0);
     type b_mux_input_wire is array (0 to MUX_NUM-1) of b_mux_input;
-    
-    type mux_sel_array is array (0 to MUX_NUM) of std_logic_vector(MUX_SEL_SIZE-1 downto 0); 
+
+    type mux_sel_array is array (0 to MUX_NUM-1) of std_logic_vector(MUX_SEL_SIZE-1 downto 0); 
 
 
 end package;
