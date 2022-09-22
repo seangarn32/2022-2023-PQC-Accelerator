@@ -49,12 +49,6 @@ while i < N:
     while j < N:
         matC[i][j] = matA[j][i]*matB[i] #matC row 0 is a list of B0 x a1,a2,a3...
         j+=1
-    i+=1
-        
-        
-        
+    i+=1        
         
 print(matC)
-sumS[i] = [bool2int(matC[::-1]) for x in matC]
-i+=1
-print(sumS)

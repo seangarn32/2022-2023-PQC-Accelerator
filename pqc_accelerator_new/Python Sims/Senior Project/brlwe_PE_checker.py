@@ -5,45 +5,53 @@ import random
 from scipy.linalg import circulant
 from PE_checker_do_maker import *
 
+N = 8 
+MAXVAL = 127
+
 #Definition of ring method
-#ring decrements value by 256 until value < 256
+#ring truncates 
 def ring(value):
-    while value >= 256:
-        value -= 256
-    while value <= 0:
-        value+= 256
+    while value >= MAXVAL:
+        value -= MAXVAL
+    while value <= -1*MAXVAL:
+        value += MAXVAL
     return value
 
-N = 8
-
 matA = circulant([random.randint(0, 1) for i in range(N)])
-
+print(matA)
 for i in range(N):
     for j in range(N):
-        if j > i:
+        if i > j:
             matA[i][j] = -1*matA[i][j]
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
-matB = [[random.randint(0,255)] for i in range(N)]
+matB = [[random.randint(0,MAXVAL)] for i in range(N)]
 print("\nMatrix B  (", len(matB[:]), "x", len(matB[0]), "):\n", matB)
 
 matD = np.empty([N,N])
 
 for i in range(N):
     for j in range(N):
-        matD[i][j] = matA[j][i]*matB[i][0]
-
+        matD[i][j] = matA[i][j]*matB[i][0]
+matD = np.transpose(matD)
 print("\nMatrix D  (", len(matD[:]), "x", len(matD[0]), "):\n", matD)
 
-matFinal = np.zeros([N])
+matE = np.zeros([N])
 
 
 for i in range(N):
-    matFinal[i] = np.sum(matD[i])
-
+    matE[i] = np.sum(matD[i])
 for k in range(N):
-    matFinal[k] = ring(matFinal[k])
+    matE[k] = ring(matE[k])
 
-print("\nFinal Output (1 x", len(matFinal),"):\n", matFinal)
+print("\nMatrix E (Sums of D rows) ( 1 x",len(matE),"):\n", matE)
+
+matF = np.zeros([N])
+for i in range(N):
+    matF[i] = np.sum(matD[i]+matE[i])
+for k in range(N):
+    matF[k] = ring(matF[k])
+
+print("\nMatrix F (Final Accumulator) ( 1 x",len(matF),"):\n", matF)
 
 createFile(matA, matB, "PE_checker.do")
