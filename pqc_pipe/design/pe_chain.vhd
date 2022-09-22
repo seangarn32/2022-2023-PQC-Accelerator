@@ -19,19 +19,43 @@ end entity;
 
 architecture rtl of pe_chain is
 
+    signal A_sel : a_matrix; 
+    signal B_sel : 
+
     signal A    : a_wire;
     signal C    : c_wire;
 
 begin
+
+    CIRC : entity work.circulant(rtl)
+        port map(
+            A0,
+            A
+        );
+
+    MUX_A_GEN : for i in 0 to (N_SIZE/DIVIDE)-1 generate 
+        entity work.MUX_A_NAME(rtl)
+            port map(
+
+            );
+    end generate MUX_A_GEN;
+
+    MUX_B_GEN : for i in 0 to (N_SIZE/DIVIDE)-1 generate 
+        entity work.MUX_B_NAME(rtl)
+            port map(
+
+            );
+    end generate MUX_B_GEN;
 
     PE_0 :   entity work.processing_element_i(rtl)
         port map(
             clk,
             rst,
             ena,
-            A0,
+
+            A(0),
             B(0),
-            A(1),
+
             C(1)
         );
 
@@ -41,10 +65,11 @@ begin
                 clk,
                 rst,
                 ena,
+
                 A(i),
                 B(i),
                 C(i),
-                A(i+1),
+
                 C(i+1)
             );
     end generate PE_GEN;
@@ -54,10 +79,11 @@ begin
             clk,
             rst,
             ena,
+
             A(N_SIZE-1),
             B(N_SIZE-1),
             C(N_SIZE-1),
-            A_out,
+
             C_out
         );
 
