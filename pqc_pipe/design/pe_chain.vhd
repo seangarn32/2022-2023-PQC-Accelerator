@@ -10,40 +10,62 @@ entity pe_chain is
         ena     : in    std_logic;
 
         A0      : in    std_logic_vector(N_SIZE-1 downto 0);
-        B       : in    b_matrix;
+        A_sel   : in    mux_sel_array;
 
-        A_out   : out   a_matrix;
-        C_out   : out   b_matrix
+        B       : in    b_matrix;
+        B_sel   : in    mux_sel_array;
+
+        C_out   : out   c_matrix
     );
 end entity;
 
 architecture rtl of pe_chain is
 
-    signal A_sel : a_matrix; 
-    signal B_sel : 
+    signal A    : a_matrix;
 
-    signal A    : a_wire;
-    signal C    : c_wire;
+    signal A_hold : a_pe_input_array;
+    signal B_hold : b_pe_input_array;
+
+    signal A_mux2pe : a_mux2pe_array;
+    signal B_mux2pe : b_mux2pe_array;
+
+    signal C    : c_array;
 
 begin
 
-    CIRC : entity work.circulant(rtl)
+    CIRC_MATRIX : entity work.circulant(rtl)
         port map(
             A0,
             A
         );
 
-    MUX_A_GEN : for i in 0 to (N_SIZE/DIVIDE)-1 generate 
-        entity work.MUX_A_NAME(rtl)
-            port map(
+    MUX_A_GEN : for i in 0 to MUX_NUM-1 generate 
 
+        A_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
+            A_hold(i)(j) <= A(i*DIVIDE+j);
+        end generate A_HOLD_ASSIGN;
+
+        A_MUX : entity work.a_mux(rtl)
+            port map(
+                A_hold(i),
+                A_sel(i),
+
+                A_mux2pe(i)
             );
     end generate MUX_A_GEN;
 
-    MUX_B_GEN : for i in 0 to (N_SIZE/DIVIDE)-1 generate 
-        entity work.MUX_B_NAME(rtl)
-            port map(
+    MUX_B_GEN : for i in 0 to MUX_NUM-1 generate 
 
+        B_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
+            B_hold(i)(j) <= B(i*DIVIDE+j);
+        end generate B_HOLD_ASSIGN;
+
+        B_MUX : entity work.b_mux(rtl)
+            port map(
+                B_hold(i),
+                B_sel(i),
+
+                B_mux2pe(i)
             );
     end generate MUX_B_GEN;
 
@@ -53,21 +75,21 @@ begin
             rst,
             ena,
 
-            A(0),
-            B(0),
+            A_mux2pe(0),
+            B_mux2pe(0),
 
             C(1)
         );
 
-    PE_GEN : for i in 1 to N_SIZE-2 generate
+    PE_GEN : for i in 1 to MUX_NUM-2 generate
         PE : entity work.processing_element_n(rtl)
             port map(
                 clk,
                 rst,
                 ena,
 
-                A(i),
-                B(i),
+                A_mux2pe(i),
+                B_mux2pe(i),
                 C(i),
 
                 C(i+1)
@@ -80,9 +102,9 @@ begin
             rst,
             ena,
 
-            A(N_SIZE-1),
-            B(N_SIZE-1),
-            C(N_SIZE-1),
+            A_mux2pe(MUX_NUM-1),
+            B_mux2pe(MUX_NUM-1),
+            C(MUX_NUM-1),
 
             C_out
         );

@@ -9,18 +9,18 @@ entity processing_element_n is
         rst     : in    std_logic;
         ena     : in    std_logic;
         
-        A       : in    a_matrix;
+        A       : in    a_vector;
         B       : in    std_logic_vector(7 downto 0);
-        C_in    : in    b_matrix;
+        C_in    : in    c_matrix;
 
-        C_out   : out   b_matrix
+        C_out   : out   c_matrix
     );
 end entity;
 
 architecture rtl of processing_element_n is
 
-    signal C_mult : b_matrix;
-    signal C_sum  : b_matrix;
+    signal C_mult : c_matrix;
+    signal C_sum  : c_matrix;
 
 begin
     -- Multiply AxB -> C_mult
@@ -37,12 +37,13 @@ begin
     end generate SUM;
 
     -- Register Output -> C_out
-    REG_SUM :   entity work.reg_aclr_en_8bit(arch)
+    REG_SUM :   entity work.reg_nbit_matrix(rtl)
         port map(
             clk,
             rst,
             ena,
             C_sum,
+
             C_out
         );
 

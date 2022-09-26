@@ -5,8 +5,8 @@ use work.globals_pkg.all;
 
 entity signed_shift is
     port (
-        A_in    : in    a_matrix;
-        A_nxt   : out   a_matrix
+        A_in    : in    a_vector;
+        A_nxt   : out   a_vector
     );
 end entity;
 
