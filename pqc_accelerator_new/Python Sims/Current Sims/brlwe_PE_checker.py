@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import numpy 
+import numpy as np
 import random
 from scipy.linalg import circulant
 from PE_checker_do_maker import *
