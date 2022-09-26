@@ -12,7 +12,6 @@ entity pqc_accelerator_top is
         A_in    : in    std_logic;
         B_in    : in    std_logic_vector(7 downto 0);
 
-        A_out   : out   a_matrix;
         C_out   : out   std_logic_vector(7 downto 0)
     );
 end entity;
@@ -21,7 +20,7 @@ architecture rtl of pqc_accelerator_top is
 
     signal A : std_logic_vector(N_SIZE-1 downto 0);
     signal B : b_matrix;
-    signal C : b_matrix;
+    signal C : c_matrix;
 
     signal A_sel : mux_sel_array;
     signal B_sel : mux_sel_array;
@@ -68,7 +67,6 @@ begin
             B,
             B_sel,
 
-            A_out,
             C
         );
 

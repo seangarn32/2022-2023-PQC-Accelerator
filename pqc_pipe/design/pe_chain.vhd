@@ -15,22 +15,21 @@ entity pe_chain is
         B       : in    b_matrix;
         B_sel   : in    mux_sel_array;
 
-        A_out   : out   a_matrix;
-        C_out   : out   b_matrix
+        C_out   : out   c_matrix
     );
 end entity;
 
 architecture rtl of pe_chain is
 
-    signal A    : a_wire;
+    signal A    : a_matrix;
 
-    signal A_hold : a_mux_input_wire;
-    signal B_hold : b_mux_input_wire;
+    signal A_hold : a_pe_input_array;
+    signal B_hold : b_pe_input_array;
 
-    signal A_mux2pe : a_wire_mux2pe;
-    signal B_mux2pe : b_wire_mux2pe;
+    signal A_mux2pe : a_mux2pe_array;
+    signal B_mux2pe : b_mux2pe_array;
 
-    signal C    : c_wire;
+    signal C    : c_array;
 
 begin
 
