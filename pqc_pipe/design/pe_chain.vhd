@@ -23,8 +23,8 @@ architecture rtl of pe_chain is
 
     signal A    : a_matrix;
 
-    signal A_hold : a_pe_input_array;
-    signal B_hold : b_pe_input_array;
+    signal A_hold : a_mux_input_array;
+    signal B_hold : b_mux_input_array;
 
     signal A_mux2pe : a_mux2pe_array;
     signal B_mux2pe : b_mux2pe_array;

@@ -22,7 +22,7 @@ architecture rtl of processing_element_i is
 
 begin
     -- Multiply AxB -> C_mult
-    MULT :      entity work.multiplier_8bit(rtl)
+    MULT :      entity work.multiplier_nbit(rtl)
         port map(
             A,
             B,

@@ -18,16 +18,18 @@ end entity;
 
 architecture rtl of pqc_accelerator_top is
 
-    signal A : std_logic_vector(N_SIZE-1 downto 0);
-    signal B : b_matrix;
-    signal C : c_matrix;
+    signal A            : std_logic_vector(N_SIZE-1 downto 0);
+    signal B            : b_matrix;
+    signal C            : c_matrix;
+    signal C_accum      : c_matrix;
 
-    signal A_sel : mux_sel_array;
-    signal B_sel : mux_sel_array;
+    signal A_sel        : mux_sel_array;
+    signal B_sel        : mux_sel_array;
 
-    signal dsi_ena : std_logic;
-    signal pe_ena  : std_logic;
-    signal dso_ena : std_logic;
+    signal dsi_ena      : std_logic;
+    signal pe_ena       : std_logic;
+    signal accum_ena    : std_logic;
+    signal dso_ena      : std_logic;
 
 begin
 
@@ -70,12 +72,22 @@ begin
             C
         );
 
+    PE_ACCUM : entity work.pe_accum(rtl)
+        port map(
+            clk,
+            rst,
+            accum_ena,
+
+            C,
+            C_accum
+        );
+
     DSO : entity work.data_shift_out(rtl)
         port map(
             clk,
             rst,
             dso_ena,
-            C,
+            C_accum,
 
             C_out
         );
