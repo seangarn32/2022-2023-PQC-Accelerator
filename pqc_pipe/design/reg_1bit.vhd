@@ -8,7 +8,7 @@ entity reg_1bit is
         clk   : in    std_logic;
         rst   : in    std_logic;  
         ena   : in    std_logic;
-        
+
         d     : in    std_logic;
 
         q     : out   std_logic
@@ -19,7 +19,7 @@ architecture rtl of reg_1bit is
 begin
     process(clk)
 	begin
-        if (clk'event and clk = '1') then
+        if (rising_edge(clk)) then
             if (rst = '1') then
                 q <= '0';    
             else
