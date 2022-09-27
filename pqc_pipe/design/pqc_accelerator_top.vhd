@@ -23,8 +23,7 @@ architecture rtl of pqc_accelerator_top is
     signal C            : c_matrix;
     signal C_accum      : c_matrix;
 
-    signal A_sel        : mux_sel_array;
-    signal B_sel        : mux_sel_array;
+    signal pe_mux_sel   : mux_sel_array; 
 
     signal dsi_ena      : std_logic;
     signal pe_ena       : std_logic;
@@ -64,10 +63,8 @@ begin
             pe_ena,
 
             A,
-            A_sel,
-
             B,
-            B_sel,
+            pe_mux_sel,
 
             C
         );
