@@ -18,7 +18,9 @@ def ring(value):
     return value
 
 matA = circulant([random.randint(0, 1) for i in range(N)])
-print(matA)
+
+print("\nInitial column of matrix A: ",matA[0])
+
 for i in range(N):
     for j in range(N):
         if i > j:
@@ -28,26 +30,26 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 matB = [[random.randint(0,MAXVAL)] for i in range(N)]
 print("\nMatrix B  (", len(matB[:]), "x", len(matB[0]), "):\n", matB)
 
-matD = np.empty([N,N])
+matC = np.empty([N,N])
 
 for i in range(N):
     for j in range(N):
-        matD[i][j] = matA[i][j]*matB[i][0]
-matD = np.transpose(matD)
-print("\nMatrix D  (", len(matD[:]), "x", len(matD[0]), "):\n", matD)
+        matC[i][j] = matA[i][j]*matB[i][0]
+matC = np.transpose(matC)
+print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
 
-matE = np.zeros([N])
+matD = np.zeros([N])
 
 for i in range(N):
-    matE[i] = np.sum(matD[i])
+    matD[i] = np.sum(matC[i])
 for k in range(N):
-    matE[k] = ring(matE[k])
-matE[-1] = 0
-print("\nMatrix E (Sums of D rows, last value is 0 since the final sum is not used) ( 1 x",len(matE),"):\n", matE)
+    matD[k] = ring(matD[k])
+matD[-1] = 0
+print("\nMatrix D (Sums of C rows, last value is 0 since the final sum is not used) ( 1 x",len(matD),"):\n", matD)
 
 matF = np.zeros([N])
 for i in range(N):
-    matF[i] = sum(matD[i])+matE[i-1]
+    matF[i] = sum(matC[i])+matD[i-1]
 for k in range(N):
     matF[k] = ring(matF[k])
 

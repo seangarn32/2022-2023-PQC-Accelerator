@@ -11,7 +11,10 @@ entity fsm is
 
         dsi_ena : out   std_logic;
         pe_ena  : out   std_logic;
-        dso_ena : out   std_logic
+        dso_ena : out   std_logic;
+
+        a_sel : out mux_sel_array;
+        b_sel : out mux_sel_array
     );
 end fsm;
 
@@ -72,6 +75,9 @@ begin
                             dso_ena <= '1';
                         else
                             present_state<= PE;
+         
+                        --a_sel <= shift_left(a_sel, 1) + 1
+
                         end if;
 
                     when DATA_OUT =>         --when current state is "D"

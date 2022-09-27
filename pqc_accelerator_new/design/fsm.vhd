@@ -82,6 +82,7 @@ begin
                             present_state<= DATA_OUT;
                         end if;
                         
+                        
                 end case;
             end if;
         end if;
