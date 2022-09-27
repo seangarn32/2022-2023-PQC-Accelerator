@@ -13,8 +13,7 @@ entity fsm is
         pe_ena  : out   std_logic;
         dso_ena : out   std_logic;
 
-        a_sel : out mux_sel_array;
-        b_sel : out mux_sel_array
+        sel : out mux_sel_array
     );
 end fsm;
 
@@ -26,6 +25,7 @@ architecture rtl of fsm is
     signal counter : std_logic_vector(7 downto 0);
     signal counter_ena : std_logic;
     signal counter_reset : std_logic;
+    signal sel_hold : mux_sel_array:= (others =>(others => '0'))
 
 begin
 
@@ -76,7 +76,9 @@ begin
                         else
                             present_state<= PE;
          
-                        --a_sel <= shift_left(a_sel, 1) + 1
+                        --selector line for muxes
+                        sel <= shift_right(sel, 1)
+                        sel(0) <= counter
 
                         end if;
 
