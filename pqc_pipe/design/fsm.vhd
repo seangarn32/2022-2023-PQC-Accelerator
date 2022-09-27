@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
 use work.globals_pkg.all;
 
 entity fsm is
@@ -25,7 +26,8 @@ architecture rtl of fsm is
     signal counter : std_logic_vector(7 downto 0);
     signal counter_ena : std_logic;
     signal counter_reset : std_logic;
-    signal sel_hold : mux_sel_array:= (others =>(others => '0'))
+    signal sel_hold : mux_sel_array:= (others =>(others => '0'));
+    signal sel_hold_nxt : mux_sel_array;
 
 begin
 
@@ -75,11 +77,7 @@ begin
                             dso_ena <= '1';
                         else
                             present_state<= PE;
-         
-                        --selector line for muxes
-                        sel <= shift_right(sel, 1)
-                        sel(0) <= counter
-
+                            sel_hold <= sel_hold_nxt;
                         end if;
 
                     when DATA_OUT =>         --when current state is "D"
@@ -95,4 +93,11 @@ begin
             end if;
         end if;
     end process;
+    
+    SEL_GEN : for i in 1 to MUX_NUM-1 generate
+        sel_hold_nxt(i) <= sel_hold(i-1);
+    end generate SEL_GEN;
+    sel_hold_nxt(0) <= sel_hold(0) + '1' when sel_hold(0) = "1" else "1";
+
+    sel <= sel_hold;
 end rtl;
