@@ -10,10 +10,8 @@ entity pe_chain is
         ena     : in    std_logic;
 
         A0      : in    std_logic_vector(N_SIZE-1 downto 0);
-        A_sel   : in    mux_sel_array;
-
         B       : in    b_matrix;
-        B_sel   : in    mux_sel_array;
+        sel     : in    mux_sel_array;
 
         C_out   : out   c_matrix
     );
@@ -48,7 +46,7 @@ begin
         A_MUX : entity work.a_mux(rtl)
             port map(
                 A_hold(i),
-                A_sel(i),
+                sel(i),
 
                 A_mux2pe(i)
             );
@@ -63,7 +61,7 @@ begin
         B_MUX : entity work.b_mux(rtl)
             port map(
                 B_hold(i),
-                B_sel(i),
+                sel(i),
 
                 B_mux2pe(i)
             );
