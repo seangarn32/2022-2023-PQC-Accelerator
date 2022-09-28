@@ -10,6 +10,7 @@ add wave -noupdate /fsm/counter_rst
 add wave -noupdate /fsm/count
 add wave -noupdate -divider Signals
 add wave -noupdate /fsm/state
+add wave -noupdate /fsm/state_nxt
 add wave -noupdate /fsm/sel_hold
 add wave -noupdate /fsm/sel_nxt
 add wave -noupdate -divider Outputs
