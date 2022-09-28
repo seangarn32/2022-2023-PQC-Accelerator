@@ -1,11 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
-<<<<<<< HEAD
-use iee
-=======
 use ieee.numeric_std.all;
->>>>>>> a2d926d980f9536a3daa6413509e7cd4dbad015c
 use work.globals_pkg.all;
 
 entity fsm is
@@ -28,19 +24,12 @@ architecture rtl of fsm is
     type state_available is (SETUP, DATA_IN, PE_PIPE, DATA_OUT);  --type of state machine.
     signal state            : state_available := SETUP;
     
-<<<<<<< HEAD
-    signal counter : std_logic_vector(7 downto 0);
-    signal counter_ena : std_logic;
-    signal counter_reset : std_logic;
-    signal sel_hold : mux_sel_array:= (others =>(others => '0'));
-=======
     signal count            : std_logic_vector(COUNTER_SIZE-1 downto 0);
     signal counter_ena      : std_logic := '0';
     signal counter_rst      : std_logic := '1';
 
     signal sel_hold         : mux_sel_array := (others =>(others => '0'));
     signal sel_nxt          : mux_sel_array;
->>>>>>> a2d926d980f9536a3daa6413509e7cd4dbad015c
 
 begin
 
