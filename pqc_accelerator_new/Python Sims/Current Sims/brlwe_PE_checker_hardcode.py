@@ -17,7 +17,7 @@ def ring(value):
         value += MAXVAL
     return value
 
-matA = circulant([random.randint(0, 1) for i in range(N)])
+matA = circulant([1,1,1,1,1,1,1,1])
 
 print("\nInitial column of matrix A: ",matA[0])
 
@@ -27,18 +27,16 @@ for i in range(N):
             matA[i][j] = -1*matA[i][j]
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
-matB = [[random.randint(0,MAXVAL)] for i in range(N)]
-print("\nMatrix B  (", len(matB[:]), "x", len(matB[0]), "):\n", matB)
+matB = [0,1,0,0,0,0,0,1]
+print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
 matC = np.empty([N,N])
 
 for i in range(N):
     for j in range(N):
-        matC[i][j] = matA[i][j]*matB[i][0]
+        matC[i][j] = matA[i][j]*matB[i]
 matC = np.transpose(matC)
 print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
-
-
 
 matF = np.zeros([N])
 for i in range(N):
