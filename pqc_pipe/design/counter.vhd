@@ -9,25 +9,26 @@ entity counter is
         rst     : in    std_logic;
         ena     : in    std_logic;
 
-        cnt     : out   std_logic_vector(7 downto 0)
+        cnt     : out   std_logic_vector(COUNTER_SIZE-1 downto 0)
     );
 end entity;
 
 architecture rtl of counter is
 
-    signal count        : std_logic_vector(7 downto 0) := "00000000";
-    signal count_nxt    : std_logic_vector(7 downto 0) := "00000000";
+    signal count        : std_logic_vector(COUNTER_SIZE-1 downto 0) := (others => '0');
+    signal count_nxt    : std_logic_vector(COUNTER_SIZE-1 downto 0) := (others => '0');
 
 begin
 
-    count_nxt <= count + "00000001" when count < N_SIZE-1
-                 else "00000000";
+    count_nxt <= count + '1' when count < N_SIZE-1
+                 else (others => '0');
 
-    process (clk, rst, ena) begin
+    process (clk) 
+    begin
         if (rst = '1') then
-            count <= "00000000"; 
+            count <= (others => '0'); 
         else 
-            if (clk'event and clk = '1' and ena = '1') then
+            if (rising_edge(clk) and ena = '1') then
                 count <= count_nxt;
             end if;
         end if;
