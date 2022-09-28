@@ -6,9 +6,9 @@ use ieee.math_real."log2";
 package globals_pkg is
 
     -- N_SIZE -> Size of initial A vector 
-    constant N_SIZE : integer := 8;
+    constant N_SIZE : integer := 64;
     -- DIVIDE -> Number of times to divide down PEs for pipelining
-    constant DIVIDE : integer := 2;
+    constant DIVIDE : integer := 4;
 
     constant COUNTER_SIZE : integer := 8;
 
@@ -21,6 +21,8 @@ package globals_pkg is
     constant MUX_LN_SIZE : integer := N_SIZE;
     -- MUX_SEL_SIZE -> Bit length of mux selector signal
     constant MUX_SEL_SIZE : integer := integer(log2(real(MUX_SIZE)));
+
+    constant COUNTER_SIZE : integer := integer(log2(real(N_SIZE)));
 
 
     -- "vector" -> 1 signed A column
