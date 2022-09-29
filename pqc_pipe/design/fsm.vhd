@@ -74,7 +74,6 @@ begin
                     when PE_PIPE =>
                         if(count = MUX_NUM+DIVIDE-2) then
                             pe_ena <= '0';
-                            accum_ena <= '0';
                             counter_rst <= '1';
                             state <= DATA_OUT;
                         else

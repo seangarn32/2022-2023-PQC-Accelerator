@@ -16,20 +16,35 @@ end entity;
 
 architecture rtl of data_shift_out is
 
-    signal c_sel    : c_matrix;
-    signal c_nxt    : c_matrix;
+    signal c_sel        : c_matrix;
+    signal c_nxt        : c_matrix;
+    signal shift_ena    : std_logic;
+    
 
 begin
 
+    process(clk)
+    begin
+        if(rising_edge(clk)) then
+            if(rst = '1') then
+                shift_ena <= '0';
+            else 
+                if(ena = '1') then
+                    shift_ena <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
+
     REG_GEN : for i in 0 to N_SIZE-2 generate
 
-        c_sel <= c_in when ena = '0' else c_nxt;
+        c_sel <= c_in when shift_ena = '0' else c_nxt;
 
         REG : entity work.reg_8bit(rtl)
             port map(
                 clk,
                 rst,
-                '1',
+                ena,
                 c_sel(i),
                 c_nxt(i+1)
             );
@@ -39,7 +54,7 @@ begin
         port map(
             clk,
             rst,
-            '1',
+            ena,
             c_sel(N_SIZE-1),
             c_out
         );
