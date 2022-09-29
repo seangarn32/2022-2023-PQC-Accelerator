@@ -101,6 +101,7 @@ begin
 
                         if(count = N_SIZE-1) then
                             counter_rst <= '1';
+                            dso_ena <= '0';
                             state <= SETUP;
                         end if;
 

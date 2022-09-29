@@ -6,11 +6,9 @@ use ieee.math_real."log2";
 package globals_pkg is
 
     -- N_SIZE -> Size of initial A vector 
-    constant N_SIZE : integer := 64;
+    constant N_SIZE : integer := 8;
     -- DIVIDE -> Number of times to divide down PEs for pipelining
-    constant DIVIDE : integer := 4;
-
-    constant COUNTER_SIZE : integer := 8;
+    constant DIVIDE : integer := 2;
 
     
     -- MUX_NUM -> Number of muxes

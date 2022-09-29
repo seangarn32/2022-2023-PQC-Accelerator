@@ -28,7 +28,7 @@ architecture rtl of pqc_accelerator_top is
 
 begin
 
-    FSM : entity work.fsm(rtl)
+    FSM : entity work.fsm_chain(rtl)
         port map(
             clk,
             rst,

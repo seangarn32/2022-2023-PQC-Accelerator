@@ -16,28 +16,25 @@ end pe_accum;
 
 architecture rtl of pe_accum is
 
-    signal tmp  : c_matrix;
+    signal sum      : c_matrix;
+    signal sum_nxt  : c_matrix;
 
 begin
 
-    process (clk)
-        begin
+    SUM_GEN : for i in 0 to N_SIZE-1 generate
+        sum_nxt(i) <= sum(i) + D_in(i);
+    end generate SUM_GEN;
 
-        if (rising_edge(clk)) then
-            if (rst = '1') then
-                for i in 0 to N_SIZE-1 loop
-                    tmp(i) <= (others => '0');
-                end loop;
-            else
-                if (ena = '1') then
-                    for i in 0 to N_SIZE-1 loop
-                        tmp(i) <= tmp(i) + D_in(i);
-                    end loop;
-                end if;
-            end if;
-        end if;
-    end process;
+    ACCUM_REG : entity work.reg_nbit_matrix(rtl)
+        port map(
+            clk,
+            rst,
+            ena,
 
-    Q <= tmp;
+            sum_nxt,
+            sum
+        );
+
+    Q <= sum;
 
 end rtl;

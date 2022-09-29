@@ -40,7 +40,10 @@ begin
 
             dsi_ena,
             pe_ena,
-            dso_ena
+            accum_ena,
+            dso_ena,
+
+            pe_mux_sel
         );
 
     DSI : entity work.data_shift_in(rtl)
