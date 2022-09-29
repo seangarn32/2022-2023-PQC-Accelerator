@@ -45,7 +45,6 @@ begin
 
             if (rst='1') then
                 state <= SETUP;
-
             else
                 case state is
 
@@ -56,53 +55,52 @@ begin
                         dso_ena <= '0';
                         counter_ena <= '0';
                         counter_rst <= '1';
-
                         sel_hold <= (others =>(others => '0'));
-
                         if(ena = '1') then
                             state <= DATA_IN;
                         end if;
 
                     when DATA_IN =>
-                        dsi_ena <= '1';
-                        counter_ena <= '1';
-                        counter_rst <= '0';
-
                         if(count = N_SIZE-1) then
+                            dsi_ena <= '0';
                             counter_rst <= '1';
                             state <= PE_PIPE;
+                        else
+                            dsi_ena <= '1';
+                            counter_ena <= '1';
+                            counter_rst <= '0';
                         end if;
-     
 
                     when PE_PIPE =>
-                        dsi_ena <= '0';
-                        pe_ena <= '1';
-                        counter_rst <= '0';
-                        
-                        if(counter_rst = '0') then
-                            sel_hold <= sel_nxt;
-                        end if;
-
-                        if(count > MUX_NUM-2) then
-                            if(count = MUX_NUM+DIVIDE-2) then
-                                counter_rst <= '1';
-                                state <= DATA_OUT;
-                            end if;
-                            accum_ena <= '1';
-                        else
+                        if(count = MUX_NUM+DIVIDE-2) then
+                            pe_ena <= '0';
                             accum_ena <= '0';
+                            counter_rst <= '1';
+                            state <= DATA_OUT;
+                        else
+                            if(count > MUX_NUM-2) then
+                                accum_ena <= '1';
+                            else
+                                accum_ena <= '0';
+                            end if;
+                            if(counter_rst = '0') then
+                                sel_hold <= sel_nxt;
+                            end if;
+                            dsi_ena <= '0';
+                            pe_ena <= '1';
+                            counter_rst <= '0';
                         end if;
 
                     when DATA_OUT =>
-                        pe_ena <= '0';
-                        accum_ena <= '0';
-                        dso_ena <= '1';
-                        counter_rst <= '0';
-
                         if(count = N_SIZE-1) then
-                            counter_rst <= '1';
                             dso_ena <= '0';
+                            counter_rst <= '1';
                             state <= SETUP;
+                        else
+                            pe_ena <= '0';
+                            accum_ena <= '0';
+                            dso_ena <= '1';
+                            counter_rst <= '0';
                         end if;
 
                 end case;
