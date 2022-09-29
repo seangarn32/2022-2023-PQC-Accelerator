@@ -78,11 +78,13 @@ begin
                         dsi_ena <= '0';
                         pe_ena <= '1';
                         counter_rst <= '0';
-
-                        sel_hold <= sel_nxt;
                         
-                        if(count > MUX_NUM-1) then
-                            if(count = MUX_NUM + DIVIDE - 1) then
+                        if(counter_rst = '0') then
+                            sel_hold <= sel_nxt;
+                        end if;
+
+                        if(count > MUX_NUM-2) then
+                            if(count = MUX_NUM+DIVIDE-2) then
                                 counter_rst <= '1';
                                 state <= DATA_OUT;
                             end if;
