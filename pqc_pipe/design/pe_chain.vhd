@@ -40,7 +40,9 @@ begin
     MUX_A_GEN : for i in 0 to MUX_NUM-1 generate 
 
         A_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
-            A_hold(i)(j) <= A(i*DIVIDE+j);
+            A_hold(i)(j) <= A(i+j*MUX_NUM);
+            -- A_hold(i)(j) <= A(i*DIVIDE+j)
+            -- To send A0, A1 to PE0
         end generate A_HOLD_ASSIGN;
 
         A_MUX : entity work.a_mux(rtl)
@@ -55,7 +57,9 @@ begin
     MUX_B_GEN : for i in 0 to MUX_NUM-1 generate 
 
         B_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
-            B_hold(i)(j) <= B(i*DIVIDE+j);
+            B_hold(i)(j) <= B(i+j*MUX_NUM);
+            -- B_hold(i)(j) <= B(i*DIVIDE+j)
+            -- To send B0, B1 to PE0
         end generate B_HOLD_ASSIGN;
 
         B_MUX : entity work.b_mux(rtl)

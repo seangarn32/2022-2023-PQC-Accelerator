@@ -63,6 +63,7 @@ begin
                     when DATA_IN =>
                         if(count = N_SIZE-1) then
                             dsi_ena <= '0';
+                            pe_ena <= '1';
                             counter_rst <= '1';
                             state <= PE_PIPE;
                         else

@@ -9,7 +9,6 @@ package globals_pkg is
     constant N_SIZE : integer := 8;
     -- DIVIDE -> Number of times to divide down PEs for pipelining
     constant DIVIDE : integer := 2;
-
     
     -- MUX_NUM -> Number of muxes
     constant MUX_NUM : integer := N_SIZE/DIVIDE;
@@ -19,9 +18,8 @@ package globals_pkg is
     constant MUX_LN_SIZE : integer := N_SIZE;
     -- MUX_SEL_SIZE -> Bit length of mux selector signal
     constant MUX_SEL_SIZE : integer := integer(log2(real(MUX_SIZE)));
-
+    -- COUNTER_SIZE -> Bit length of fsm counter
     constant COUNTER_SIZE : integer := integer(log2(real(N_SIZE)));
-
 
     -- "vector" -> 1 signed A column
     type a_vector is array (0 to N_SIZE-1) of std_logic_vector(1 downto 0);
