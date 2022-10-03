@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -68,7 +67,6 @@ begin
     a_out <= a;
     b_out <= b;
 
-=======
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -138,5 +136,4 @@ begin
     a_out <= a;
     b_out <= b;
 
->>>>>>> 796a0a2aa00b1feb1d4f28e90794d192af041b96
 end rtl;

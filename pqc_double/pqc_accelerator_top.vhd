@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -93,7 +92,6 @@ begin
             C_out
         );
 
-=======
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -188,5 +186,4 @@ begin
             C_out
         );
 
->>>>>>> 796a0a2aa00b1feb1d4f28e90794d192af041b96
 end architecture;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -48,7 +47,6 @@ package globals_pkg is
     type a_mux2pe_array is array (0 to MUX_NUM-1) of a_vector;
     type b_mux2pe_array is array (0 to MUX_NUM-1) of std_logic_vector(7 downto 0);
 
-=======
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -98,5 +96,4 @@ package globals_pkg is
     type a_mux2pe_array is array (0 to MUX_NUM-1) of a_vector;
     type b_mux2pe_array is array (0 to MUX_NUM-1) of std_logic_vector(7 downto 0);
 
->>>>>>> 796a0a2aa00b1feb1d4f28e90794d192af041b96
 end package;
