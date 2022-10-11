@@ -5,22 +5,22 @@ use ieee.numeric_std.all;
 use work.globals_pkg.all;
 
 entity enc_dec_mux is
-	port( a0	: in std_logic_vector(7 downto 0);
+	port( a0	: in a_vector;
 	      sel	: in std_logic;
-	      res	: out std_logic_vector(7 downto 0)
+	      res	: out a_vector
 );
 end enc_dec_mux;
 
 architecture rtl of enc_dec_mux is
 
 component mux2to1
-	port( a0, a1	: in std_logic_vector(7 downto 0);
+	port( a0, a1	: in a_vector;
 	      sel	: in std_logic;
-	      res	: out std_logic_vector(7 downto 0)
+	      res	: out a_vector
 );
 end component;
 
-signal T1: std_logic_vector(7 downto 0);
+signal T1: a_vector;
 
 begin
 
