@@ -14,9 +14,6 @@ end mux2to1;
 architecture rtl of mux2to1 is
 begin
 
-with sel select
-res <= 	a0 when '0',
-    a1 when '1',
-    "00000000" when others;
-
+    res <= a1 when sel = '1' else
+           a0;
 end rtl;
