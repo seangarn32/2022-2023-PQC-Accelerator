@@ -17,10 +17,6 @@ architecture rtl of circulant_a_nxt is
 
 begin
 
-    SIGNED : for i in 0 to N_SIZE-1 generate
-        A_sign(i) <= '0' & A0(N_SIZE-1-i);
-    end generate SIGNED;
-
     A_n(0) <= A_sign;
 
     CIRC_GEN : for i in 0 to N_SIZE-2 generate
