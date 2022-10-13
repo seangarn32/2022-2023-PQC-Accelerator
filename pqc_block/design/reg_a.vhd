@@ -6,8 +6,8 @@ use work.globals_pkg.all;
 entity reg_a is
     port (
         clk : in    std_logic;
-        ena : in    std_logic;
         rst : in    std_logic;
+        ena : in    std_logic;
         
         d   : in    a_vector;
 
