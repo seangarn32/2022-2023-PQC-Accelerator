@@ -8,8 +8,6 @@ add wave -noupdate /pqc_accelerator_top/A0
 add wave -noupdate /pqc_accelerator_top/B_in
 add wave -noupdate -divider FSM
 add wave -noupdate /pqc_accelerator_top/FSM/state_current
-add wave -noupdate /pqc_accelerator_top/FSM/cnt
-add wave -noupdate -divider Enables
 add wave -noupdate /pqc_accelerator_top/dsi_ena
 add wave -noupdate /pqc_accelerator_top/pe_ena
 add wave -noupdate /pqc_accelerator_top/dso_ena
@@ -39,7 +37,7 @@ TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {567041 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 254
-configure wave -valuecolwidth 215
+configure wave -valuecolwidth 40
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
 configure wave -snapdistance 10
@@ -52,4 +50,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {619500 ps}
+WaveRestoreZoom {0 ps} {334441 ps}
