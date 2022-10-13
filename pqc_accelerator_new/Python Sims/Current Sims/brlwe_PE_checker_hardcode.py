@@ -53,4 +53,4 @@ for k in range(N):
 
 print("\nMatrix F (Final Accumulation, Dn+En-1) (",len(matF),"x 1 ):\n", matF)
 
-createFile(matA, matB, "PE_checker_hardcode.do")
+createFileHardcode(matA, matB, "PE_checker_hardcode.do")
