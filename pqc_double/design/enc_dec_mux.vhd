@@ -23,8 +23,11 @@ end component;
 signal T1: a_vector;
 
 begin
-
-    T1 <= NOT a0;
+    
+    T1(0) <= NOT(a0(0)) + "01";
+    ASSIGN : for i in 1 to N_SIZE-1 generate
+        T1(i) <= a0(i);
+    end generate ASSIGN;
 
     u1: mux2to1 
     port map(a0=>a0, a1=>T1, sel=>sel, res=>res);
