@@ -17,7 +17,7 @@ begin
     A_nxt(1) <= NOT(A_in(N_SIZE-1)) + "01";
 
     SHIFT : for i in 2 to N_SIZE-1 generate
-        A_nxt(i) <= A_in(i-1);
+        A_nxt(i) <= A_in(i-2);
     end generate SHIFT;
 
 end rtl;
