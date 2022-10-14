@@ -31,9 +31,13 @@ architecture rtl of data_shift_out is
 begin
 
     -- Count to NUM_B_SECTIONS (Number of cycles needed to accumulate pipelined results)
-    count_nxt <= count + '1' when count < NUM_B_SECTIONS-1 else (others => '0');
-    -- Every NUM_B_SECTIONS cycles, shift to next DSO section index
-    c_index_nxt <= c_index + '1' when c_index < NUM_C_SECTIONS-1 and count = NUM_B_SECTIONS-1 else c_index;
+    count_nxt <= count + '1' when count < NUM_B_SECTIONS-1 
+            else (others => '0') when c_index < NUM_C_SECTIONS-1
+            else count;
+    -- After every NUM_B_SECTIONS cycles, shift to next DSO section index
+    c_index_nxt <= c_index + '1' when c_index < NUM_C_SECTIONS-1 and count = NUM_B_SECTIONS-1 
+            else c_index;
+
     process(clk)
     begin
         if(rising_edge(clk)) then
@@ -45,10 +49,8 @@ begin
                 if(ena = '1') then
                     count <= count_nxt;
                     c_index <= c_index_nxt;
-                    if(c_index = NUM_C_SECTIONS-1) then
+                    if(count = NUM_B_SECTIONS-1 and c_index = NUM_C_SECTIONS-1) then
                         shift_ena <= '1';
-                    else 
-                        shift_ena <= '0';
                     end if;
                 end if;
             end if;
