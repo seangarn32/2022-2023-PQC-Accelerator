@@ -10,7 +10,6 @@ entity data_shift_out is
         ena     : in    std_logic;
 
         C_in    : in    c_section;
-
         C_out   : out   std_logic_vector(7 downto 0)
     );
 end entity;

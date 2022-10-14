@@ -10,7 +10,6 @@ entity reg_shift_b is
         ena     : in    std_logic;
 
         B_in    : in    b_matrix;
-
         B_out   : out   b_section
     );
 end entity;

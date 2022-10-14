@@ -10,7 +10,6 @@ entity reg_shift_a is
         ena     : in    std_logic;
 
         A_in    : in    std_logic_vector(N_SIZE-1 downto 0);
-
         A_out   : out   a_vector
     );
 end entity;
