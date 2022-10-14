@@ -14,8 +14,6 @@ entity fsm is
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
         dso_ena     : out   std_logic;
-
-        sel : out mux_sel_array
     );
 end fsm;
 
@@ -24,7 +22,7 @@ architecture rtl of fsm is
     type state_available is (SETUP, DATA_IN, PE_PIPE, DATA_OUT);  --type of state machine.
     signal state            : state_available := SETUP;
     
-    signal count            : std_logic_vector(COUNTER_SIZE-1 downto 0);
+    signal count            : std_logic_vector(COUNTER_SIZE_FSM-1 downto 0);
     signal counter_ena      : std_logic := '0';
     signal counter_rst      : std_logic := '1';
 
