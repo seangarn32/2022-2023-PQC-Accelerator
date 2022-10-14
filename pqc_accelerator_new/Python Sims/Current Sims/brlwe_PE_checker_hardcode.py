@@ -3,7 +3,7 @@
 import numpy as np
 import random
 from scipy.linalg import circulant
-from PE_checker_do_maker_hardcode import *
+from do_maker_hardcode import *
 
 N = 8 
 MAXVAL = 128
