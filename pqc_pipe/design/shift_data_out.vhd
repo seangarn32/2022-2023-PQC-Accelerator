@@ -10,9 +10,6 @@ entity data_shift_out is
         ena     : in    std_logic;
         c_accum : in    c_matrix;
 		  
-
-		  
-		  
         c_out   : out   std_logic_vector(7 downto 0)
     );
 end entity;
