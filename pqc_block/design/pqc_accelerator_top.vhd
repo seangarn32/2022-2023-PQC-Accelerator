@@ -65,7 +65,7 @@ begin
         port map(
             clk,
             rst,
-            bl_ena,
+            pe_ena,
 
             a0,
             a_shift2pe

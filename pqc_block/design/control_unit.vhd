@@ -47,7 +47,7 @@ begin
     bl_ena      <= '1' when (state = B_LOAD or state = PE_PIPE or state = PE_ACCUM) else '0'; 
     pe_ena      <= '1' when (state = PE_PIPE or state = PE_ACCUM) else '0';
     accum_ena   <= '1' when state = PE_ACCUM else '0';
-    dso_ena     <= '1' when state = DSO else '0';
+    dso_ena     <= '1' when (state = DSO or state = PE_ACCUM) else '0';
 
     process (clk)
     begin
