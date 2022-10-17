@@ -18,6 +18,8 @@ def ring(value):
     return value
 
 #A[0] is the bottom of the first column of A
+
+#Change this
 A = [0,0,0,1,1,0,1,0]
 
 #Prepare A for circulant function
@@ -34,7 +36,10 @@ for i in range(N):
             matA[i][j] = -1*matA[i][j]
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
+
+#Change this
 matB = [0,1,0,0,0,0,0,1]
+
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
 matC = np.empty([N,N])
