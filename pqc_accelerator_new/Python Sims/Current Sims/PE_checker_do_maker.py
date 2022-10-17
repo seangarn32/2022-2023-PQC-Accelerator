@@ -24,7 +24,7 @@ def createFile(A, B, filepath):
                     if j == 0:
                         file.write(num+" "+str(T*(j+1))+" ns")
                 else:
-                    num = np.binary_repr(int(B[j]), width=8)
+                    num = np.binary_repr(int(B[j][0]), width=8)
                     if j == 0:
                         file.write("\""+num+"\" "+str(T*(j+1))+" ns")
                     else:
