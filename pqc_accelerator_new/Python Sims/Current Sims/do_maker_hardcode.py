@@ -30,7 +30,7 @@ def createFileHardcode(A, B, filepath):
                     else:
                         file.write(", \""+num+"\" "+str(T*(j+1))+" ns")
 
-        file.write("\n\nrun 700000ns")
+        file.write("\n\nrun 500 ns")
                 
     finally:
         file.close()
