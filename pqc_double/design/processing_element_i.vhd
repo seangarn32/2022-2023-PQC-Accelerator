@@ -8,6 +8,7 @@ entity processing_element_i is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
+        enc_dec : in    std_logic;
         
         A0       : in    a_vector;
 
@@ -23,8 +24,11 @@ end entity;
 
 architecture rtl of processing_element_i is
 
-    signal C_mult : c_matrix;
+    signal C_mult_0 : c_matrix;
+    signal C_mult_1 : c_matrix;
     signal A1     : a_vector;
+    signal sc_A0  : a_vector;
+
 
 begin
     -- Multiply AxB -> C_mult
@@ -33,7 +37,7 @@ begin
             A0,
             B_0,
 
-            C_mult
+            C_mult_0
         );
 
     -- Register Output -> C_out
@@ -42,7 +46,7 @@ begin
             clk,
             rst,
             ena,
-            C_mult,
+            C_mult_0,
 
             C_out
         );
@@ -54,7 +58,7 @@ begin
             A1,
             B_1,
 
-            C_mult
+            C_mult_1
         );
 
     REG_SUM_1 :   entity work.reg_nbit_matrix(rtl)
@@ -62,7 +66,7 @@ begin
             clk,
             rst,
             ena,
-            C_mult,
+            C_mult_1,
 
             C_out
         );
