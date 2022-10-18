@@ -9,25 +9,28 @@ entity processing_element_i is
         rst     : in    std_logic;
         ena     : in    std_logic;
         
-        A       : in    a_vector;
+        A0       : in    a_vector;
 
         B_0       : in    std_logic_vector(7 downto 0);
         B_1       : in    std_logic_vector(7 downto 0);
 
         C_out_0   : out   c_matrix
         C_out_1   : out   c_matrix
+
+        A2     : out    a_vector;
     );
 end entity;
 
 architecture rtl of processing_element_i is
 
     signal C_mult : c_matrix;
+    signal A1     : a_vector;
 
 begin
     -- Multiply AxB -> C_mult
     MULT_0 :      entity work.multiplier_nbit(rtl)
         port map(
-            A,
+            A0,
             B_0,
 
             C_mult
@@ -44,9 +47,11 @@ begin
             C_out
         );
 
+    -- Add code to circular shift A0 to A1.  If encryption, don't add sign
+
     MULT_1 :      entity work.multiplier_nbit(rtl)
         port map(
-            A,
+            A1,
             B_1,
 
             C_mult
@@ -61,5 +66,7 @@ begin
 
             C_out
         );
+
+    -- Add code to circular shift A0 to A2
 
 end rtl;
