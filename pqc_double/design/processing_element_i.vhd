@@ -10,9 +10,12 @@ entity processing_element_i is
         ena     : in    std_logic;
         
         A       : in    a_vector;
-        B       : in    std_logic_vector(7 downto 0);
 
-        C_out   : out   c_matrix
+        B_0       : in    std_logic_vector(7 downto 0);
+        B_1       : in    std_logic_vector(7 downto 0);
+
+        C_out_0   : out   c_matrix
+        C_out_1   : out   c_matrix
     );
 end entity;
 
@@ -22,16 +25,34 @@ architecture rtl of processing_element_i is
 
 begin
     -- Multiply AxB -> C_mult
-    MULT :      entity work.multiplier_nbit(rtl)
+    MULT_0 :      entity work.multiplier_nbit(rtl)
         port map(
             A,
-            B,
+            B_0,
 
             C_mult
         );
 
     -- Register Output -> C_out
-    REG_SUM :   entity work.reg_nbit_matrix(rtl)
+    REG_SUM_0 :   entity work.reg_nbit_matrix(rtl)
+        port map(
+            clk,
+            rst,
+            ena,
+            C_mult,
+
+            C_out
+        );
+
+    MULT_1 :      entity work.multiplier_nbit(rtl)
+        port map(
+            A,
+            B_1,
+
+            C_mult
+        );
+
+    REG_SUM_1 :   entity work.reg_nbit_matrix(rtl)
         port map(
             clk,
             rst,

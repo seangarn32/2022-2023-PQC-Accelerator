@@ -9,11 +9,14 @@ entity processing_element_n is
         rst     : in    std_logic;
         ena     : in    std_logic;
         
-        A       : in    a_vector;
+        A_0     : in    a_vector;
+        A_1     : in    a_vector;
         B       : in    std_logic_vector(7 downto 0);
-        C_in    : in    c_matrix;
+        C_in_0  : in    c_matrix;
+        C_in_1  : in    c_matrix;
 
-        C_out   : out   c_matrix
+        C_out_0   : out   c_matrix
+        C_out_1   : out   c_matrix
     );
 end entity;
 
