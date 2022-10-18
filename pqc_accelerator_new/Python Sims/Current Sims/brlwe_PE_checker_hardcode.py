@@ -3,7 +3,7 @@
 import numpy as np
 import random
 from scipy.linalg import circulant
-from PE_checker_do_maker import *
+from do_maker_hardcode import *
 
 N = 8 
 MAXVAL = 128
@@ -17,7 +17,16 @@ def ring(value):
         value += MAXVAL
     return value
 
-matA = circulant([1,1,1,1,1,1,1,1])
+#A[0] is the bottom of the first column of A
+
+#Change this
+A = [0,0,0,1,1,0,1,0]
+
+#Prepare A for circulant function
+A = np.flip(A)
+A = np.roll(A,1)
+
+matA = circulant(A)
 
 print("\nInitial column of matrix A: ",matA[0])
 
@@ -27,7 +36,10 @@ for i in range(N):
             matA[i][j] = -1*matA[i][j]
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
+
+#Change this
 matB = [0,1,0,0,0,0,0,1]
+
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
 matC = np.empty([N,N])
@@ -46,4 +58,4 @@ for k in range(N):
 
 print("\nMatrix F (Final Accumulation, Dn+En-1) (",len(matF),"x 1 ):\n", matF)
 
-createFile(matA, matB, "PE_checker.do")
+createFileHardcode(matA, matB, "PE_checker_hardcode.do")

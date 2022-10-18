@@ -1,0 +1,1047 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/19183/Desktop/Simulation/pqc_block
+Econtrol_unit
+Z0 w1665789607
+Z1 DPx4 ieee 9 math_real 0 22 gNk<PdFJ<XNPcfef`f?Z81
+Z2 DPx4 work 11 globals_pkg 0 22 >Ge9Be89`]D29mN0lWAl^2
+Z3 DPx4 ieee 11 numeric_std 0 22 aU^R8eGcicLcUFIaBQSL>3
+Z4 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z5 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+!i122 677
+Z8 dC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/simulation
+Z9 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/control_unit.vhd
+Z10 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/control_unit.vhd
+l0
+L7 1
+V6J9IP@G]]`f6i5Z03I:io0
+!s100 AnUUH8PciV5hPXL^cjR>22
+Z11 OV;C;2020.1;71
+32
+Z12 !s110 1665789826
+!i10b 1
+Z13 !s108 1665789826.000000
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/control_unit.vhd|
+Z15 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/control_unit.vhd|
+!i113 1
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1 CvgOpt 0
+Artl
+R1
+R2
+R3
+R4
+R5
+R6
+R7
+Z18 DEx4 work 12 control_unit 0 22 6J9IP@G]]`f6i5Z03I:io0
+!i122 677
+l30
+Z19 L21 45
+Z20 V`M7<^?>j9KbhZmcGoF_K`1
+Z21 !s100 ;EofkQmzhQS_X]e[KcK^50
+R11
+32
+R12
+!i10b 1
+R13
+R14
+R15
+!i113 1
+R16
+R17
+Ecounter
+Z22 w1665787184
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 657
+R8
+Z23 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/counter.vhd
+Z24 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/counter.vhd
+l0
+L6 1
+VLiS5P@;:22IIb0eDGQoON0
+!s100 Ubc46NGBelJe2]i72aeQC1
+R11
+32
+Z25 !s110 1665789822
+!i10b 1
+Z26 !s108 1665789822.000000
+Z27 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/counter.vhd|
+Z28 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/counter.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+DEx4 work 7 counter 0 22 LiS5P@;:22IIb0eDGQoON0
+!i122 657
+l21
+L16 24
+V91O5a6Wi[cWbNgRACQN5C1
+!s100 8hflMQ4YNBBXDUb5EN;bD0
+R11
+32
+R25
+!i10b 1
+R26
+R27
+R28
+!i113 1
+R16
+R17
+Edata_shift_in
+Z29 w1663794974
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 675
+R8
+Z30 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_in.vhd
+Z31 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_in.vhd
+l0
+L6 1
+VVFS`kSHYa^fLn4i<9CYYN0
+!s100 hSP8D1m_5oNG;X<n6EZZO0
+R11
+32
+R12
+!i10b 1
+R13
+Z32 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_in.vhd|
+Z33 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_in.vhd|
+!i113 1
+R16
+R17
+Artl
+Z34 DEx4 work 8 reg_8bit 0 22 _WcjD<bi<V6<5;LDY[Y7b2
+Z35 DEx4 work 8 reg_1bit 0 22 db5NE1S8ACZiCzd<Y2B340
+R1
+R2
+R4
+R5
+R6
+R7
+Z36 DEx4 work 13 data_shift_in 0 22 VFS`kSHYa^fLn4i<9CYYN0
+!i122 675
+l25
+L20 51
+Vj8S0a=joZLGhf293S[1fc3
+!s100 Y=@@42:z@_[H2^kdZilEi2
+R11
+32
+R12
+!i10b 1
+R13
+R32
+R33
+!i113 1
+R16
+R17
+Edata_shift_out
+Z37 w1665786649
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 676
+R8
+Z38 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_out.vhd
+Z39 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_out.vhd
+l0
+L6 1
+VcE;<K91]clKWBUKPSb<IA1
+!s100 I6oZK1n3VM2QIaGSUWcn=2
+R11
+32
+R12
+!i10b 1
+R13
+Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_out.vhd|
+Z41 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_out.vhd|
+!i113 1
+R16
+R17
+Artl
+R34
+R1
+R2
+R4
+R5
+R6
+R7
+Z42 DEx4 work 14 data_shift_out 0 22 cE;<K91]clKWBUKPSb<IA1
+!i122 676
+l30
+L17 94
+VEX=_l^R0nn5?R]?U5L>c`1
+!s100 lBL6@Z]OWd4GR2k[_n^`=3
+R11
+32
+R12
+!i10b 1
+R13
+R40
+R41
+!i113 1
+R16
+R17
+Pglobals_pkg
+R1
+R4
+R5
+R6
+R7
+!i122 658
+w1665786766
+R8
+8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/globals_pkg.vhd
+FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/globals_pkg.vhd
+l0
+L6 1
+V>Ge9Be89`]D29mN0lWAl^2
+!s100 dlSh9TR=_3BOXlzkF65UI1
+R11
+32
+R25
+!i10b 1
+R26
+!s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/globals_pkg.vhd|
+!s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/globals_pkg.vhd|
+!i113 1
+R16
+R17
+Emultiplier
+Z43 w1665067796
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 659
+R8
+Z44 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/multiplier.vhd
+Z45 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/multiplier.vhd
+l0
+L6 1
+VgaO48RjaM;G``;KYh067B1
+!s100 hlSUaLC;Be9DB2XFEm^XZ3
+R11
+32
+Z46 !s110 1665789823
+!i10b 1
+R26
+Z47 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/multiplier.vhd|
+Z48 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/multiplier.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+Z49 DEx4 work 10 multiplier 0 22 gaO48RjaM;G``;KYh067B1
+!i122 659
+l20
+L15 17
+Ve29>RbgG`UF5K7@2gMZDo0
+!s100 cD[cfT4>olL^`]hXI`?OY1
+R11
+32
+R46
+!i10b 1
+R26
+R47
+R48
+!i113 1
+R16
+R17
+Epe_accum
+Z50 w1665691861
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 660
+R8
+Z51 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd
+Z52 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd
+l0
+L6 1
+VKdSf5`XaD@]EHJFL^9ODz1
+!s100 9W>7f@zcoa@`iUalll2Kk3
+R11
+32
+R46
+!i10b 1
+Z53 !s108 1665789823.000000
+Z54 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd|
+Z55 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd|
+!i113 1
+R16
+R17
+Artl
+Z56 DEx4 work 5 reg_c 0 22 7z1I[WRRl^ILamV;j:kdo1
+R1
+R2
+R4
+R5
+R6
+R7
+Z57 DEx4 work 8 pe_accum 0 22 KdSf5`XaD@]EHJFL^9ODz1
+!i122 660
+l28
+L17 54
+VLRh?1EUzgiFA@9_m89kYB2
+!s100 BmA8FV;<];HJQloDEY5V^0
+R11
+32
+R46
+!i10b 1
+R53
+R54
+R55
+!i113 1
+R16
+R17
+Epe_chain
+Z58 w1665692986
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 661
+R8
+Z59 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_chain.vhd
+Z60 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_chain.vhd
+l0
+L6 1
+VioeH3:N6AZNLC<mjRIn@Q0
+!s100 Ig0^X`Yc>Dbnf^A`A0E6H0
+R11
+32
+R46
+!i10b 1
+R53
+Z61 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_chain.vhd|
+Z62 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_chain.vhd|
+!i113 1
+R16
+R17
+Artl
+Z63 DEx4 work 20 processing_element_n 0 22 WShR@S>[UCXnY17?HQ][d2
+Z64 DEx4 work 20 processing_element_i 0 22 8bnX4`Y92;h[`hlR]R9;J0
+R34
+Z65 DEx4 work 20 processing_element_0 0 22 V68UL=5onmhTDhdN?NAXX0
+R1
+R2
+R4
+R5
+R6
+R7
+Z66 DEx4 work 8 pe_chain 0 22 ioeH3:N6AZNLC<mjRIn@Q0
+!i122 661
+l24
+L19 106
+VNAAU9[@9d;RU@77ET_4BN0
+!s100 ?lVW9R3O90aXMo3^mkk<I2
+R11
+32
+R46
+!i10b 1
+R53
+R61
+R62
+!i113 1
+R16
+R17
+Epqc_accelerator_top
+Z67 w1665789758
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 662
+R8
+Z68 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pqc_accelerator_top.vhd
+Z69 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pqc_accelerator_top.vhd
+l0
+L6 1
+V2_:fO<VCeWAcG@zkkK2CV0
+!s100 ;DV9lM_j?GEBgCaTDZ9Dh1
+R11
+32
+R46
+!i10b 1
+R53
+Z70 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pqc_accelerator_top.vhd|
+Z71 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pqc_accelerator_top.vhd|
+!i113 1
+R16
+R17
+Artl
+R42
+R57
+R66
+Z72 DEx4 work 11 reg_shift_b 0 22 SBh[ggJ`Ee`4nKVXcT8Xk2
+Z73 DEx4 work 11 reg_shift_a 0 22 ATJch7Xg2AMMiH7M2`_Y00
+R36
+R3
+R18
+R1
+R2
+R4
+R5
+R6
+R7
+DEx4 work 19 pqc_accelerator_top 0 22 2_:fO<VCeWAcG@zkkK2CV0
+!i122 662
+l36
+L19 98
+Vi69F02FcTn[l;VQi>iiAN2
+!s100 iJejgfR3lW<<=>7BSYYah2
+R11
+32
+R46
+!i10b 1
+R53
+R70
+R71
+!i113 1
+R16
+R17
+Eprocessing_element_0
+Z74 w1665069641
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 663
+R8
+Z75 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_0.vhd
+Z76 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_0.vhd
+l0
+L6 1
+VV68UL=5onmhTDhdN?NAXX0
+!s100 3DkbF^f^>3l54=U`^BXVH0
+R11
+32
+R46
+!i10b 1
+R53
+Z77 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_0.vhd|
+Z78 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_0.vhd|
+!i113 1
+R16
+R17
+Artl
+R56
+Z79 DEx4 work 5 reg_a 0 22 gzBH<ghg12VidL4KW[;JO3
+R49
+Z80 DEx4 work 12 signed_shift 0 22 Lm<f^TC?@MPcj`dd7AEDc1
+R1
+R2
+R4
+R5
+R6
+R7
+R65
+!i122 663
+l26
+L20 55
+VaKzSEYefV`:A7alKG7mjF2
+!s100 `YJQH8Th@ok5;ONN?SDd<0
+R11
+32
+R46
+!i10b 1
+R53
+R77
+R78
+!i113 1
+R16
+R17
+Eprocessing_element_i
+Z81 w1665069841
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 664
+R8
+Z82 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_i.vhd
+Z83 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_i.vhd
+l0
+L6 1
+V8bnX4`Y92;h[`hlR]R9;J0
+!s100 cY=HXS9l<k]DMXmf0]<[L1
+R11
+32
+Z84 !s110 1665789824
+!i10b 1
+R53
+Z85 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_i.vhd|
+Z86 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_i.vhd|
+!i113 1
+R16
+R17
+Artl
+R56
+R79
+R49
+R80
+R1
+R2
+R4
+R5
+R6
+R7
+R64
+!i122 664
+l28
+L21 61
+V:ngjQDlDWNK7;OFG[E?gP1
+!s100 Qj>4lBdh4O1oMX91kO0l]1
+R11
+32
+R84
+!i10b 1
+R53
+R85
+R86
+!i113 1
+R16
+R17
+Eprocessing_element_n
+Z87 w1665069922
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 665
+R8
+Z88 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_n.vhd
+Z89 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_n.vhd
+l0
+L6 1
+VWShR@S>[UCXnY17?HQ][d2
+!s100 R15:b3=EZ7O8Y0mBEJAb63
+R11
+32
+R84
+!i10b 1
+Z90 !s108 1665789824.000000
+Z91 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_n.vhd|
+Z92 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_n.vhd|
+!i113 1
+R16
+R17
+Artl
+R56
+R49
+R1
+R2
+R4
+R5
+R6
+R7
+R63
+!i122 665
+l26
+L20 40
+VL_?OF_XKcV9^0UZbge2nl1
+!s100 a1@5U7DBW`o9Hn3bkXb823
+R11
+32
+R84
+!i10b 1
+R90
+R91
+R92
+!i113 1
+R16
+R17
+Ereg_1bit
+Z93 w1664216582
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 666
+R8
+Z94 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd
+Z95 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd
+l0
+L6 1
+Vdb5NE1S8ACZiCzd<Y2B340
+!s100 :16Yozh`eD<C^BS9S[9`61
+R11
+32
+R84
+!i10b 1
+R90
+Z96 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd|
+Z97 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+R35
+!i122 666
+l19
+Z98 L18 15
+V@jWNgO`HOi<[HMOA`hFb:3
+!s100 aVh[oA0]2Hg6XT^UY=3LQ3
+R11
+32
+R84
+!i10b 1
+R90
+R96
+R97
+!i113 1
+R16
+R17
+Ereg_8bit
+Z99 w1664216585
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 667
+R8
+Z100 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_8bit.vhd
+Z101 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_8bit.vhd
+l0
+L6 1
+V_WcjD<bi<V6<5;LDY[Y7b2
+!s100 88i8X9:TT2I3QmP>58Fa@2
+R11
+32
+R84
+!i10b 1
+R90
+Z102 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_8bit.vhd|
+Z103 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_8bit.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+R34
+!i122 667
+l19
+R98
+VUO`l21MQOJ3hY;R?9aOQO3
+!s100 NgL9OJ<ol77Rikb[bFHZ11
+R11
+32
+R84
+!i10b 1
+R90
+R102
+R103
+!i113 1
+R16
+R17
+Ereg_a
+Z104 w1665685096
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 673
+R8
+Z105 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_a.vhd
+Z106 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_a.vhd
+l0
+L6 1
+VgzBH<ghg12VidL4KW[;JO3
+!s100 =CN1D<4cR@>G<0@;5eNC11
+R11
+32
+R12
+!i10b 1
+Z107 !s108 1665789825.000000
+Z108 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_a.vhd|
+Z109 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_a.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+R79
+!i122 673
+l19
+Z110 L18 13
+V^0FJ=_V1]_NUK6J2zEd=N3
+!s100 B0^Pn6EZ9_99og4=2bD1]1
+R11
+32
+R12
+!i10b 1
+R107
+R108
+R109
+!i113 1
+R16
+R17
+Ereg_b
+Z111 w1665685112
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 674
+R8
+Z112 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_b.vhd
+Z113 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_b.vhd
+l0
+L6 1
+V3U@G>XoM:5nEPF:Dg;TRm2
+!s100 bCDVSzlKEd;:kHd9i5dF60
+R11
+32
+R12
+!i10b 1
+R13
+Z114 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_b.vhd|
+Z115 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_b.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+Z116 DEx4 work 5 reg_b 0 22 3U@G>XoM:5nEPF:Dg;TRm2
+!i122 674
+l19
+R110
+V_:5B2UPO>k3P3aVf7X8671
+!s100 2?FeRj5VY@o5nFm^?M]Lj3
+R11
+32
+R12
+!i10b 1
+R13
+R114
+R115
+!i113 1
+R16
+R17
+Ereg_c
+Z117 w1665685106
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 668
+R8
+Z118 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_c.vhd
+Z119 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_c.vhd
+l0
+L6 1
+V7z1I[WRRl^ILamV;j:kdo1
+!s100 j^8j]MkzOofh;OYhDZX0n2
+R11
+32
+R84
+!i10b 1
+R90
+Z120 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_c.vhd|
+Z121 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_c.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+R56
+!i122 668
+l19
+R110
+V1:oMh<foF6lBlb:8fcc[C0
+!s100 VhhAo4IX[9>YP:Hk6lS0c0
+R11
+32
+R84
+!i10b 1
+R90
+R120
+R121
+!i113 1
+R16
+R17
+Ereg_nbit_matrix
+Z122 w1664226279
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 669
+R8
+Z123 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_nbit_matrix.vhd
+Z124 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_nbit_matrix.vhd
+l0
+L6 1
+V`Q=34R>B`lD_:Uacf]HCj3
+!s100 i73dTnSkSfL@0Z_VUf8<:2
+R11
+32
+Z125 !s110 1665789825
+!i10b 1
+R107
+Z126 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_nbit_matrix.vhd|
+Z127 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_nbit_matrix.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+DEx4 work 15 reg_nbit_matrix 0 22 `Q=34R>B`lD_:Uacf]HCj3
+!i122 669
+l19
+R98
+Vg?<Bc`d6f50>Om92C;bH?0
+!s100 @=[7:54>jRTZZIL`HPaTm0
+R11
+32
+R125
+!i10b 1
+R107
+R126
+R127
+!i113 1
+R16
+R17
+Ereg_shift_a
+Z128 w1665786557
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 670
+R8
+Z129 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_a.vhd
+Z130 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_a.vhd
+l0
+L6 1
+VATJch7Xg2AMMiH7M2`_Y00
+!s100 V_=9Bc8<?:Km<4G[i0m]Z1
+R11
+32
+R125
+!i10b 1
+R107
+Z131 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_a.vhd|
+Z132 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_a.vhd|
+!i113 1
+R16
+R17
+Artl
+R79
+R80
+R1
+R2
+R4
+R5
+R6
+R7
+R73
+!i122 670
+l28
+L17 68
+V7Kb8Z=VO5Ycl^ele:9bWT1
+!s100 P1aA237;GAQIc5WBg7QjY3
+R11
+32
+R125
+!i10b 1
+R107
+R131
+R132
+!i113 1
+R16
+R17
+Ereg_shift_b
+Z133 w1665786582
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 671
+R8
+Z134 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_b.vhd
+Z135 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_b.vhd
+l0
+L6 1
+VSBh[ggJ`Ee`4nKVXcT8Xk2
+!s100 7B<N?e4bbFO?cWe9]iE`>2
+R11
+32
+R125
+!i10b 1
+R107
+Z136 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_b.vhd|
+Z137 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_shift_b.vhd|
+!i113 1
+R16
+R17
+Artl
+R116
+R1
+R2
+R4
+R5
+R6
+R7
+R72
+!i122 671
+l25
+L17 53
+V:Cf4fKE;VYzTfW`c==V:Z2
+!s100 H6eY7moaC84YU5l=HJdUZ3
+R11
+32
+R125
+!i10b 1
+R107
+R136
+R137
+!i113 1
+R16
+R17
+Esigned_shift
+Z138 w1664214044
+R1
+R2
+R4
+R5
+R6
+R7
+!i122 672
+R8
+Z139 8C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/signed_shift.vhd
+Z140 FC:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/signed_shift.vhd
+l0
+L6 1
+VLm<f^TC?@MPcj`dd7AEDc1
+!s100 ^2znj9XZo38Z?;1CncR]V2
+R11
+32
+R125
+!i10b 1
+R107
+Z141 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/signed_shift.vhd|
+Z142 !s107 C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/signed_shift.vhd|
+!i113 1
+R16
+R17
+Artl
+R1
+R2
+R4
+R5
+R6
+R7
+R80
+!i122 672
+l14
+L13 10
+V_j]TUAjf1<jkMUhPUo@a:1
+!s100 Ik]9Kg0M7NaHDPBe_:>b@2
+R11
+32
+R125
+!i10b 1
+R107
+R141
+R142
+!i113 1
+R16
+R17

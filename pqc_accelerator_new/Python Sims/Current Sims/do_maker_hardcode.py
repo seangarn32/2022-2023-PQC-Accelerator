@@ -4,7 +4,7 @@ import numpy as np
 N = 8
 T = 20
 
-def createFile(A, B, filepath):
+def createFileHardcode(A, B, filepath):
     file = open(filepath, 'w')
     try:
         file.write("restart -f\n")
@@ -18,19 +18,19 @@ def createFile(A, B, filepath):
                 file.write("\nforce B_in ")
             for j in range(0, len(A)):
                 if i == 0:
-                    num = ""
-                    for k in A[0]:
-                        num += str(k)
+                    num = np.binary_repr(int(A[N-1][j]), width=1)
                     if j == 0:
-                        file.write(num+" "+str(T*(j+1))+" ns")
+                        file.write(num+" "+str(T*(j+1))+"ns")
+                    else:
+                        file.write(", "+num+" "+str(T*(j+1))+"ns")
                 else:
-                    num = np.binary_repr(int(B[j][0]), width=8)
+                    num = np.binary_repr(int(B[j]), width=8)
                     if j == 0:
                         file.write("\""+num+"\" "+str(T*(j+1))+" ns")
                     else:
                         file.write(", \""+num+"\" "+str(T*(j+1))+" ns")
 
-        file.write("\n\nrun 700000ns")
+        file.write("\n\nrun 500 ns")
                 
     finally:
         file.close()
