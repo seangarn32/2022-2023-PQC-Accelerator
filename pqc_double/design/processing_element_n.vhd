@@ -59,6 +59,20 @@ begin
         );
 
     -- Add code to circular shift A0 to A1.  If encryption, don't add sign
+    SHIFT_CELL:   entity work.shift_cell(rtl)
+        port map (
+            A0,
+
+            sc_A0
+        );
+
+    ENC_DEC_MUX:  entity work.enc_dec_mux(rtl)
+        port map (
+            sc_A0,
+            enc_dec,
+
+            A1
+        );
 
     MULT_1 :      entity work.multiplier_nbit(rtl)
         port map(
@@ -84,5 +98,11 @@ begin
         );
 
     -- Add code to circular shift A0 to A2
+    DOUBLE_SIGNED_CS : entity work.Dsigned_shift(rtl)
+        port map (
+            A0,
+
+            A2
+        );
 
 end rtl;
