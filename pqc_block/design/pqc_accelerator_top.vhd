@@ -61,7 +61,7 @@ begin
             b_all
         );
 
-    ASHIFT : entity work.reg_shift_a(rtl)
+    ASHIFT : entity work.load_a(rtl)
         port map(
             clk,
             rst,
@@ -71,7 +71,7 @@ begin
             a_shift2pe
         );
 
-    BSHIFT : entity work.reg_shift_b(rtl)
+    BSHIFT : entity work.load_b(rtl)
         port map(
             clk,
             rst,
