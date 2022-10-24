@@ -8,8 +8,8 @@ entity data_shift_out is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
-        c_in    : in    c_matrix;
-
+        c_accum : in    c_matrix;
+		  
         c_out   : out   std_logic_vector(7 downto 0)
     );
 end entity;
@@ -21,7 +21,6 @@ architecture rtl of data_shift_out is
     signal shift_ena    : std_logic;
 
 begin
-
     process(clk)
     begin
         if(rising_edge(clk)) then
@@ -35,8 +34,8 @@ begin
         end if;
     end process;
 
-    c_sel <= c_in when shift_ena = '0' else c_nxt;
-
+    c_sel <= c_accum when shift_ena = '0' else
+	 c_nxt;
     REG_GEN : for i in 0 to N_SIZE-2 generate
 			
         REG : entity work.reg_8bit(rtl)
