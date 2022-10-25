@@ -10,49 +10,34 @@ entity pe_chain is
         ena     : in    std_logic;
 
         A0      : in    std_logic_vector(N_SIZE-1 downto 0);
-        B       : in    b_matrix;
-        sel     : in    mux_sel_array;
+        B0      : in    b_matrix;
+        B1      : in    b_matrix;
 
-        C_out   : out   c_matrix
+        C_out_0   : out   c_matrix
+        C_out_1   : out   c_matrix
     );
 end entity;
 
 architecture rtl of pe_chain is
 
-    signal A    : a_matrix;
-
-    signal A_hold : a_mux_input_array;
-    signal B_hold : b_mux_input_array;
-
-    signal A_mux2pe : a_mux2pe_array;
-    signal B_mux2pe : b_mux2pe_array;
-
-    signal C    : c_array;
+    signal B_REG_IN : in    std_logic_vector(7 downto 0)
+    signal B_REG_OUT : in    std_logic_vector(7 downto 0)
 
 begin
 
-    CIRC_MATRIX : entity work.circulant(rtl)
-        port map(
-            A0,
-            A
-        );
+    REG_B_GEN : for i in 1 to (N_SIZE / DIVIDE) generate 
 
-    MUX_A_GEN : for i in 0 to MUX_NUM-1 generate 
-
-        A_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
-            A_hold(i)(j) <= A(i+j*MUX_NUM);
-            -- A_hold(i)(j) <= A(i*DIVIDE+j)
-            -- To send A0, A1 to PE0
-        end generate A_HOLD_ASSIGN;
-
-        A_MUX : entity work.a_mux(rtl)
+        B_REG : entity work.reg_8bit(rtl)
             port map(
-                A_hold(i),
-                sel(i),
-
-                A_mux2pe(i)
+                clk;
+                rst; 
+                ena;
+        
+                B_REG_IN;
+                B_REG_OUT;
             );
-    end generate MUX_A_GEN;
+
+    end generate REG_B_GEN;
 
     MUX_B_GEN : for i in 0 to MUX_NUM-1 generate 
 
