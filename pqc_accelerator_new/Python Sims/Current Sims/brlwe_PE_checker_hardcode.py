@@ -37,7 +37,7 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [0,1,0,0,0,0,0,1]
+matB = [25,30,35,30,25,20,100,33]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
