@@ -19,7 +19,6 @@ architecture rtl of data_shift_out is
     signal c_sel        : c_matrix;
     signal c_nxt        : c_matrix;
     signal shift_ena    : std_logic;
-    
 
 begin
     process(clk)

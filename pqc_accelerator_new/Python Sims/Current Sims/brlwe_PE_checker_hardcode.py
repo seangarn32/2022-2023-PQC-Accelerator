@@ -18,8 +18,6 @@ def ring(value):
     return value
 
 #A[0] is the bottom of the first column of A
-
-#Change this
 A = [0,0,0,0,1,1,1,1]
 
 #Prepare A for circulant function
@@ -39,7 +37,7 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [106,77,4,35,94,111,124,1]
+matB = [0,1,0,0,0,0,0,1]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 

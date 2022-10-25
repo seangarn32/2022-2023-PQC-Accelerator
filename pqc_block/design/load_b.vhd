@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use work.globals_pkg.all;
 
-entity reg_shift_b is
+entity load_b is
     port(
         clk     : in    std_logic;
         rst     : in    std_logic;
@@ -14,7 +14,7 @@ entity reg_shift_b is
     );
 end entity;
 
-architecture rtl of reg_shift_b is
+architecture rtl of load_b is
 
     signal shift_ena    : std_logic := '0';
     signal b_arrange    : b_array;
