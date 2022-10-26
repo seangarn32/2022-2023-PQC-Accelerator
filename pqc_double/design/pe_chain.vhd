@@ -76,7 +76,7 @@ begin
             a_wire(1)
         );
 
-    PE_N_GEN : for i in 1 to COLS-2 generate
+    PE_N_GEN : for i in 1 to PE_SIZE-1 generate
 
         type reg_link_i_wire is array (0 to i) of std_logic_vector(7 downto 0);
         signal reg_link_i_0   : reg_link_i_wire := (others=>(others=>'0'));
@@ -121,11 +121,15 @@ begin
                 enc_dec,
 
                 a_wire(i),
-                reg_link_i(i),
-                c_wire(i-1),
+                reg_link_i_0(i),
+                reg_link_i_1(i),
+                c0_wire(i-1),
+                c1_wire(i-1),
 
-                a_wire(i+1),
-                c_wire(i)
+                
+                c0_wire(i),
+                c1_wire(i),
+                a_wire(i+1)
             );
     end generate PE_N_GEN;
 
@@ -168,6 +172,7 @@ begin
 --
 --    end generate PE_N_GEN; 
 
-    C_out <= c_wire(COLS-1);
+    C_out_0 <= c0_wire(PE_SIZE-1);
+    C_out_1 <= c1_wire(PE_SIZE-1);
 
 end architecture;
