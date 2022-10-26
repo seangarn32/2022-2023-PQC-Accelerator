@@ -50,7 +50,7 @@ begin
             a_wire(1)
         );
 
-    PE_N_GEN : for i in 1 to PE_SIZE-1 generate
+    PE_N_GEN : for i in 1 to PE_SIZE-2 generate
 
         type reg_link_i_wire is array (0 to i) of std_logic_vector(7 downto 0);
         signal reg_link_i_0   : reg_link_i_wire := (others=>(others=>'0'));
@@ -109,42 +109,61 @@ begin
 
 
 
---    PE_N_GEN : for i in 1 to 1 generate
---
---        type reg_link_n_wire is array (0 to COLS-1) of std_logic_vector(7 downto 0);
---        signal reg_link_n   : reg_link_n_wire := (others=>(others=>'0'));
---
---    begin
---
---        reg_link_n(0) <= B(COLS-1);
---
---        REG_FEED_GEN_N : for j in 0 to COLS-2 generate
---            REG_8 : entity work.reg_8bit(rtl)
---                port map(
---                    clk,
---                    rst,
---                    ena,
---
---                    reg_link_n(j),
---
---                    reg_link_n(j+1)
---                );
---        end generate REG_FEED_GEN_N;
---
---        PE_N :   entity work.processing_element_n(rtl)
---            port map(
---                clk,
---                rst,
---                ena,
---
---                a_wire(COLS-1),
---                reg_link_n(COLS-1),
---                c_wire(COLS-2),
---
---                c_wire(COLS-1)
---            );
---
---    end generate PE_N_GEN; 
+    PE_L_GEN : for i in 1 to 1 generate
+
+        type reg_link_n_wire is array (0 to PE_SIZE-1) of std_logic_vector(7 downto 0);
+        signal reg_link_n_0   : reg_link_n_wire := (others=>(others=>'0'));
+        signal reg_link_n_1   : reg_link_n_wire := (others=>(others=>'0'));
+
+   begin
+
+    reg_link_n_0(0) <= B0(PE_SIZE-1);
+    reg_link_n_1(0) <= B1(PE_SIZE-1);
+
+        REG_FEED_GEN_N0 : for j in 0 to PE_SIZE-2 generate
+            REG_8 : entity work.reg_8bit(rtl)
+                port map(
+                    clk,
+                    rst,
+                    ena,
+
+                    reg_link_n_0(j),
+
+                    reg_link_n_0(j+1)
+                );
+        end generate REG_FEED_GEN_N0;
+
+        REG_FEED_GEN_N0 : for j in 0 to PE_SIZE-2 generate
+        REG_8 : entity work.reg_8bit(rtl)
+            port map(
+                clk,
+                rst,
+                ena,
+
+                reg_link_n_1(j),
+
+                reg_link_n_1(j+1)
+            );
+        end generate REG_FEED_GEN_N0;
+
+        PE_N :   entity work.processing_element_l(rtl)
+            port map(
+                clk,
+                rst,
+                ena,
+                enc_dec,
+
+                a_wire(PE_SIZE-1),
+                reg_link_n0(PE_SIZE-1),
+                reg_link_n1(PE_SIZE-1),
+                c0_wire(PE_SIZE-2),
+                c1_wire(PE_SIZE-2,)
+
+                c0_wire(PE_SIZE-1),
+                c1_wire(PE_SIZE-1)
+            );
+
+    end generate PE_L_GEN; 
 
     C_out_0 <= c0_wire(PE_SIZE-1);
     C_out_1 <= c1_wire(PE_SIZE-1);
