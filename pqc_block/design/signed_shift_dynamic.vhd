@@ -21,12 +21,14 @@ architecture rtl of signed_shift_dynamic is
 
 begin
 
+    -- Invert value at index inv_sel
     INV_GEN : for i in 0 to N_SIZE-1 generate
         a_not(i) <= NOT(A_in(i)) + "01";
 
         a_inv(i) <= a_not(i) when unsigned(inv_sel) = i else A_in(i);
     end generate INV_GEN;
 
+    -- Shift last value to top
     a_shift(0) <= a_inv(N_SIZE-1);
     SHIFT_GEN : for i in 1 to N_SIZE-1 generate
         a_shift(i) <= a_inv(i-1);

@@ -22,6 +22,7 @@ package globals_pkg is
     constant COUNTER_SIZE_A : integer := integer(log2(real(NUM_A_SECTIONS)));
     constant COUNTER_SIZE_B : integer := integer(log2(real(NUM_B_SECTIONS)));
     constant COUNTER_SIZE_C : integer := integer(log2(real(NUM_C_SECTIONS)));
+    constant A_INDEX_SIZE : integer := integer(log2(real(N_SIZE)));
 
     -- "section" -> 1 block used for PE operation
     type a_section_col is array (0 to ROWS-1) of std_logic_vector(1 downto 0);

@@ -9,6 +9,7 @@ entity load_a is
         rst     : in    std_logic;
         pe_ena  : in    std_logic;
 
+        a_sel   : in    std_logic_vector(A_INDEX_SIZE-1 downto 0);
         A_in    : in    std_logic_vector(N_SIZE-1 downto 0);
         A_out   : out   a_vector
     );
@@ -73,7 +74,9 @@ begin
     -- Shift aN
     SHIFT_AN : entity work.shift_an(rtl)
         port map(
+            a_sel,
             a_now,
+            
             aN_nxt
         );
 
