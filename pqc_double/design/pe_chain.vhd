@@ -154,8 +154,8 @@ begin
                 enc_dec,
 
                 a_wire(PE_SIZE-1),
-                reg_link_n0(PE_SIZE-1),
-                reg_link_n1(PE_SIZE-1),
+                reg_link_n_0(PE_SIZE-1),
+                reg_link_n_1(PE_SIZE-1),
                 c0_wire(PE_SIZE-2),
                 c1_wire(PE_SIZE-2),
 
