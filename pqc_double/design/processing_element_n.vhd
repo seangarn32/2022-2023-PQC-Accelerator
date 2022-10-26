@@ -18,8 +18,8 @@ entity processing_element_n is
         C_in_0  : in    c_matrix;
         C_in_1  : in    c_matrix;
 
-        C_out_0   : out   c_matrix
-        C_out_1   : out   c_matrix
+        C_out_0   : out   c_matrix;
+        C_out_1   : out   c_matrix;
 
         A2     : out    a_vector;
     );
