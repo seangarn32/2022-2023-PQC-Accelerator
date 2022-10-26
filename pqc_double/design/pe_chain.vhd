@@ -27,7 +27,7 @@ architecture rtl of pe_chain is
 
 begin
 
-    REG_B_GEN : for i in 1 to (N_SIZE / DIVIDE) generate 
+    REG_B_GEN : for i in 1 to (PE_SIZE) generate 
 
         B_REG : entity work.reg_8bit(rtl)
             port map(
