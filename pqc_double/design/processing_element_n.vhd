@@ -32,6 +32,7 @@ architecture rtl of processing_element_n is
     signal C_sum_0  : c_matrix;
     signal C_sum_1  : c_matrix;
     signal A1     : a_vector;
+    signal sc_A0    : a_vector;
 
 begin
     -- Multiply AxB -> C_mult
