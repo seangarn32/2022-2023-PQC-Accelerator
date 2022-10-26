@@ -30,29 +30,6 @@ architecture rtl of pe_chain is
 
 begin
 
-    REG_B_GEN : for i in 1 to (PE_SIZE) generate 
-
-        B_REG_0 : entity work.reg_8bit(rtl)
-            port map(
-                clk;
-                rst; 
-                ena;
-        
-                B_REG_IN;
-                B_REG_OUT;
-            );
-        B_REG_1 : entity work.reg_8bit(rtl)
-            port map(
-                clk;
-                rst; 
-                ena;
-        
-                B_REG_IN;
-                B_REG_OUT;
-            );
-
-    end generate REG_B_GEN;
-
     begin
 
     a_wire(0) <= A;
