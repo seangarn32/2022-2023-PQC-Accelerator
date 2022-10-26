@@ -23,6 +23,8 @@ architecture rtl of pe_chain is
     signal B_REG_IN : in    std_logic_vector(7 downto 0)
     signal B_REG_OUT : in    std_logic_vector(7 downto 0)
     signal a_wire       : a_array;
+    signal b_wire       : b_matrix;
+    signal p_wire       : b_matrix;
     signal c_wire       : c_array;
 
 begin
@@ -41,12 +43,11 @@ begin
 
     end generate REG_B_GEN;
 
-
-begin
+    begin
 
     a_wire(0) <= A;
 
-    PE_0 :   entity work.processing_element_0(rtl)
+    PE_0 :   entity work.processing_element_i(rtl)
         port map(
             clk,
             rst,
@@ -81,7 +82,7 @@ begin
                 );
         end generate REG_FEED_GEN_I;
 
-        PE : entity work.processing_element_i(rtl)
+        PE : entity work.processing_element_n(rtl)
             port map(
                 clk,
                 rst,
