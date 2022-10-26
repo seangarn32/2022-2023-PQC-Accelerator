@@ -19,7 +19,7 @@ entity processing_element_l is
         C_in_1  : in    c_matrix;
 
         C_out_0   : out   c_matrix;
-        C_out_1   : out   c_matrix;
+        C_out_1   : out   c_matrix
     );
 end entity;
 
