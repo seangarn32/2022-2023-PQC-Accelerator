@@ -29,7 +29,7 @@ architecture rtl of pe_chain is
 
 begin
 
-    a_wire <= A0;
+    a_wire(0) <= A0;
     b_wire <= B0;
     p_wire <= B1;
 
