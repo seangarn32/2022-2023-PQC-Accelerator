@@ -23,7 +23,7 @@ entity processing_element_l is
     );
 end entity;
 
-architecture rtl of processing_element_n is
+architecture rtl of processing_element_l is
 
     signal C_mult_0 : c_matrix;
     signal C_mult_1 : c_matrix;
