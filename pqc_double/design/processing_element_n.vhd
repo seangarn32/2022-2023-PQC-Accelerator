@@ -44,9 +44,9 @@ begin
         );
 
     -- Accumulate (+) C values -> C_sum
-    SUM : for i in 0 to N_SIZE-1 generate
+    SUM_0 : for i in 0 to N_SIZE-1 generate
         C_sum_0(i) <= C_in_0(i) + C_mult_0(i);
-    end generate SUM;
+    end generate SUM_0;
 
     -- Register Output -> C_out
     REG_SUM_0 :   entity work.reg_nbit_matrix(rtl)
@@ -84,9 +84,9 @@ begin
         );
 
     -- Accumulate (+) C values -> C_sum
-    SUM : for i in 0 to N_SIZE-1 generate
+    SUM_1 : for i in 0 to N_SIZE-1 generate
         C_sum_1(i) <= C_in_1(i) + C_mult_1(i);
-    end generate SUM;
+    end generate SUM_1;
 
     REG_SUM_1 :   entity work.reg_nbit_matrix(rtl)
         port map(
