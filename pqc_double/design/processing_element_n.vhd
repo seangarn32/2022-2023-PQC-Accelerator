@@ -55,7 +55,7 @@ begin
             ena,
             C_sum_0,
 
-            C_out
+            C_out_0
         );
 
     -- Add code to circular shift A0 to A1.  If encryption, don't add sign
@@ -94,7 +94,7 @@ begin
             ena,
             C_sum_1,
 
-            C_out
+            C_out_1
         );
 
     -- Add code to circular shift A0 to A2
