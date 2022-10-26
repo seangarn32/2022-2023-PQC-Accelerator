@@ -20,6 +20,7 @@ architecture rtl of pqc_accelerator_top is
 
     signal a0           : std_logic_vector(N_SIZE-1 downto 0);
     signal b_all        : b_matrix;
+    signal a_sel        : std_logic_vector(A_INDEX_SIZE-1 downto 0);
 
     signal a_shift2pe   : a_vector; 
     signal b_shift2pe   : b_section;
@@ -40,6 +41,8 @@ begin
             clk,
             rst,
             ena,
+
+            a_sel,
 
             dsi_ena,
             bl_ena,
@@ -67,6 +70,7 @@ begin
             rst,
             pe_ena,
 
+            a_sel,
             a0,
             a_shift2pe
         );
@@ -87,6 +91,7 @@ begin
             rst,
             pe_ena,
 
+            a_sel,
             a_shift2pe,
             b_shift2pe,
 

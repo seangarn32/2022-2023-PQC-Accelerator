@@ -10,8 +10,10 @@ entity processing_element_0 is
         ena     : in    std_logic;
         
         A       : in    a_vector;
+        a_sel   : in    std_logic_vector(A_INDEX_SIZE-1 downto 0);
         B       : in    std_logic_vector(7 downto 0);
 
+        a_selout: out   std_logic_vector(A_INDEX_SIZE-1 downto 0);
         A_out   : out   a_vector;
         C_out   : out   c_section
     );
@@ -31,8 +33,9 @@ begin
     end generate A_COL_GEN;
 
     -- With A(n), determine A(n+1) -> a_nxt
-    SHIFT_A :   entity work.signed_shift(rtl)
+    SHIFT_A :   entity work.signed_shift_dynamic(rtl)
         port map(
+            a_sel,
             A,
 
             a_nxt
@@ -57,6 +60,18 @@ begin
             a_nxt,
 
             A_out
+        );
+
+    -- Pass a_sel to next PE
+    REG_A_SEL :   entity work.reg_a_sel(rtl)
+        port map(
+            clk,
+            rst,
+            ena,
+            
+            a_sel,
+
+            a_selout
         );
 
     -- Register C output -> c_out
