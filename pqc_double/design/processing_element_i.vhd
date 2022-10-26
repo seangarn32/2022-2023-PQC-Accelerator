@@ -15,10 +15,10 @@ entity processing_element_i is
         B_0       : in    std_logic_vector(7 downto 0);
         B_1       : in    std_logic_vector(7 downto 0);
 
-        C_out_0   : out   c_matrix
-        C_out_1   : out   c_matrix
+        C_out_0   : out   c_matrix;
+        C_out_1   : out   c_matrix;
 
-        A2     : out    a_vector;
+        A2     : out    a_vector
     );
 end entity;
 
@@ -48,7 +48,7 @@ begin
             ena,
             C_mult_0,
 
-            C_out
+            C_out_0
         );
 
     -- Add code to circular shift A0 to A1.  If encryption, don't add sign
@@ -82,7 +82,7 @@ begin
             ena,
             C_mult_1,
 
-            C_out
+            C_out_1
         );
 
     -- Add code to circular shift A0 to A2

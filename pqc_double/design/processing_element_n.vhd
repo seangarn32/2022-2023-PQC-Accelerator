@@ -18,10 +18,10 @@ entity processing_element_n is
         C_in_0  : in    c_matrix;
         C_in_1  : in    c_matrix;
 
-        C_out_0   : out   c_matrix
-        C_out_1   : out   c_matrix
+        C_out_0   : out   c_matrix;
+        C_out_1   : out   c_matrix;
 
-        A2     : out    a_vector;
+        A2     : out    a_vector
     );
 end entity;
 
@@ -32,6 +32,7 @@ architecture rtl of processing_element_n is
     signal C_sum_0  : c_matrix;
     signal C_sum_1  : c_matrix;
     signal A1     : a_vector;
+    signal sc_A0    : a_vector;
 
 begin
     -- Multiply AxB -> C_mult
@@ -43,9 +44,9 @@ begin
         );
 
     -- Accumulate (+) C values -> C_sum
-    SUM : for i in 0 to N_SIZE-1 generate
+    SUM_0 : for i in 0 to N_SIZE-1 generate
         C_sum_0(i) <= C_in_0(i) + C_mult_0(i);
-    end generate SUM;
+    end generate SUM_0;
 
     -- Register Output -> C_out
     REG_SUM_0 :   entity work.reg_nbit_matrix(rtl)
@@ -55,7 +56,7 @@ begin
             ena,
             C_sum_0,
 
-            C_out
+            C_out_0
         );
 
     -- Add code to circular shift A0 to A1.  If encryption, don't add sign
@@ -83,9 +84,9 @@ begin
         );
 
     -- Accumulate (+) C values -> C_sum
-    SUM : for i in 0 to N_SIZE-1 generate
+    SUM_1 : for i in 0 to N_SIZE-1 generate
         C_sum_1(i) <= C_in_1(i) + C_mult_1(i);
-    end generate SUM;
+    end generate SUM_1;
 
     REG_SUM_1 :   entity work.reg_nbit_matrix(rtl)
         port map(
@@ -94,7 +95,7 @@ begin
             ena,
             C_sum_1,
 
-            C_out
+            C_out_1
         );
 
     -- Add code to circular shift A0 to A2
