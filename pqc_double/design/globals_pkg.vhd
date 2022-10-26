@@ -9,6 +9,8 @@ package globals_pkg is
     constant N_SIZE : integer := 8;
     -- DIVIDE -> Number of times to divide down PEs for pipelining
     constant DIVIDE : integer := 2;
+    -- PE_SIZE -> Number of PEs used in design
+    constant PE_SIZE : integer := N_SIZE/DIVIDE;
     
     -- MUX_NUM -> Number of muxes
     constant MUX_NUM : integer := N_SIZE/DIVIDE;

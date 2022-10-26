@@ -10,66 +10,42 @@ entity pe_chain is
         ena     : in    std_logic;
 
         A0      : in    std_logic_vector(N_SIZE-1 downto 0);
-        B       : in    b_matrix;
-        sel     : in    mux_sel_array;
+        B0      : in    b_matrix;
+        B1      : in    b_matrix;
 
-        C_out   : out   c_matrix
+        C_out_0   : out   c_matrix
+        C_out_1   : out   c_matrix
     );
 end entity;
 
 architecture rtl of pe_chain is
 
-    signal A    : a_matrix;
-
-    signal A_hold : a_mux_input_array;
-    signal B_hold : b_mux_input_array;
-
-    signal A_mux2pe : a_mux2pe_array;
-    signal B_mux2pe : b_mux2pe_array;
-
-    signal C    : c_array;
+    signal B_REG_IN : in    std_logic_vector(7 downto 0)
+    signal B_REG_OUT : in    std_logic_vector(7 downto 0)
+    signal a_wire       : a_array;
+    signal b_wire       : b_matrix;
+    signal p_wire       : b_matrix;
+    signal c_wire       : c_array;
 
 begin
 
-    CIRC_MATRIX : entity work.circulant(rtl)
-        port map(
-            A0,
-            A
-        );
+    REG_B_GEN : for i in 1 to (PE_SIZE) generate 
 
-    MUX_A_GEN : for i in 0 to MUX_NUM-1 generate 
-
-        A_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
-            A_hold(i)(j) <= A(i+j*MUX_NUM);
-            -- A_hold(i)(j) <= A(i*DIVIDE+j)
-            -- To send A0, A1 to PE0
-        end generate A_HOLD_ASSIGN;
-
-        A_MUX : entity work.a_mux(rtl)
+        B_REG : entity work.reg_8bit(rtl)
             port map(
-                A_hold(i),
-                sel(i),
-
-                A_mux2pe(i)
+                clk;
+                rst; 
+                ena;
+        
+                B_REG_IN;
+                B_REG_OUT;
             );
-    end generate MUX_A_GEN;
 
-    MUX_B_GEN : for i in 0 to MUX_NUM-1 generate 
+    end generate REG_B_GEN;
 
-        B_HOLD_ASSIGN : for j in 0 to DIVIDE-1 generate
-            B_hold(i)(j) <= B(i+j*MUX_NUM);
-            -- B_hold(i)(j) <= B(i*DIVIDE+j)
-            -- To send B0, B1 to PE0
-        end generate B_HOLD_ASSIGN;
+    begin
 
-        B_MUX : entity work.b_mux(rtl)
-            port map(
-                B_hold(i),
-                sel(i),
-
-                B_mux2pe(i)
-            );
-    end generate MUX_B_GEN;
+    a_wire(0) <= A;
 
     PE_0 :   entity work.processing_element_i(rtl)
         port map(
@@ -77,38 +53,89 @@ begin
             rst,
             ena,
 
-            A_mux2pe(0),
-            B_mux2pe(0),
+            a_wire(0),
+            B(0),
 
-            C(1)
+            a_wire(1),
+            c_wire(0)
         );
 
-    PE_GEN : for i in 1 to MUX_NUM-2 generate
+    PE_I_GEN : for i in 1 to COLS-2 generate
+
+        type reg_link_i_wire is array (0 to i) of std_logic_vector(7 downto 0);
+        signal reg_link_i   : reg_link_i_wire := (others=>(others=>'0'));
+
+    begin
+
+        reg_link_i(0) <= B(i);
+
+        REG_FEED_GEN_I : for j in 0 to i-1 generate
+            REG_8 : entity work.reg_8bit(rtl)
+                port map(
+                    clk,
+                    rst,
+                    ena,
+
+                    reg_link_i(j),
+
+                    reg_link_i(j+1)
+                );
+        end generate REG_FEED_GEN_I;
+
         PE : entity work.processing_element_n(rtl)
             port map(
                 clk,
                 rst,
                 ena,
 
-                A_mux2pe(i),
-                B_mux2pe(i),
-                C(i),
+                a_wire(i),
+                reg_link_i(i),
+                c_wire(i-1),
 
-                C(i+1)
+                a_wire(i+1),
+                c_wire(i)
             );
-    end generate PE_GEN;
+    end generate PE_I_GEN;
 
-    PE_N :   entity work.processing_element_n(rtl)
-        port map(
-            clk,
-            rst,
-            ena,
 
-            A_mux2pe(MUX_NUM-1),
-            B_mux2pe(MUX_NUM-1),
-            C(MUX_NUM-1),
 
-            C_out
-        );
+    PE_N_GEN : for i in 1 to 1 generate
+
+        type reg_link_n_wire is array (0 to COLS-1) of std_logic_vector(7 downto 0);
+        signal reg_link_n   : reg_link_n_wire := (others=>(others=>'0'));
+
+    begin
+
+        reg_link_n(0) <= B(COLS-1);
+
+        REG_FEED_GEN_N : for j in 0 to COLS-2 generate
+            REG_8 : entity work.reg_8bit(rtl)
+                port map(
+                    clk,
+                    rst,
+                    ena,
+
+                    reg_link_n(j),
+
+                    reg_link_n(j+1)
+                );
+        end generate REG_FEED_GEN_N;
+
+        PE_N :   entity work.processing_element_n(rtl)
+            port map(
+                clk,
+                rst,
+                ena,
+
+                a_wire(COLS-1),
+                reg_link_n(COLS-1),
+                c_wire(COLS-2),
+
+                c_wire(COLS-1)
+            );
+
+    end generate PE_N_GEN;
+
+    C_out <= c_wire(COLS-1);
 
 end architecture;
