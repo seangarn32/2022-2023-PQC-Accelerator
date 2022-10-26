@@ -10,6 +10,8 @@ entity control_unit is
         rst : in  std_logic;
         ena : in  std_logic;
 
+        a_sel       : out   std_logic_vector(A_INDEX_SIZE-1 downto 0);
+
         dsi_ena     : out   std_logic;
         bl_ena      : out   std_logic;
         pe_ena      : out   std_logic;
@@ -61,5 +63,7 @@ begin
             end if;
         end if;
     end process;
+
+    a_sel <= (others=>'1');
 
 end rtl;

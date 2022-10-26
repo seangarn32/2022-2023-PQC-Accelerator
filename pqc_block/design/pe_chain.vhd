@@ -9,6 +9,7 @@ entity pe_chain is
         rst     : in    std_logic;
         ena     : in    std_logic;
 
+        a_sel   : in    std_logic_vector(A_INDEX_SIZE-1 downto 0);
         A       : in    a_vector;
         B       : in    b_section;
 
@@ -18,12 +19,16 @@ end entity;
 
 architecture rtl of pe_chain is
 
+    type a_sel_array is array (0 to COLS-1) of std_logic_vector(A_INDEX_SIZE-1 downto 0);
+    signal a_sel_wire   : a_sel_array; 
+
     signal a_wire       : a_array;
     signal c_wire       : c_array;
 
 begin
 
     a_wire(0) <= A;
+    a_sel_wire(0) <= a_sel;
 
     PE_0 :   entity work.processing_element_0(rtl)
         port map(
@@ -32,8 +37,10 @@ begin
             ena,
 
             a_wire(0),
+            a_sel_wire(0),
             B(0),
 
+            a_sel_wire(1),
             a_wire(1),
             c_wire(0)
         );
@@ -67,9 +74,11 @@ begin
                 ena,
 
                 a_wire(i),
+                a_sel_wire(i),
                 reg_link_i(i),
                 c_wire(i-1),
 
+                a_sel_wire(i+1),
                 a_wire(i+1),
                 c_wire(i)
             );
