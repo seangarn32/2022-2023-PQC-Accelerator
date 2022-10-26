@@ -6,7 +6,7 @@ use ieee.math_real."log2";
 package globals_pkg is
 
     -- N_SIZE -> Size of initial A vector 
-    constant N_SIZE : integer := 8;
+    constant N_SIZE : integer := 16;
     
     -- ROWS/COLS -> Section size to process (i.e. 4x8)
     constant ROWS : integer := 2;

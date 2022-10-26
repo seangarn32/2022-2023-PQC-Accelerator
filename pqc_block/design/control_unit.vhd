@@ -10,7 +10,7 @@ entity control_unit is
         rst : in  std_logic;
         ena : in  std_logic;
 
-        a_sel       : out   std_logic_vector(A_INDEX_SIZE-1 downto 0);
+        a_selout    : out   std_logic_vector(A_INDEX_SIZE-1 downto 0);
 
         dsi_ena     : out   std_logic;
         bl_ena      : out   std_logic;
@@ -25,9 +25,15 @@ architecture rtl of control_unit is
     type state_available is (SETUP, DSI, B_LOAD, PE_PIPE, PE_ACCUM, DSO);
     signal state            : state_available := SETUP;
     signal state_nxt        : state_available;
+
+    signal a_sel            : std_logic_vector(A_INDEX_SIZE-1 downto 0);
+    signal a_sel_nxt        : std_logic_vector(A_INDEX_SIZE-1 downto 0);
     
     signal count            : std_logic_vector(COUNTER_SIZE_FSM-1 downto 0);
     signal count_nxt        : std_logic_vector(COUNTER_SIZE_FSM-1 downto 0);
+
+    signal count_a_sel      : std_logic_vector(COUNTER_SIZE_B-1 downto 0);
+    signal count_a_sel_nxt  : std_logic_vector(COUNTER_SIZE_B-1 downto 0);
 
 begin
 
@@ -64,6 +70,29 @@ begin
         end if;
     end process;
 
-    a_sel <= (others=>'1');
+
+    count_a_sel_nxt <= count_a_sel + '1' when (state = PE_PIPE or state = PE_ACCUM) 
+                                          and (count_a_sel < NUM_B_SECTIONS-1)
+                                          --and (count > NUM_B_SECTIONS-2)
+                                         else (others => '0'); 
+    a_sel_nxt <= a_sel - ROWS when (state = PE_PIPE or state = PE_ACCUM)
+                               and (count_a_sel < NUM_B_SECTIONS-1)
+                               --and (count > NUM_B_SECTIONS-2)
+                              else (a_sel);
+    
+    process (clk)
+    begin
+        if rising_edge(clk) then
+            if (rst = '1' or ena = '0') then
+                count_a_sel <= (others => '0');
+                a_sel <= std_logic_vector(to_unsigned(N_SIZE-1, A_INDEX_SIZE));
+            else 
+                count_a_sel <= count_a_sel_nxt;
+                a_sel <= a_sel_nxt;
+            end if;
+        end if;
+    end process;
+
+    a_selout <= a_sel;
 
 end rtl;
