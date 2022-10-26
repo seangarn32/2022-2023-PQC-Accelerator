@@ -18,7 +18,7 @@ entity processing_element_i is
         C_out_0   : out   c_matrix;
         C_out_1   : out   c_matrix;
 
-        A2     : out    a_vector;
+        A2     : out    a_vector
     );
 end entity;
 
