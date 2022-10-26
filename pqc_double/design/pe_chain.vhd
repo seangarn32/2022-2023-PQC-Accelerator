@@ -25,7 +25,8 @@ architecture rtl of pe_chain is
     signal a_wire       : a_array;
     signal b_wire       : b_matrix;
     signal p_wire       : b_matrix;
-    signal c_wire       : c_array;
+    signal c0_wire      : c_array;
+    signal c1_wire      : c_array;
 
 begin
 
@@ -46,18 +47,24 @@ begin
     begin
 
     a_wire(0) <= A;
+    b_wire(0) <= B0;
+    p_wire(0) <= B1;
 
     PE_0 :   entity work.processing_element_i(rtl)
         port map(
             clk,
             rst,
             ena,
+            enc_dec,
 
             a_wire(0),
-            B(0),
+            b_wire(0),
+            p_wire(0),
 
-            a_wire(1),
-            c_wire(0)
+            
+            c0_wire(0),
+            c1_wire(0),
+            a_wire(1)
         );
 
     PE_I_GEN : for i in 1 to COLS-2 generate
@@ -87,6 +94,7 @@ begin
                 clk,
                 rst,
                 ena,
+                enc_dec,
 
                 a_wire(i),
                 reg_link_i(i),
