@@ -50,11 +50,7 @@ begin
             a_wire(1)
         );
 
-<<<<<<< HEAD
     PE_N_GEN : for i in 1 to PE_SIZE-2 generate
-=======
-    PE_N_GEN : for i in 1 to PE_SIZE generate
->>>>>>> fabb4dbda9746ae2f0264ea1c650db1677d5cb68
 
         type reg_link_i_wire is array (0 to i) of std_logic_vector(7 downto 0);
         signal reg_link_i_0   : reg_link_i_wire := (others=>(others=>'0'));
