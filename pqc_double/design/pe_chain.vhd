@@ -8,8 +8,9 @@ entity pe_chain is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
+        enc_dec : in    std_logic;
 
-        A0      : in    std_logic_vector(N_SIZE-1 downto 0);
+        A0      : in    a_vector;
         B0      : in    b_matrix;
         B1      : in    b_matrix;
 
@@ -20,8 +21,6 @@ end entity;
 
 architecture rtl of pe_chain is
 
-    signal B_REG_IN : in    std_logic_vector(7 downto 0)
-    signal B_REG_OUT : in    std_logic_vector(7 downto 0)
     signal a_wire       : a_array;
     signal b_wire       : b_matrix;
     signal p_wire       : b_matrix;
@@ -30,11 +29,9 @@ architecture rtl of pe_chain is
 
 begin
 
-    begin
-
-    a_wire(0) <= A;
-    b_wire(0) <= B0;
-    p_wire(0) <= B1;
+    a_wire <= A0;
+    b_wire <= B0;
+    p_wire <= B1;
 
     PE_0 :   entity work.processing_element_i(rtl)
         port map(
