@@ -13,7 +13,7 @@ entity pe_chain is
         B0      : in    b_matrix;
         B1      : in    b_matrix;
 
-        C_out_0   : out   c_matrix
+        C_out_0   : out   c_matrix;
         C_out_1   : out   c_matrix
     );
 end entity;
