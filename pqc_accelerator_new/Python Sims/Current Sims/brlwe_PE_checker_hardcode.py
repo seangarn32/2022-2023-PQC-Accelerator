@@ -17,12 +17,12 @@ def ring(value):
         value += MAXVAL
     return value
 
-#A[0] is the bottom of the first column of A
-A = [0,0,0,0,1,1,1,1]
+#A[0] is the 0,0 element of the circular matrix
+A = [0,0,1,0,0,1,1,1]
 
 #Prepare A for circulant function
-A = np.flip(A)
-A = np.roll(A,1)
+#A = np.flip(A)
+#A = np.roll(A,1)
 
 matA = circulant(A)
 
@@ -30,9 +30,9 @@ print("\nInitial column of matrix A: ",matA[0])
 
 for i in range(N):
     for j in range(N):
-        if i > j:
+        if i < j:
             matA[i][j] = -1*matA[i][j]
-matA = np.flip(np.transpose(matA),axis=0)
+#matA = np.flip(np.transpose(matA),axis=0)
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
