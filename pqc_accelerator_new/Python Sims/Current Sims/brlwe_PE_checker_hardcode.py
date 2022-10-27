@@ -18,7 +18,7 @@ def ring(value):
     return value
 
 #A[0] is the 0,0 element of the circular matrix
-A = [0,0,1,0,0,1,1,1]
+A = [0,1,0,1,0,1,1,1]
 
 #Prepare A for circulant function
 #A = np.flip(A)
@@ -34,28 +34,27 @@ for i in range(N):
             matA[i][j] = -1*matA[i][j]
 #matA = np.flip(np.transpose(matA),axis=0)
 print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
+matA = np.transpose(matA)
 
 
 #Change this
-matB = [25,30,35,30,25,20,100,33]
+matB = [0,1,0,1,0,1,0,1]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
-matC = np.empty([N,N])
-
+matC = np.zeros([N,N])
+Sums = np.zeros([N])
 for i in range(N):
     for j in range(N):
-        matC[i][j] = matA[i][j]*matB[i]
-matC = np.transpose(matC)
+        matC[i][j] = (matB[i]* matA[i][j])
+
+Sums = matC[0]
+for i in range(N-1):
+    Sums = matC[i+1]+Sums
+
+
+        
 print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
-
-matF = np.zeros([N])
-for i in range(N):
-    matF[i] = sum(matC[i])
-for k in range(N):
-    matF[k] = ring(matF[k])
-
-matF.reshape(-1, 1)
-print("\nMatrix F (Final Accumulation, Dn+En-1) (1 x ",len(matF),"):\n", matF)
+print("\nMatrix F (Final Accumulation) (1 x ",len(Sums),"):\n", Sums)
 
 createFileHardcode(matA, matB, "PE_checker_hardcode.do")
