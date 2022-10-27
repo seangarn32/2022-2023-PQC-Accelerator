@@ -18,7 +18,7 @@ def ring(value):
     return value
 
 #A[0] is the 0,0 element of the circular matrix
-A = [0,0,1,0,0,1,1,1]
+A = [0,1,0,1,0,1,1,1]
 
 #Prepare A for circulant function
 #A = np.flip(A)
@@ -37,7 +37,7 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [25,30,35,30,25,20,100,33]
+matB = [0,1,0,1,0,1,0,1]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
@@ -46,7 +46,7 @@ matC = np.empty([N,N])
 for i in range(N):
     for j in range(N):
         matC[i][j] = matA[i][j]*matB[i]
-matC = np.transpose(matC)
+#matC = np.transpose(matC)
 print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
 
 matF = np.zeros([N])
