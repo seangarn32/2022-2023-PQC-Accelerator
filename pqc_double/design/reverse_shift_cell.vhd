@@ -5,8 +5,8 @@ use work.globals_pkg.all;
 
 entity reverse_shift_cell is
     port (
-        A_in    : in    a_vector;
-        A_nxt   : out   a_vector
+        A_in    : in    c_matrix;
+        A_nxt   : out   c_matrix
     );
 end entity;
 
