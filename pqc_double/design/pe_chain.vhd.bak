@@ -24,11 +24,7 @@ architecture rtl of pe_chain is
     signal a_wire       : a_array;
     signal b_wire       : b_matrix;
     signal b_wire_temp       : b_matrix;
-    signal b_wire_0       : b_matrix;
-    signal b_wire_1       : b_matrix;
     signal p_wire       : b_matrix;
-    signal p_wire_0       : b_matrix;
-    signal p_wire_1       : b_matrix;
     signal c0_wire      : c_array;
     signal c1_wire      : c_array;
 
@@ -37,26 +33,18 @@ begin
     a_wire(0) <= A0;
     b_wire_temp <= B0;
             
-    DEC_ASSIGN: for i in 0 to 3 generate
-        p_wire_1(i) <= b_wire_temp(2*i+1);
-        b_wire_1(i) <= b_wire_temp(2*i);
-    end generate DEC_ASSIGN;
+    LOOP_FUNC: for i in 0 to 3 generate
+        p_wire(i) <= b_wire_temp(2*i+1);
+        b_wire(i) <= b_wire_temp(2*i);
+    end generate LOOP_FUNC;
 
-    p_wire_0 <= B1;
-    b_wire_0 <= B0;
-
-    WIRE_SELECT : entity work.mux2to1_B(rtl)
-        port map (
-            p_wire_0,
-            b_wire_0,
-            p_wire_1,
-            b_wire_1,
-
-            enc_dec,
-
-            p_wire,
-            b_wire
-        );
+    process
+    begin
+        if enc_dec = '0' then
+           p_wire <= B1;
+           b_wire <= B0;
+        end if;
+    end process;
 
     PE_0 :   entity work.processing_element_i(rtl)
         port map(
@@ -83,8 +71,8 @@ begin
 
     begin
 
-        reg_link_i_0(0) <= b_wire(i);
-        reg_link_i_1(0) <= p_wire(i);
+        reg_link_i_0(0) <= B0(i);
+        reg_link_i_1(0) <= B1(i);
 
         REG_FEED_GEN_I_0 : for j in 0 to i-1 generate
             REG_8 : entity work.reg_8bit(rtl)
@@ -142,8 +130,8 @@ begin
 
    begin
 
-    reg_link_n_0(0) <= b_wire(PE_SIZE-1);
-    reg_link_n_1(0) <= p_wire(PE_SIZE-1);
+    reg_link_n_0(0) <= B0(PE_SIZE-1);
+    reg_link_n_1(0) <= B1(PE_SIZE-1);
 
         REG_FEED_GEN_N0 : for j in 0 to PE_SIZE-2 generate
             REG_8 : entity work.reg_8bit(rtl)
