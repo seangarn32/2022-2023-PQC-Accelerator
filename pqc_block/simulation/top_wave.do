@@ -64,13 +64,21 @@ add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/C_in
 add wave -noupdate -radix unsigned /pqc_accelerator_top/DSO/c_index
 add wave -noupdate /pqc_accelerator_top/DSO/reg_ena
 add wave -noupdate /pqc_accelerator_top/DSO/shift_ena
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN_0/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/REG_GEN_SECTION_0(1)/REG/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN(1)/REG_GEN(0)/REG/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN(1)/REG_GEN(1)/REG/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN(2)/REG_GEN(0)/REG/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN(2)/REG_GEN(1)/REG/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN(3)/REG_GEN(0)/REG/q
+add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/SECTION_GEN(3)/REG_GEN(1)/REG/q
 add wave -noupdate -divider Outputs
 add wave -noupdate -radix decimal /pqc_accelerator_top/C_out
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {325367 ps} 0}
+WaveRestoreCursors {{Cursor 1} {521729 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 340
-configure wave -valuecolwidth 216
+configure wave -valuecolwidth 233
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
 configure wave -snapdistance 10
@@ -83,4 +91,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {682500 ps}
+WaveRestoreZoom {0 ps} {673684 ps}
