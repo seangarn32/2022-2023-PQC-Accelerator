@@ -9,6 +9,7 @@ entity fsm is
         clk : in  std_logic;
         rst : in  std_logic;
         ena : in  std_logic;
+        enc_dec: in std_logic;
 
         dsi_ena     : out   std_logic;
         pe_ena      : out   std_logic;
@@ -27,9 +28,6 @@ architecture rtl of fsm is
     signal count            : std_logic_vector(COUNTER_SIZE-1 downto 0);
     signal counter_ena      : std_logic := '0';
     signal counter_rst      : std_logic := '1';
-
-    signal sel_hold         : mux_sel_array := (others =>(others => '0'));
-    signal sel_nxt          : mux_sel_array;
 
 begin
 
@@ -55,7 +53,6 @@ begin
                         dso_ena <= '0';
                         counter_ena <= '0';
                         counter_rst <= '1';
-                        sel_hold <= (others =>(others => '0'));
                         if(ena = '1') then
                             state <= DATA_IN;
                         end if;
