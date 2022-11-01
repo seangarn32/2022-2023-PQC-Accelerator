@@ -37,6 +37,12 @@ architecture rtl of control_unit is
 
 begin
 
+    -- Not functioning properly when N_SIZE > 8 in globals_pkg.vhd
+    -- This is the only logic that should determine count_nxt
+    -- When state=PE_ACCUM (450 ns), count_nxt should be count+1, but it appears as 0
+    -- It should meeet the (state = PE_ACCUM and count < NUM_A_SECTIONS-1) condition
+        -- state = PE_ACCUM and count = 0, which is less than NUM_A_SECTIONS-1=32
+    -- This prevents the counter from advancing and stalls the entire process
     count_nxt <= count + '1' when (state = DSO and count < N_SIZE-1)
                                or (state = DSI and count < N_SIZE-1)
                                or (state = PE_PIPE and count < COLS-1)
@@ -55,7 +61,8 @@ begin
     bl_ena      <= '1' when (state = B_LOAD or state = PE_PIPE or state = PE_ACCUM) else '0'; 
     pe_ena      <= '1' when (state = PE_PIPE or state = PE_ACCUM) else '0';
     accum_ena   <= '1' when state = PE_ACCUM else '0';
-    dso_ena     <= '1' when (state = DSO or state = PE_ACCUM) else '0';
+    -- Should it be NUM_B_SECTIONS-1 ??
+    dso_ena     <= '1' when (state = DSO or (state = PE_ACCUM and count > NUM_B_SECTIONS-2)) else '0';
 
     process (clk)
     begin
@@ -73,11 +80,11 @@ begin
 
     count_a_sel_nxt <= count_a_sel + '1' when (state = PE_PIPE or state = PE_ACCUM) 
                                           and (count_a_sel < NUM_B_SECTIONS-1)
-                                          --and (count > NUM_B_SECTIONS-2)
+                                          and (count > NUM_B_SECTIONS-2)
                                          else (others => '0'); 
     a_sel_nxt <= a_sel - ROWS when (state = PE_PIPE or state = PE_ACCUM)
                                and (count_a_sel < NUM_B_SECTIONS-1)
-                               --and (count > NUM_B_SECTIONS-2)
+                               and (count > NUM_B_SECTIONS-2)
                               else (a_sel);
     
     process (clk)
