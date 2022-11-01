@@ -14,17 +14,22 @@ entity pqc_accelerator_top is
         B_in    : in    std_logic_vector(7 downto 0);
         P_in    : in    std_logic_vector(7 downto 0);
 
-        C_out   : out   std_logic_vector(7 downto 0)
+        C_out_0   : out   std_logic_vector(7 downto 0);
+        C_out_1   : out   std_logic_vector(7 downto 0)
     );
 end entity;
 
 architecture rtl of pqc_accelerator_top is
 
     signal A            : std_logic_vector(N_SIZE-1 downto 0);
+    signal A0           : a_vector;
     signal B            : b_matrix;
     signal P            : b_matrix;
-    signal C            : c_matrix;
-    signal C_accum      : c_matrix;
+    signal C_0            : c_matrix;
+    signal C_1            : c_matrix;
+    signal C_accum_0      : c_matrix;
+    signal C_accum_1      : c_matrix;
+    signal C_accum_2      : c_matrix;
 
     signal dsi_ena      : std_logic;
     signal pe_ena       : std_logic;
@@ -42,9 +47,7 @@ begin
             dsi_ena,
             pe_ena,
             accum_ena,
-            dso_ena,
-
-            pe_mux_sel
+            dso_ena
         );
 
     DSI : entity work.data_shift_in(rtl)
@@ -58,7 +61,18 @@ begin
             P_in,
 
             A,
-            B
+            B,
+            P
+        );
+    
+    LOAD_A : entity work.load_a(rtl)
+        port map(
+            clk,
+            rst,
+            pe_ena,
+            A,
+
+            A0
         );
 
     PE_CHAIN : entity work.pe_chain(rtl)
@@ -68,21 +82,26 @@ begin
             pe_ena,
             enc_dec,
 
-            A,
+            A0,
             B,
             P,
 
-            C
+            C_0,
+            C_1
         );
 
-    PE_ACCUM : entity work.pe_accum(rtl)
+    ACCUM : entity work.accumulator_cell(rtl)
         port map(
             clk,
             rst,
             accum_ena,
 
-            C,
-            C_accum
+            C_0,
+            C_1,
+
+            C_accum_0,
+            C_accum_1,
+            C_accum_2
         );
 
     DSO : entity work.data_shift_out(rtl)
@@ -90,9 +109,14 @@ begin
             clk,
             rst,
             dso_ena,
-            C_accum,
+            enc_dec,
 
-            C_out
+            C_accum_0,
+            C_accum_1,
+            C_accum_2,
+
+            C_out_0, -- will be either cyphertext 1 or the decrypted plaintext
+            C_out_1  -- will be either cyphertext 2 or random data
         );
 
 end architecture;

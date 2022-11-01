@@ -8,16 +8,23 @@ entity data_shift_out is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
-        c_in    : in    c_matrix;
+        enc_dec : in    std_logic;
+        c_in_0    : in    c_matrix;
+        c_in_1    : in    c_matrix;
+        c_in_2    : in    c_matrix;
 
-        c_out   : out   std_logic_vector(7 downto 0)
+        c_out_0   : out   std_logic_vector(7 downto 0);
+        c_out_1   : out   std_logic_vector(7 downto 0)
     );
 end entity;
 
 architecture rtl of data_shift_out is
 
-    signal c_sel        : c_matrix;
-    signal c_nxt        : c_matrix;
+    signal c_sel_0        : c_matrix;
+    signal c_sel_1        : c_matrix;
+    signal c_nxt_0        : c_matrix;
+    signal c_nxt_1        : c_matrix;
+    signal c_enc_dec         : c_matrix;
     signal shift_ena    : std_logic;
     
 
@@ -36,27 +43,61 @@ begin
         end if;
     end process;
 
-    REG_GEN : for i in 0 to N_SIZE-2 generate
+    -- assigns c_enc_dec c_in_0 for encryption, or c_in_2 for decryption
+    C_SELECT : entity work.mux2to1_C(rtl) 
+        port map (
+            c_in_0,
+            c_in_2,
 
-        c_sel <= c_in when shift_ena = '0' else c_nxt;
+            enc_dec,
+
+            c_enc_dec
+        );
+
+    REG_GEN_0 : for i in 0 to N_SIZE-2 generate
+
+        c_sel_0 <= c_enc_dec when shift_ena = '0' else c_nxt_0;
 
         REG : entity work.reg_8bit(rtl)
             port map(
                 clk,
                 rst,
                 ena,
-                c_sel(i),
-                c_nxt(i+1)
+                c_sel_0(i),
+                c_nxt_0(i+1)
             );
-    end generate REG_GEN;
+    end generate REG_GEN_0;
 
-    REG_N : entity work.reg_8bit(rtl)
+    REG_N_0 : entity work.reg_8bit(rtl)
         port map(
             clk,
             rst,
             ena,
-            c_sel(N_SIZE-1),
-            c_out
+            c_sel_0(N_SIZE-1),
+            c_out_0
+        );
+
+    REG_GEN_1 : for i in 0 to N_SIZE-2 generate
+
+        c_sel_1 <= c_in_1 when shift_ena = '0' else c_nxt_1;
+
+        REG : entity work.reg_8bit(rtl)
+            port map(
+                clk,
+                rst,
+                ena,
+                c_sel_1(i),
+                c_nxt_1(i+1)
+            );
+    end generate REG_GEN_1;
+
+    REG_N_1 : entity work.reg_8bit(rtl)
+        port map(
+            clk,
+            rst,
+            ena,
+            c_sel_1(N_SIZE-1),
+            c_out_1
         );
 
 end rtl;

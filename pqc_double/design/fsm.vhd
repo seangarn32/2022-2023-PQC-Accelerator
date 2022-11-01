@@ -9,14 +9,11 @@ entity fsm is
         clk : in  std_logic;
         rst : in  std_logic;
         ena : in  std_logic;
-        enc_dec: in std_logic;
 
         dsi_ena     : out   std_logic;
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
-        dso_ena     : out   std_logic;
-
-        sel : out mux_sel_array
+        dso_ena     : out   std_logic
     );
 end fsm;
 
@@ -70,18 +67,15 @@ begin
                         end if;
 
                     when PE_PIPE =>
-                        if(count = MUX_NUM+DIVIDE-2) then
+                        if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) -1) then
                             pe_ena <= '0';
                             counter_rst <= '1';
                             state <= DATA_OUT;
                         else
-                            if(count > MUX_NUM-2) then
+                            if(count > PE_SIZE) then
                                 accum_ena <= '1';
                             else
                                 accum_ena <= '0';
-                            end if;
-                            if(counter_rst = '0') then
-                                sel_hold <= sel_nxt;
                             end if;
                             dsi_ena <= '0';
                             pe_ena <= '1';
@@ -104,13 +98,5 @@ begin
             end if;
         end if;
     end process;
-    
-    sel_nxt(0) <= sel_hold(0) when sel_hold(0) = MUX_SIZE-1 
-                  else sel_hold(0) + '1';
-    SEL_GEN : for i in 1 to MUX_NUM-1 generate
-        sel_nxt(i) <= sel_hold(i-1);
-    end generate SEL_GEN;
-
-    sel <= sel_hold;
 
 end rtl;
