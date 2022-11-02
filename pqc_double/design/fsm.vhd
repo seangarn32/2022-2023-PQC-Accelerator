@@ -22,7 +22,7 @@ architecture rtl of fsm is
     type state_available is (SETUP, DATA_IN, PE_PIPE, DATA_OUT);  --type of state machine.
     signal state            : state_available := SETUP;
     
-    signal count            : std_logic_vector(COUNTER_SIZE-1 downto 0);
+    signal count            : std_logic_vector(COUNTER_SIZE downto 0);
     signal counter_ena      : std_logic := '0';
     signal counter_rst      : std_logic := '1';
 
@@ -36,7 +36,7 @@ begin
     process (clk)
     begin
 
-        if rising_edge(clk) then
+        if falling_edge(clk) then
 
             if (rst='1') then
                 state <= SETUP;
@@ -55,7 +55,7 @@ begin
                         end if;
 
                     when DATA_IN =>
-                        if(count = N_SIZE-1) then
+                        if(count = N_SIZE) then
                             dsi_ena <= '0';
                             pe_ena <= '1';
                             counter_rst <= '1';
@@ -67,12 +67,13 @@ begin
                         end if;
 
                     when PE_PIPE =>
-                        if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) -1) then
+                        if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2)-1) then
                             pe_ena <= '0';
                             counter_rst <= '1';
+                            accum_ena <= '0';
                             state <= DATA_OUT;
                         else
-                            if(count > PE_SIZE) then
+                            if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2)-2) then
                                 accum_ena <= '1';
                             else
                                 accum_ena <= '0';

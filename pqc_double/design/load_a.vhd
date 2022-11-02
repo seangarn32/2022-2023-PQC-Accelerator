@@ -25,4 +25,5 @@ begin
         a0(i) <= '0' & A_in(N_SIZE-1-i);
     end generate SIGNED;
 
+    A_out <= a0;
 end rtl;
