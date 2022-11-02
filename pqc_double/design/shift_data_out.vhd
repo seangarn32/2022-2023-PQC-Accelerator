@@ -56,7 +56,7 @@ begin
 
     REG_GEN_0 : for i in 0 to N_SIZE-2 generate
 
-        c_sel_0 <= c_enc_dec when shift_ena = '0' else c_nxt_0;
+        c_sel_0 <= c_enc_dec when shift_ena = '1' else c_nxt_0;
 
         REG : entity work.reg_8bit(rtl)
             port map(
@@ -79,7 +79,7 @@ begin
 
     REG_GEN_1 : for i in 0 to N_SIZE-2 generate
 
-        c_sel_1 <= c_in_1 when shift_ena = '0' else c_nxt_1;
+        c_sel_1 <= c_in_1 when shift_ena = '1' else c_nxt_1;
 
         REG : entity work.reg_8bit(rtl)
             port map(
