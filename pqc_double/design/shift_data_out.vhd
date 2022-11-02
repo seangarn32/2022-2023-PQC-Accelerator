@@ -9,6 +9,7 @@ entity data_shift_out is
         rst     : in    std_logic;
         ena     : in    std_logic;
         enc_dec : in    std_logic;
+        
         c_in_0    : in    c_matrix;
         c_in_1    : in    c_matrix;
         c_in_2    : in    c_matrix;
