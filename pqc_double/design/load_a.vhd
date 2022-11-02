@@ -16,7 +16,9 @@ end entity;
 
 architecture rtl of load_a is
 
-    signal a0           : a_vector;
+    signal a0          : a_vector;
+    signal tmp         : a_vector;
+    signal a1          : a_vector;
     
 begin
 
@@ -25,5 +27,31 @@ begin
         a0(i) <= '0' & A_in(N_SIZE-1-i);
     end generate SIGNED;
 
-    A_out <= a0;
+    SHIFT_CELL:   entity work.shift_cell(rtl)
+        port map (
+            a0,
+
+            a1
+        );
+
+
+
+
+
+        
+
+
+    REG_1 :   entity work.reg_(rtl)
+    port map(
+        clk,
+        rst,
+        ena,
+        C_sum_1,
+
+        C_out_1
+    );
+    
+    
+
+    A_out <= tmp;
 end rtl;
