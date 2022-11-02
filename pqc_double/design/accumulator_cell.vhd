@@ -8,7 +8,6 @@ entity accumulator_cell is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
-        sel     : in    std_logic;
         
         A0      : in    c_matrix;
         A1      : in    c_matrix;    
@@ -55,11 +54,9 @@ begin
             sc1_out
         );
 
-    if(sel='1') then
-        SUM_GEN : for i in 0 to N_SIZE-1 generate
-            sum(i) <= C0_out(i) + sc1_out(i);
-        end generate SUM_GEN;
-    end if;
+    SUM_GEN : for i in 0 to N_SIZE-1 generate
+        sum(i) <= C0_out(i) + C1_out(i);
+    end generate SUM_GEN;
 
     C0 <= C0_out;
     C1 <= sc1_out;

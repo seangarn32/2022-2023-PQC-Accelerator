@@ -8,9 +8,11 @@ entity pqc_accelerator_top is
         clk     : in    std_logic;
         rst     : in    std_logic;
         ena     : in    std_logic;
+        enc_dec : in    std_logic;
 
         A_in    : in    std_logic;
         B_in    : in    std_logic_vector(7 downto 0);
+        P_in    : in    std_logic_vector(7 downto 0);
 
         C_out   : out   std_logic_vector(7 downto 0)
     );
@@ -20,10 +22,9 @@ architecture rtl of pqc_accelerator_top is
 
     signal A            : std_logic_vector(N_SIZE-1 downto 0);
     signal B            : b_matrix;
+    signal P            : b_matrix;
     signal C            : c_matrix;
     signal C_accum      : c_matrix;
-
-    signal pe_mux_sel   : mux_sel_array; 
 
     signal dsi_ena      : std_logic;
     signal pe_ena       : std_logic;
@@ -54,6 +55,7 @@ begin
 
             A_in,
             B_in,
+            P_in,
 
             A,
             B
@@ -64,10 +66,11 @@ begin
             clk,
             rst,
             pe_ena,
+            enc_dec,
 
             A,
             B,
-            pe_mux_sel,
+            P,
 
             C
         );

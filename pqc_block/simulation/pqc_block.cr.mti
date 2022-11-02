@@ -51,6 +51,31 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity reg_8bit
 -- Compiling architecture rtl of reg_8bit
 
+} {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package MATH_REAL
+-- Loading package globals_pkg
+-- Compiling entity reg_1bit
+-- Compiling architecture rtl of reg_1bit
+
+} {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package MATH_REAL
+-- Loading package globals_pkg
+-- Compiling entity pe_accum
+-- Compiling architecture rtl of pe_accum
+-- Loading entity reg_c
+
 } {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_0.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/processing_element_0.vhd}
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -69,43 +94,6 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Loading entity reg_a_sel
 -- Loading entity reg_c
 
-} {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/pe_accum.vhd}
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package MATH_REAL
--- Loading package globals_pkg
--- Compiling entity pe_accum
--- Compiling architecture rtl of pe_accum
--- Loading entity reg_c
-
-} {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_1bit.vhd}
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package MATH_REAL
--- Loading package globals_pkg
--- Compiling entity reg_1bit
--- Compiling architecture rtl of reg_1bit
-
-} {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/shift_a0.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/shift_a0.vhd}
-Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package std_logic_arith
--- Loading package STD_LOGIC_UNSIGNED
--- Loading package MATH_REAL
--- Loading package globals_pkg
--- Compiling entity shift_a0
--- Compiling architecture rtl of shift_a0
-
 } {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_out.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/data_shift_out.vhd}
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
 -- Loading package STANDARD
@@ -118,6 +106,18 @@ Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 
 -- Compiling entity data_shift_out
 -- Compiling architecture rtl of data_shift_out
 -- Loading entity reg_8bit
+
+} {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/shift_a0.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/shift_a0.vhd}
+Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package MATH_REAL
+-- Loading package globals_pkg
+-- Compiling entity shift_a0
+-- Compiling architecture rtl of shift_a0
 
 } {} {}} {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_a.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/19183/OneDrive - Villanova University/Desktop/SCHOOL/4 Senior Year (2022-2023)/Fall 2022/ECE4971-008 - Design Project/Project/2022-2023-PQC-Accelerator/pqc_block/design/reg_a.vhd}
 Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020

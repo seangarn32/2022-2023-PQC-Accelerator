@@ -11,9 +11,11 @@ entity data_shift_in is
 
         a_in    : in    std_logic;
         b_in    : in    std_logic_vector(7 downto 0);
+        p_in    : in    std_logic_vector(7 downto 0);
 
         a_out   : out   std_logic_vector(N_SIZE-1 downto 0);
-        b_out   : out   b_matrix
+        b_out   : out   b_matrix;
+        p_out   : out   b_matrix
     );
 end entity;
 
@@ -21,6 +23,7 @@ architecture rtl of data_shift_in is
 
     signal a       : std_logic_vector(N_SIZE-1 downto 0);
     signal b       : b_matrix;
+    signal p       : b_matrix;
 
 begin
 
@@ -44,7 +47,7 @@ begin
             );
     end generate REG_1_GEN;
 
-    REG_8_0 : entity work.reg_8bit(rtl)
+    REG_8_B_0 : entity work.reg_8bit(rtl)
         port map(
             clk,
             rst,
@@ -53,8 +56,8 @@ begin
             b(0)
         );
 
-    REG_8_GEN : for i in 1 to N_SIZE-1 generate
-        REG_8 : entity work.reg_8bit(rtl)
+    REG_8_B_GEN : for i in 1 to N_SIZE-1 generate
+        REG_8_B : entity work.reg_8bit(rtl)
             port map(
                 clk,
                 rst,
@@ -62,9 +65,30 @@ begin
                 b(i-1),
                 b(i)
             );
-    end generate REG_8_GEN;
+    end generate REG_8_B_GEN;
+
+    REG_8_P_0 : entity work.reg_8bit(rtl)
+        port map(
+            clk,
+            rst,
+            ena,
+            p_in,
+            p(0)
+        );
+
+    REG_8_P_GEN : for i in 1 to N_SIZE-1 generate
+        REG_8_P : entity work.reg_8bit(rtl)
+            port map(
+                clk,
+                rst,
+                ena,
+                p(i-1),
+                p(i)
+            );
+    end generate REG_8_P_GEN;
 
     a_out <= a;
     b_out <= b;
+    p_out <= p;
 
 end rtl;
