@@ -13,7 +13,8 @@ entity fsm is
         dsi_ena     : out   std_logic;
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
-        dso_ena     : out   std_logic
+        dso_ena     : out   std_logic;
+        dso_rst     : out   std_logic
     );
 end fsm;
 
@@ -71,6 +72,7 @@ begin
                             pe_ena <= '0';
                             counter_rst <= '1';
                             accum_ena <= '0';
+                            dso_rst <= '1';
                             state <= DATA_OUT;
                         else
                             if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2)-2) then
@@ -84,7 +86,7 @@ begin
                         end if;
 
                     when DATA_OUT =>
-                        if(count = N_SIZE-1) then
+                        if(count = N_SIZE) then
                             dso_ena <= '0';
                             counter_rst <= '1';
                             state <= SETUP;
@@ -92,6 +94,7 @@ begin
                             pe_ena <= '0';
                             accum_ena <= '0';
                             dso_ena <= '1';
+                            dso_rst <= '0';
                             counter_rst <= '0';
                         end if;
 

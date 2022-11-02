@@ -35,6 +35,7 @@ architecture rtl of pqc_accelerator_top is
     signal pe_ena       : std_logic;
     signal accum_ena    : std_logic;
     signal dso_ena      : std_logic;
+    signal dso_rst      : std_logic;
 
 begin
 
@@ -47,7 +48,8 @@ begin
             dsi_ena,
             pe_ena,
             accum_ena,
-            dso_ena
+            dso_ena,
+            dso_rst
         );
 
     DSI : entity work.data_shift_in(rtl)
@@ -107,7 +109,7 @@ begin
     DSO : entity work.data_shift_out(rtl)
         port map(
             clk,
-            rst,
+            dso_rst,
             dso_ena,
             enc_dec,
 
