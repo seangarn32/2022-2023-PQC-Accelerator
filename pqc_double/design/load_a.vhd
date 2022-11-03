@@ -36,7 +36,8 @@ begin
         a0(i) <= '0' & A_in(N_SIZE-1-i);
     end generate SIGNED;
 
-    a_nxt(0) <= a_reg;
+    a_nxt(0) <= a0;
+
     --ENC_SHIFT_CELL_1:   entity work.signed_shift(rtl)
     --port map (
     --        a_nxt(i),
