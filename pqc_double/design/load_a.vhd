@@ -19,6 +19,10 @@ architecture rtl of load_a is
     signal a0          : a_vector;
     signal tmp         : a_vector;
     signal a1          : a_vector;
+    signal s           : a_vector;
+    signal nxt         : a_vector;
+    signal d           : a_vector;
+    signal q           : a_vector;
     
 begin
 
@@ -34,24 +38,41 @@ begin
             a1
         );
 
+    ENC_SHIFTER : for i in 0 to PE_SIZE generate
+        
+    end generate ENC_SHIFTER;
 
+    DEC_SHIFTER : for i in 0 to PE_SIZE*2 generate
+
+    end generate DEC_SHIFTER;
 
 
 
         
 
 
-    REG_1 :   entity work.reg_(rtl)
+    REG_0 :   entity work.reg_nbit_a(rtl)
     port map(
         clk,
         rst,
         ena,
-        C_sum_1,
+        tmp,
 
-        C_out_1
+        s
+    );
+
+    REG_1 :   entity work.reg_nbit_a(rtl)
+    port map(
+        clk,
+        rst,
+        ena,
+        s,
+
+        q
     );
     
     
-
+    
     A_out <= tmp;
+
 end rtl;
