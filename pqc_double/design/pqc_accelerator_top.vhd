@@ -32,6 +32,8 @@ architecture rtl of pqc_accelerator_top is
     signal C_accum_2      : c_matrix;
 
     signal dsi_ena      : std_logic;
+    signal load_a_rst   : std_logic;
+    signal load_a_ena   : std_logic;
     signal pe_ena       : std_logic;
     signal accum_ena    : std_logic;
     signal dso_ena      : std_logic;
@@ -44,8 +46,11 @@ begin
             clk,
             rst,
             ena,
+            enc_dec,
 
             dsi_ena,
+            load_a_rst,
+            load_a_ena,
             pe_ena,
             accum_ena,
             dso_ena,
@@ -70,8 +75,9 @@ begin
     LOAD_A : entity work.load_a(rtl)
         port map(
             clk,
-            rst,
-            pe_ena,
+            load_a_rst,
+            load_a_ena,
+            enc_dec,
             A,
 
             A0

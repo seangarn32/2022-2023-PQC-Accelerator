@@ -9,8 +9,11 @@ entity fsm is
         clk : in  std_logic;
         rst : in  std_logic;
         ena : in  std_logic;
+        enc_dec : in std_logic;
 
         dsi_ena     : out   std_logic;
+        load_a_rst  : out   std_logic;
+        load_a_ena  : out   std_logic;
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
         dso_ena     : out   std_logic;
@@ -46,6 +49,8 @@ begin
 
                     when SETUP =>
                         dsi_ena <= '0';
+                        load_a_rst <= '0';
+                        load_a_ena <= '0';
                         pe_ena <= '0';
                         accum_ena <= '0';
                         dso_ena <= '0';
@@ -58,7 +63,9 @@ begin
                     when DATA_IN =>
                         if(count = N_SIZE) then
                             dsi_ena <= '0';
-                            pe_ena <= '1';
+                            load_a_rst <= '1';
+                            load_a_ena <= '0';
+                            pe_ena <= '0';
                             counter_rst <= '1';
                             state <= PE_PIPE;
                         else
@@ -68,19 +75,33 @@ begin
                         end if;
 
                     when PE_PIPE =>
-                        if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2)-1) then
+                        if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2) then
                             pe_ena <= '0';
                             counter_rst <= '1';
                             accum_ena <= '0';
                             dso_rst <= '1';
                             state <= DATA_OUT;
                         else
-                            if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2)-2) then
+                            if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 1) then
                                 accum_ena <= '1';
                             else
                                 accum_ena <= '0';
                             end if;
+                            if (enc_dec = '0') then
+                                if (count < (N_SIZE / PE_SIZE)) then
+                                    load_a_ena <= '1';
+                                else
+                                    load_a_ena <= '0';
+                                end if;
+                            else
+                                if (count = (N_SIZE / (PE_SIZE * 2))) then
+                                    load_a_ena <= '1';
+                                else
+                                    load_a_ena <= '0';
+                                end if;
+                            end if;
                             dsi_ena <= '0';
+                            load_a_rst <= '0';
                             pe_ena <= '1';
                             counter_rst <= '0';
                         end if;

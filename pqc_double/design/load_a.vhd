@@ -7,7 +7,7 @@ entity load_a is
     port(
         clk     : in    std_logic;
         rst     : in    std_logic;
-        pe_ena  : in    std_logic;
+        load_a_ena  : in    std_logic;
         enc_dec : in    std_logic;
 
         A_in    : in    std_logic_vector(N_SIZE-1 downto 0);
@@ -19,8 +19,6 @@ architecture rtl of load_a is
 
     signal a0          : a_vector;
     signal a_nxt         : a_matrix;
-    signal a1          : a_vector;
-    signal a2           : a_vector;
     signal tmp         : a_vector;
     signal a_reg         : a_vector;
     signal a_init       : std_logic;
@@ -34,13 +32,15 @@ begin
             if(rst = '1') then
                 a_init <= '0';
             else 
-                if(pe_ena = '1') then
+                if(load_a_ena = '1') then
                     a_init <= '1';
                     if (count = '0') then
                         count <= '1';
                     else 
                         count <= '0';
                     end if;
+                else
+                    a_init <= '0';
                 end if;
             end if;
         end if;
@@ -62,15 +62,16 @@ begin
     end generate ENC_DEC_SHIFT_CELL;
 
     tmp <= a0 when (rst = '1' and a_init = '0') else
-             a_nxt(1) when (enc_dec = '0' and a_init = '1' and count = '0') else
-             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '0' and a_init = '1' and count = '1') else
-             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '1' and a_init = '1');
+             a_nxt(1) when (enc_dec = '0' and a_init = '1' and count = '1') else
+             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '0' and a_init = '1' and count = '0') else
+             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '1' and a_init = '1');-- else
+             --a_nxt(0);
 
     REG_A :   entity work.reg_nbit_a(rtl)
     port map(
         clk,
         rst,
-        pe_ena,
+        load_a_ena,
         tmp,
 
         a_reg
