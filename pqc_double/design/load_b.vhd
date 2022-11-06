@@ -17,5 +17,20 @@ end entity;
 
 architecture rtl of load_b is
 
+    signal b_hold   :   b_matrix;
+    signal b_reg    :   b_matrix;
+
+    -- Register either initial B values or next shifted B values
+    REG_B : entity work.reg_b(rtl)
+    port map(
+        clk,
+        rst,
+        ena,
+
+        b_hold,
+        b_reg
+    );
+
+    B_out <= b_reg(0);
 
  end rtl;
