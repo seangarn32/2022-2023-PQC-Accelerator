@@ -29,4 +29,6 @@ package globals_pkg is
     -- "array" -> Array of wires to connect PEs/REGs
     type a_array is array (0 to PE_SIZE-1) of a_vector;
 
+    type b_section is array (0 to PE_SIZE-1) of std_logic_vector(7 downto 0);
+
 end package;
