@@ -31,6 +31,24 @@ architecture rtl of load_b is
     signal p_sec_odd    :   b_matrix;
     signal cnt          :   std_logic_vector(4 downto 0);
 
+    -- doesn't start at zero
+    LOAD_B_SEC_0 : for i in 0 to PE_SIZE-1 generate
+        b_sec_0(i) <= B_in(i+2);
+    end generate LOAD_B_SEC_0;
+
+    LOAD_B_SEC_1 : for i in 0 to PE_SIZE-1 generate
+        b_sec_1(i) <= B_in(2*i + 1);
+    end generate LOAD_B_SEC_1;
+    -- not recursive
+    LOAD_B_SEC_EVEN : for i in 0 to PE_SIZE-1 generate
+        b_sec_even(i) <= B_in((PE_SIZE*2 + 2) + i);
+    end generate LOAD_B_SEC_EVEN;
+    -- not recursive
+    LOAD_B_SEC_0 : for i in 0 to PE_SIZE-1 generate
+        b_sec_odd(i) <= B_in((PE_SIZE*2 + 1) + i);
+    end generate LOAD_B_SEC_0;
+
+
     b_tmp <= b_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else
                 b_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = '1') else
                 b_sec_even when (enc_dec = '0' and load_b_ena = '1' and cnt > '1' and cnt mod 2 = '0') else
