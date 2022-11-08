@@ -53,15 +53,21 @@ begin
                     elsif (sig_c = PE_SIZE -2) then
                         sig_c <= sig_c;
                         cnt <= cnt + 1;
+                    elsif (PE_SIZE*2 = N_SIZE) then
+                        cnt <= 0;
+                        count <= count+1;
                     else
                         --count <= count + 1;
                         cnt <= cnt + 1;
                         sig_c <= sig_c +1;
                     end if;
                 elsif (enc_dec = '1') then
-                    ecnt <= ecnt + 2;
                     if(ecnt*(PE_SIZE*2) = N_SIZE) then
                         ecnt <= ecnt;
+                    elsif(PE_SIZE*2 = N_SIZE) then
+                        ecnt <= 0;
+                    else
+                        ecnt <= ecnt + 2;
                     end if;
                 end if;
         end if;
@@ -110,13 +116,15 @@ begin
         
 
     b_tmp <= b_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else
+                b_sec_1 when (enc_dec = '0' and load_b_ena = '1' and count = 1) else
                 b_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = 1) else
                 b_sec_even when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 0) else
                 b_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 1) else
                 b_sec_s when (rst = '1' and enc_dec = '1' and load_b_ena = '1') else
                 b_sec_n when (enc_dec = '1' and load_b_ena = '1' and ecnt > 0);
 
-    p_tmp <= p_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else        
+    p_tmp <= p_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else 
+                p_sec_1 when (enc_dec = '0' and load_b_ena = '1' and count = 1) else
                 p_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = 1) else
                 p_sec_even when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 0) else
                 p_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 1);
