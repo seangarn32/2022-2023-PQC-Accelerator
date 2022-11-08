@@ -31,7 +31,8 @@ architecture rtl of load_b is
     signal p_sec_1      :   b_matrix;
     signal p_sec_even   :   b_matrix;
     signal p_sec_odd    :   b_matrix;
-    signal cnt          :   integer;
+    signal cnt          :   integer := 0;
+    signal count        :   integer := 0;
 
 begin
     process(clk)
@@ -39,7 +40,14 @@ begin
         if(rising_edge(clk)) then
             if(rst = '1') then
                 cnt <= 0;
-            else 
+            elsif (enc_dec = '0') then
+                if (count = 2) then
+                    cnt <= cnt + 1;
+                    count <= 0;
+                else
+                    count <= count + 1;
+                end if;
+            elsif (enc_dec = '1') then
                 cnt <= cnt + 1;
             end if;
         end if;
@@ -54,11 +62,11 @@ begin
         b_sec_1(i) <= B_in(2*i + 1);
     end generate LOAD_B_SEC_1;
 
-    LOAD_B_SEC_EVEN : for i in 0 to N_SIZE/(PE_SIZE*2)-1 generate
+    LOAD_B_SEC_EVEN : for i in 0 to PE_SIZE-1 generate
         b_sec_even(i) <= B_in((PE_SIZE*2)*cnt + 2*i);
     end generate LOAD_B_SEC_EVEN;
     
-    LOAD_B_SEC_ODD : for i in 0 to N_SIZE/(PE_SIZE*2)-1 generate
+    LOAD_B_SEC_ODD : for i in 0 to PE_SIZE-1 generate
         b_sec_odd(i) <= B_in((PE_SIZE*cnt*2+1) + 2*i);
     end generate LOAD_B_SEC_ODD;
     
