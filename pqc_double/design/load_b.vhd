@@ -33,23 +33,35 @@ architecture rtl of load_b is
     signal p_sec_odd    :   b_matrix;
     signal cnt          :   integer := 0;
     signal count        :   integer := 0;
+    signal sig_c        :   integer := 0;
+    signal ecnt         :   integer := 0;
 
 begin
     process(clk)
     begin
         if(rising_edge(clk)) then
-            if(rst = '1') then
-                cnt <= 0;
-            elsif (enc_dec = '0') then
-                if (count = 2) then
-                    cnt <= cnt + 1;
-                    count <= 0;
-                else
-                    count <= count + 1;
+                if(rst = '1') then
+                    cnt <= 0;
+                    sig_c <= 0;
+                elsif (enc_dec = '0') then
+                    if (count = 2) then
+                        cnt <= cnt + 1;
+                        sig_c <= sig_c +1;
+                        count <= 0;
+                    elsif (cnt = PE_SIZE-1) then
+                        cnt <= cnt;
+                    elsif (sig_c = PE_SIZE -2) then
+                        sig_c <= sig_c;
+                        cnt <= cnt + 1;
+                    else
+                        count <= count + 1;
+                    end if;
+                elsif (enc_dec = '1') then
+                    ecnt <= ecnt + 2;
+                    if(ecnt*(PE_SIZE*2) = N_SIZE) then
+                        ecnt <= ecnt;
+                    end if;
                 end if;
-            elsif (enc_dec = '1') then
-                cnt <= cnt + 1;
-            end if;
         end if;
     end process;
 
@@ -63,18 +75,18 @@ begin
     end generate LOAD_B_SEC_1;
 
     LOAD_B_SEC_EVEN : for i in 0 to PE_SIZE-1 generate
-        b_sec_even(i) <= B_in((PE_SIZE*2)*cnt + 2*i);
+        b_sec_even(i) <= B_in((PE_SIZE)*sig_c + (2*i));
     end generate LOAD_B_SEC_EVEN;
     
     LOAD_B_SEC_ODD : for i in 0 to PE_SIZE-1 generate
-        b_sec_odd(i) <= B_in((PE_SIZE*cnt*2+1) + 2*i);
+        b_sec_odd(i) <= B_in((PE_SIZE-1)*cnt + 2*i);
     end generate LOAD_B_SEC_ODD;
     
     LOAD_B_SEC_N : for i in 0 to PE_SIZE*2-1 generate
-        b_sec_n(i) <= B_in((PE_SIZE*2) * cnt + i);
+        b_sec_n(i) <= B_in((PE_SIZE)*ecnt + i);
     end generate LOAD_B_SEC_N;
 
-    LOAD_B_SEC_S : for i in 0 to N_SIZE-1 generate
+    LOAD_B_SEC_S : for i in 0 to PE_SIZE*2-1 generate
         b_sec_s(i) <= B_in(i);
     end generate LOAD_B_SEC_S;
 
@@ -86,26 +98,26 @@ begin
         p_sec_1(i) <= P_in(2*i + 1);
     end generate LOAD_P_SEC_1;
         
-    LOAD_P_SEC_EVEN : for i in 0 to N_SIZE/(PE_SIZE*2)-1 generate
-        p_sec_even(i) <= P_in((PE_SIZE*2*cnt) + 2*i);
+    LOAD_P_SEC_EVEN : for i in 0 to PE_SIZE-1 generate
+        p_sec_even(i) <= P_in((PE_SIZE)*sig_c + (2*i));
     end generate LOAD_P_SEC_EVEN;
     
-    LOAD_P_SEC_ODD : for i in 0 to N_SIZE/(PE_SIZE*2)-1 generate
-        p_sec_odd(i) <= P_in((PE_SIZE*cnt*2+1) + 2*i);
+    LOAD_P_SEC_ODD : for i in 0 to PE_SIZE-1 generate
+        p_sec_odd(i) <= P_in((PE_SIZE-1)*cnt + 2*i);
     end generate LOAD_P_SEC_ODD;
         
 
     b_tmp <= b_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else
                 b_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = 1) else
                 b_sec_even when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 0) else
-                b_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1) else
+                b_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 1) else
                 b_sec_s when (rst = '1' and enc_dec = '1' and load_b_ena = '1') else
-                b_sec_n when (enc_dec = '1' and load_b_ena = '1' and cnt > 0);
+                b_sec_n when (enc_dec = '1' and load_b_ena = '1' and ecnt > 0);
 
     p_tmp <= p_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else        
                 p_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = 1) else
                 p_sec_even when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 0) else
-                p_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1);
+                p_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 1);
 
     B_out <= b_tmp;
     P_out <= p_tmp;
