@@ -44,17 +44,19 @@ begin
                     cnt <= 0;
                     sig_c <= 0;
                 elsif (enc_dec = '0') then
-                    if (count = 2) then
-                        cnt <= cnt + 1;
-                        sig_c <= sig_c +1;
-                        count <= 0;
-                    elsif (cnt = PE_SIZE-1) then
+                    --if (count = 1) then
+                        --cnt <= cnt + 1;
+                        --sig_c <= sig_c +1;
+                        --count <= 0;
+                    if (cnt = PE_SIZE-1) then
                         cnt <= cnt;
                     elsif (sig_c = PE_SIZE -2) then
                         sig_c <= sig_c;
                         cnt <= cnt + 1;
                     else
-                        count <= count + 1;
+                        --count <= count + 1;
+                        cnt <= cnt + 1;
+                        sig_c <= sig_c +1;
                     end if;
                 elsif (enc_dec = '1') then
                     ecnt <= ecnt + 2;
