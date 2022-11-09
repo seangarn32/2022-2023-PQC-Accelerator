@@ -36,6 +36,28 @@ architecture rtl of b_load is
     signal sig_c        :   integer := 0;
     signal ecnt         :   integer := 0;
 
+
+
+-- There are 4 counters being used:
+-- cnt is used as the overall program counter that is iterated each clock cycle; 
+-- it is used only for encryption and is used to iterate the starting index for the n-length-jump odd vector generate statement;
+-- cnt is used for the output selection of the mux for encryption
+--
+-- count is used only for encryption and is used for instances that the PE_CHAIN only need to run through the first even and odd blocks;
+-- Examples: N_SIZE = 8 & DIVIDE = 2 -> PE_SIZE = 4; The PE_CHAIN only needs to run the first 4 even and first 4 odd
+--           N_SIZE = 16 & DIVIDE = 2 -> PE_SIZE = 8; The PE_CHAIN only needs to run the first 8 even and first 8 odd
+--
+-- sig_c is used only internally for the n-length-jump even vector generate statement;
+-- it is incremented until it reaches the second to last cycle of the total cycle count because the last even vector will always start
+-- at the total_clock_cycles_needed - final_odd_vector - final_even_vector = PE_SIZE(it is equal to the total needed input cycles) - 2
+--
+-- ecnt is used for decryption and it is used for the decryption output selection on the mux and used for the iteration for the n-length
+-- jump section generation;
+-- it is being iterated by 2 since decryption uses double the amount of values per section compared to encryption;
+-- ecnt will be set to 0 if the PE_SIZE * 2 = N_SIZE since there is no need for the n-length jump section to be generated
+-- Example: N_SIZE = 8 & DIVIDE = 2 -> PE_SIZE = 4; All of the B values will be used in the b_sec_s section so b_sec_n should never be
+-- used;
+-- when ecnt is equal to 
 begin
     process(clk)
     begin
@@ -43,6 +65,8 @@ begin
                 if(rst = '1') then
                     cnt <= 0;
                     sig_c <= 0;
+                    count <= 0;
+                    ecnt <= 0;
                 elsif (load_b_ena = '1') then
                     if (enc_dec = '0') then
                         if (cnt = PE_SIZE-1) then
