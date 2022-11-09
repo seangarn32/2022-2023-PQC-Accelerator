@@ -12,25 +12,25 @@ entity b_load is
 
         B_in        : in    b_matrix;
         P_in        : in    b_matrix;
-        B_out       : out   b_matrix;
-        P_out       : out   b_matrix
+        B_out       : out   b_section;
+        P_out       : out   b_section
     );
 end entity;
 
 architecture rtl of b_load is
 
-    signal b_tmp        :   b_matrix;
-    signal p_tmp        :   b_matrix;
-    signal b_sec_0      :   b_matrix;
-    signal b_sec_1      :   b_matrix;
-    signal b_sec_even   :   b_matrix;
-    signal b_sec_odd    :   b_matrix;
-    signal b_sec_n      :   b_matrix;
-    signal b_sec_s      :   b_matrix;
-    signal p_sec_0      :   b_matrix;
-    signal p_sec_1      :   b_matrix;
-    signal p_sec_even   :   b_matrix;
-    signal p_sec_odd    :   b_matrix;
+    signal b_tmp        :   b_section;
+    signal p_tmp        :   b_section;
+    signal b_sec_0      :   b_section;
+    signal b_sec_1      :   b_section;
+    signal b_sec_even   :   b_section;
+    signal b_sec_odd    :   b_section;
+    signal b_sec_n      :   b_section;
+    signal b_sec_s      :   b_section;
+    signal p_sec_0      :   b_section;
+    signal p_sec_1      :   b_section;
+    signal p_sec_even   :   b_section;
+    signal p_sec_odd    :   b_section;
     signal cnt          :   integer := 0;
     signal count        :   integer := 0;
     signal sig_c        :   integer := 0;
