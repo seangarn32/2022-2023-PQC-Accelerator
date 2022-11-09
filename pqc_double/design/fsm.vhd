@@ -104,7 +104,7 @@ begin
                                 else
                                     accum_ena <= '0';
                                 end if;
-                                if (count = (N_SIZE / (PE_SIZE * 2))) then
+                                if (count < (N_SIZE / (PE_SIZE * 2))) then
                                     load_a_ena <= '1';
                                     load_b_ena <= '1';
                                 else
