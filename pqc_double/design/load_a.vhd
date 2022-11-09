@@ -52,7 +52,7 @@ begin
         a0(i) <= '0' & A_in(N_SIZE-1-i);
     end generate SIGNED;
 
-    ENC_DEC_SHIFT_CELL : for i in 0 to PE_SIZE*2 - 2 generate
+    ENC_DEC_SHIFT_CELL : for i in 0 to PE_SIZE*2 - 1 generate
         ENC_SHIFT_CELL_N: entity work.signed_shift(rtl)
             port map (
                 a_nxt(i),
@@ -63,8 +63,8 @@ begin
 
     tmp <= a0 when (rst = '1' and a_init = '0') else
              a_nxt(1) when (enc_dec = '0' and a_init = '1' and count = '1') else
-             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '0' and a_init = '1' and count = '0') else
-             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '1' and a_init = '1');-- else
+             a_nxt(PE_SIZE * 2) when (enc_dec = '0' and a_init = '1' and count = '0') else
+             a_nxt(PE_SIZE * 2) when (enc_dec = '1' and a_init = '1');-- else
              --a_nxt(0);
 
     REG_A :   entity work.reg_nbit_a(rtl)
