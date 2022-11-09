@@ -131,8 +131,21 @@ begin
         p_sec_odd(i) <= P_in((PE_SIZE-1)*cnt + 2*i);
     end generate LOAD_P_SEC;
     
-    -- This is the output mux for the B values; There are 7 possible outputs for this mux: 5 for encryption and 2 for decryption
-
+    -- This is the output mux for the B values; There are 7 possible outputs for this mux: 5 for encryption and 2 for decryption;
+    -- The output of the mux will be set to the b_tmp signal
+    -- Encryption:
+    -- When b_load is reset, the first output of the mux is going to be b_sec_0 i.e. the first set of even B values;
+    -- Next, if the conditions are set that count is activated then the first b_sec_1(The one with count parameter) is outputted &
+    -- then this will be the final output for this set of B vlaues;
+    -- Otherwise, the second b_sec_1 will be outputted of the mux i.e. the first set of odd B values;
+    -- Third, b_sec_even will then be selected i.e. the next set of even B values;
+    -- Fourth, b_sec_odd will then be selected i.e. the next set of odd B values;
+    -- The output will then flip between b_sec_even and b_sec_odd every clock cycle with b_sec_even on every even clock cycle and 
+    -- b_sec_odd on every odd clock cycle; this will continue until cnt reaches the final index for the B values
+    -- Decryption:
+    -- when b_load is resest, the first output of the mux is going to be b_sec_s i.e. the first set of B values;
+    -- Next, if ecnt is set to zero then the output will stay at b_sec_s; Otherwise, b_sec_n will be set to the output and it will
+    -- stay as the output
     b_tmp <= b_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else
                 b_sec_1 when (enc_dec = '0' and load_b_ena = '1' and count = 1) else
                 b_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = 1) else
@@ -143,7 +156,16 @@ begin
 
 
     -- This is the output mux for the P values; There are 5 possible outputs for this mux: all are for encryption
-
+    -- The output of the mux will be set to the p_tmp signal
+    -- Encryption:
+    -- When b_load is reset, the first output of the mux is going to be p_sec_0 i.e. the first set of even P values;
+    -- Next, if the conditions are set that count is activated then the first p_sec_1(The one with count parameter) is outputted &
+    -- then this will be the final output for this set of P vlaues;
+    -- Otherwise, the second p_sec_1 will be outputted of the mux i.e. the first set of odd P values;
+    -- Third, p_sec_even will then be selected i.e. the next set of even P values;
+    -- Fourth, p_sec_odd will then be selected i.e. the next set of odd P values;
+    -- The output will then flip between p_sec_even and b_sec_odd every clock cycle with p_sec_even on every even clock cycle and 
+    -- p_sec_odd on every odd clock cycle; this will continue until cnt reaches the final index for the P values
     p_tmp <= p_sec_0 when (rst = '1' and enc_dec = '0' and load_b_ena = '1') else 
                 p_sec_1 when (enc_dec = '0' and load_b_ena = '1' and count = 1) else
                 p_sec_1 when (enc_dec = '0' and load_b_ena = '1' and cnt = 1) else
@@ -151,7 +173,8 @@ begin
                 p_sec_odd when (enc_dec = '0' and load_b_ena = '1' and cnt > 1 and cnt mod 2 = 1);
 
 
-
+    -- B_out is the output of the component and it will be set to the values of b_tmp every clock cycle
+    -- P_out is the output of the component and it will be set to the values of p_tmp every clock cycle
     B_out <= b_tmp;
     P_out <= p_tmp;
 
