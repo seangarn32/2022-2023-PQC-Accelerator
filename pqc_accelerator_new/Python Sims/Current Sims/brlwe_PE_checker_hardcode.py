@@ -38,7 +38,7 @@ matA = np.transpose(matA)
 
 
 #Change this
-matB = [0,1,0,1,0,1,0,1]
+matB = [1,1,0,1,0,1,0,1]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 

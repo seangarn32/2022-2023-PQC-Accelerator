@@ -43,7 +43,8 @@ begin
                 if(rst = '1') then
                     cnt <= 0;
                     sig_c <= 0;
-                elsif (enc_dec = '0') then
+                elsif (load_b_ena = '1') then
+                if (enc_dec = '0') then
                     --if (count = 1) then
                         --cnt <= cnt + 1;
                         --sig_c <= sig_c +1;
@@ -69,6 +70,7 @@ begin
                     else
                         ecnt <= ecnt + 2;
                     end if;
+                end if;
                 end if;
         end if;
     end process;
