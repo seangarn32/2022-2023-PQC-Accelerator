@@ -27,6 +27,7 @@ architecture rtl of processing_element_i is
     signal C_mult_0 : c_matrix;
     signal C_mult_1 : c_matrix;
     signal A1     : a_vector;
+    signal tmp     : a_vector;
     signal sc_A0  : a_vector;
 
 
@@ -90,6 +91,16 @@ begin
         port map (
             A0,
 
+            tmp
+        );
+    
+    REG_A :   entity work.reg_nbit_a(rtl)
+        port map(
+            clk,
+            rst,
+            ena,
+            tmp,
+    
             A2
         );
 
