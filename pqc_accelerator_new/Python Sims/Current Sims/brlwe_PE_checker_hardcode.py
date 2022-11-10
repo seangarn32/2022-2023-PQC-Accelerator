@@ -5,7 +5,7 @@ import random
 from scipy.linalg import circulant
 from do_maker_hardcode import *
 
-N = 16
+N = 64
 MAXVAL = 128
 
 #Definition of ring method
@@ -18,8 +18,8 @@ def ring(value):
     return value
 
 #A[0] is the 0,0 element of the circular matrix
-A = [0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0]
-#A = [random.randint(0, 1) for i in range(N)]
+#A = [0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0]
+A = [random.randint(0, 1) for i in range(N)]
 
 matA = circulant(A)
 print(matA[:,0])
@@ -32,8 +32,8 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [106,77,4,35,94,111,124,1,106,77,4,35,94,111,124,1]
-#matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
+#matB = [106,77,4,35,94,111,124,1,106,77,4,35,94,111,124,1]
+matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
@@ -50,7 +50,6 @@ print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
 Sums = matC[0]
 for i in range(N-1):
     Sums = matC[i+1]+Sums
-    print(Sums,"\n")
     for z in range(N):
         Sums[z] = ring(Sums[z])
 
