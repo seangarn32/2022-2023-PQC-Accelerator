@@ -14,6 +14,8 @@ entity fsm is
         dsi_ena     : out   std_logic;
         load_a_rst  : out   std_logic;
         load_a_ena  : out   std_logic;
+        load_b_rst  : out   std_logic;
+        load_b_ena  : out   std_logic;
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
         dso_ena     : out   std_logic;
@@ -51,6 +53,7 @@ begin
                         dsi_ena <= '0';
                         load_a_rst <= '0';
                         load_a_ena <= '0';
+                        load_b_ena <= '0';
                         pe_ena <= '0';
                         accum_ena <= '0';
                         dso_ena <= '0';
@@ -82,26 +85,41 @@ begin
                             dso_rst <= '1';
                             state <= DATA_OUT;
                         else
-                            if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 1) then
-                                accum_ena <= '1';
-                            else
-                                accum_ena <= '0';
-                            end if;
                             if (enc_dec = '0') then
+                                if(count >= PE_SIZE + N_SIZE / (PE_SIZE * 2)  and count <= PE_SIZE + N_SIZE / (PE_SIZE * 2) + N_SIZE / (PE_SIZE * 2)) then
+                                    accum_ena <= '1';
+                                else 
+                                    accum_ena <= '0';
+                                end if;
                                 if (count < (N_SIZE / PE_SIZE)) then
                                     load_a_ena <= '1';
+                                    load_b_ena <= '1';
                                 else
                                     load_a_ena <= '0';
+                                    load_b_ena <= '0';
                                 end if;
                             else
-                                if (count = (N_SIZE / (PE_SIZE * 2))) then
+                                if(count >= PE_SIZE + N_SIZE / (PE_SIZE * 2) + 1  and count <= PE_SIZE + N_SIZE / (PE_SIZE * 2) + N_SIZE / (PE_SIZE * 2)) then
+                                    accum_ena <= '1';
+                                else
+                                    accum_ena <= '0';
+                                end if;
+                                if (count < (N_SIZE / (PE_SIZE * 2))) then
                                     load_a_ena <= '1';
+                                    load_b_ena <= '1';
                                 else
                                     load_a_ena <= '0';
+                                    load_b_ena <= '0';
                                 end if;
                             end if;
                             dsi_ena <= '0';
                             load_a_rst <= '0';
+                            if (count = 0) then
+                                load_b_rst <= '1';
+                                load_b_ena <= '1';
+                            else
+                                load_b_rst <= '0';
+                            end if;
                             pe_ena <= '1';
                             counter_rst <= '0';
                         end if;
