@@ -11,14 +11,14 @@ MAXVAL = 128
 #Definition of ring method
 #ring truncates 
 def ring(value):
-    while value > MAXVAL-1:
-        value -= 2*MAXVAL
-    while value < -1*MAXVAL:
+    while(value<-1*MAXVAL):
         value += 2*MAXVAL
+    while(value>MAXVAL-1):
+        value -= 2*MAXVAL
     return value
 
 #A[0] is the 0,0 element of the circular matrix
-A = [0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1]
+A = [0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0]
 #A = [random.randint(0, 1) for i in range(N)]
 
 matA = circulant(A)
@@ -32,7 +32,7 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0]
+matB = [106,77,4,35,94,111,124,1,106,77,4,35,94,111,124,1]
 #matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
@@ -42,17 +42,20 @@ Sums = np.zeros([N])
 for i in range(N):
     for j in range(N):
         matC[i][j] = (matB[i]* matA[j][i])
-        ring(matC[i][j])
+
+print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
+
+#print(Sums,"\n\n\n\n")      
 
 Sums = matC[0]
 for i in range(N-1):
     Sums = matC[i+1]+Sums
+    print(Sums,"\n")
     for z in range(N):
         Sums[z] = ring(Sums[z])
 
         
-print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
-Sums = np.flip(Sums)
+
 print("\nMatrix F (Final Accumulation) (1 x ",len(Sums),"):\n", Sums)
 
 createFileHardcode(matA, matB, "PE_checker_hardcode.do")
