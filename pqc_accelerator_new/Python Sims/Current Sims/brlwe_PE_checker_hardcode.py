@@ -18,7 +18,7 @@ def ring(value):
     return value
 
 #A[0] is the 0,0 element of the circular matrix
-A = [0,0,0,0,1,0,1,0,0,0,0,0,1,0,1,0]
+A = [0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1]
 #A = [random.randint(0, 1) for i in range(N)]
 
 matA = circulant(A)
@@ -32,7 +32,7 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [106,77,4,35,94,111,124,1,106,77,4,35,94,111,124,1]
+matB = [0,1,0,1,]
 #matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
