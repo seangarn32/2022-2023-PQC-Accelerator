@@ -1,7 +1,7 @@
 from ctypes.wintypes import INT
 import numpy as np
 
-N = 16
+N = 64
 T = 20
 
 def createFileHardcode(A, B, filepath):

@@ -1,0 +1,2 @@
+Matrix F (Final Accumulation) (1 x  8 ):
+ [ -37.   63. -106.  -50.   10. -124.  111.   67.]
