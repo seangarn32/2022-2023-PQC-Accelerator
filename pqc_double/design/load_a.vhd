@@ -18,7 +18,7 @@ end entity;
 architecture rtl of load_a is
 
     signal a0          : a_vector;
-    signal a_nxt         : a_matrix;
+    signal a_nxt         : a_circ_hold_matrix;
     signal tmp         : a_vector;
     signal a_reg         : a_vector;
     signal a_init       : std_logic;

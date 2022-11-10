@@ -99,7 +99,8 @@ begin
                                     load_b_ena <= '0';
                                 end if;
                             else
-                                if(count >= PE_SIZE + N_SIZE / (PE_SIZE * 2) + 1  and count <= PE_SIZE + N_SIZE / (PE_SIZE * 2) + N_SIZE / (PE_SIZE * 2)) then
+                                --if(count >= PE_SIZE + N_SIZE / (PE_SIZE * 2) + 1  and count <= PE_SIZE + N_SIZE / (PE_SIZE * 2) + N_SIZE / (PE_SIZE * 2)) then
+                                if (count >= PE_SIZE + 1 and count <= PE_SIZE + (N_SIZE/(PE_SIZE * 2))) then 
                                     accum_ena <= '1';
                                 else
                                     accum_ena <= '0';
@@ -120,7 +121,9 @@ begin
                             else
                                 load_b_rst <= '0';
                             end if;
-                            pe_ena <= '1';
+                            if (count > 0) then
+                                pe_ena <= '1';
+                            end if;
                             counter_rst <= '0';
                         end if;
 

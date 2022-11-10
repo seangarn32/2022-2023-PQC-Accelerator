@@ -20,6 +20,7 @@ package globals_pkg is
 
     -- "matrix" -> 1 complete N_SIZE matrix of A, B, or C values
     type a_matrix is array (0 to N_SIZE-1) of a_vector;
+    type a_circ_hold_matrix is array (0 to N_SIZE) of a_vector;
     type b_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
     type c_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
 

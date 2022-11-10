@@ -37,7 +37,7 @@ begin
     a_wire(0) <= A0;
     b_wire_temp <= B0;
             
-    DEC_ASSIGN: for i in 0 to 3 generate
+    DEC_ASSIGN: for i in 0 to PE_SIZE-1 generate
         p_wire_1(i) <= b_wire_temp(2*i+1);
         b_wire_1(i) <= b_wire_temp(2*i);
     end generate DEC_ASSIGN;
