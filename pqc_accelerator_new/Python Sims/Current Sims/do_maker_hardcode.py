@@ -1,7 +1,7 @@
 from ctypes.wintypes import INT
 import numpy as np
 
-N = 64
+N = 256
 T = 20
 
 def createFileHardcode(A, B, filepath):
@@ -24,7 +24,7 @@ def createFileHardcode(A, B, filepath):
                     else:
                         file.write(", "+num+" "+str(T*(j+1)+15)+"ns")
                 else:
-                    num = np.binary_repr(int(B[j]), width=8)
+                    num = np.binary_repr(int(B[N-1-j]), width=8)
                     if j == 0:
                         file.write("\""+num+"\" "+str(T*(j+1)+15)+" ns")
                     else:

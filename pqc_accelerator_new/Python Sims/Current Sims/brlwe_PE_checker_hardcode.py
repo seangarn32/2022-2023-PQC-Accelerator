@@ -5,7 +5,7 @@ import random
 from scipy.linalg import circulant
 from do_maker_hardcode import *
 
-N = 64
+N = 256
 MAXVAL = 128
 
 #Definition of ring method
