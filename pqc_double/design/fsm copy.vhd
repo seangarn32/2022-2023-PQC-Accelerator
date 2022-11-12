@@ -78,14 +78,14 @@ begin
                         end if;
 
                     when PE_PIPE =>
-                        if (enc_dec = '0') then
-                            if (count = PE_SIZE + (N_SIZE/PE_SIZE) + 1) then
-                                pe_ena <= '0';
-                                counter_rst <= '1';
-                                accum_ena <= '0';
-                                dso_rst <= '1';
-                                state <= DATA_OUT;
-                            else
+                        if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2) then
+                            pe_ena <= '0';
+                            counter_rst <= '1';
+                            accum_ena <= '0';
+                            dso_rst <= '1';
+                            state <= DATA_OUT;
+                        else
+                            if (enc_dec = '0') then
                                 if(count >= PE_SIZE + 1 and count <= PE_SIZE + (N_SIZE/PE_SIZE)) then
                                     accum_ena <= '1';
                                 else 
@@ -98,30 +98,11 @@ begin
                                     load_a_ena <= '0';
                                     load_b_ena <= '0';
                                 end if;
-                                dsi_ena <= '0';
-                                load_a_rst <= '0';
-                                if (count = 0) then
-                                    load_b_rst <= '1';
-                                    load_b_ena <= '1';
-                                else
-                                    load_b_rst <= '0';
-                                end if;
-                                if (count > 0) then
-                                    pe_ena <= '1';
-                                end if;
-                                counter_rst <= '0';
-                            end if;
-                        else
-                            if(count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2) then
-                                pe_ena <= '0';
-                                counter_rst <= '1';
-                                accum_ena <= '0';
-                                dso_rst <= '1';
-                                state <= DATA_OUT;
                             else
+                                --if(count >= PE_SIZE + N_SIZE / (PE_SIZE * 2) + 1  and count <= PE_SIZE + N_SIZE / (PE_SIZE * 2) + N_SIZE / (PE_SIZE * 2)) then
                                 if (count >= PE_SIZE + 1 and count <= PE_SIZE + (N_SIZE/(PE_SIZE * 2))) then 
                                     accum_ena <= '1';
-                                 else
+                                else
                                     accum_ena <= '0';
                                 end if;
                                 if (count < (N_SIZE / (PE_SIZE * 2))) then
@@ -131,19 +112,19 @@ begin
                                     load_a_ena <= '0';
                                     load_b_ena <= '0';
                                 end if;
-                                dsi_ena <= '0';
-                                load_a_rst <= '0';
-                                if (count = 0) then
-                                    load_b_rst <= '1';
-                                    load_b_ena <= '1';
-                                else
-                                    load_b_rst <= '0';
-                                end if;
-                                if (count > 0) then
-                                    pe_ena <= '1';
-                                end if;
-                                counter_rst <= '0';
                             end if;
+                            dsi_ena <= '0';
+                            load_a_rst <= '0';
+                            if (count = 0) then
+                                load_b_rst <= '1';
+                                load_b_ena <= '1';
+                            else
+                                load_b_rst <= '0';
+                            end if;
+                            if (count > 0) then
+                                pe_ena <= '1';
+                            end if;
+                            counter_rst <= '0';
                         end if;
 
                     when DATA_OUT =>

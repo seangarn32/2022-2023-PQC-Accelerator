@@ -18,7 +18,7 @@ end entity;
 architecture rtl of load_a is
 
     signal a0          : a_vector;
-    signal a_nxt         : a_matrix;
+    signal a_nxt         : a_circ_hold_matrix;
     signal tmp         : a_vector;
     signal a_reg         : a_vector;
     signal a_init       : std_logic;
@@ -63,9 +63,8 @@ begin
 
     tmp <= a0 when (rst = '1' and a_init = '0') else
              a_nxt(1) when (enc_dec = '0' and a_init = '1' and count = '1') else
-             a_nxt(PE_SIZE * 2) when (enc_dec = '0' and a_init = '1' and count = '0') else
-             a_nxt(PE_SIZE * 2) when (enc_dec = '1' and a_init = '1');-- else
-             --a_nxt(0);
+             a_nxt(PE_SIZE * 2 - 1) when (enc_dec = '0' and a_init = '1' and count = '0') else
+             a_nxt(PE_SIZE * 2) when (enc_dec = '1' and a_init = '1');
 
     REG_A :   entity work.reg_nbit_a(rtl)
     port map(
