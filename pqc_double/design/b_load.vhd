@@ -87,12 +87,20 @@ begin
                             sig_c <= sig_c +1;
                         end if;
                 elsif (enc_dec = '1') then
-                    if(ecnt*(PE_SIZE*2) = N_SIZE) then
-                        ecnt <= ecnt;
-                    elsif(PE_SIZE*2 = N_SIZE) then
+                    if (PE_SIZE*2 = N_SIZE) then -- DIVIDE = 2
                         ecnt <= 0;
+                    elsif (PE_SIZE*2 /= N_SIZE and PE_SIZE*4 /= N_SIZE) then
+                        if(ecnt*PE_SIZE + PE_SIZE*2 = N_SIZE) then -- DIVIDE = 8,16,32,etc
+                            ecnt <= ecnt;
+                        else
+                            ecnt <= ecnt + 2;
+                        end if;
                     else
-                        ecnt <= ecnt + 2;
+                        if(ecnt*(PE_SIZE*2) = N_SIZE) then -- DIVIDE = 4
+                            ecnt <= ecnt;
+                        else
+                            ecnt <= ecnt + 2;
+                        end if;
                     end if;
                 end if;
                 end if;
