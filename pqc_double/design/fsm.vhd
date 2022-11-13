@@ -91,9 +91,9 @@ begin
                                 else 
                                     accum_ena <= '0';
                                 end if;
-                                if (count < (N_SIZE / PE_SIZE)) then
+                                if (count < (N_SIZE / PE_SIZE)) then -- changed from < to <=
                                     load_a_ena <= '1';
-                                    load_b_ena <= '1';
+                                    load_b_ena <= '1'; 
                                 else
                                     load_a_ena <= '0';
                                     load_b_ena <= '0';
@@ -124,7 +124,7 @@ begin
                                  else
                                     accum_ena <= '0';
                                 end if;
-                                if (count < (N_SIZE / (PE_SIZE * 2))) then
+                                if (count < (N_SIZE / (PE_SIZE * 2))) then -- changed from < to <=
                                     load_a_ena <= '1';
                                     load_b_ena <= '1';
                                 else
