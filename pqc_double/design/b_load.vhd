@@ -94,56 +94,16 @@ begin
                                 cnt <= cnt + 1;
                                 sig_c <= sig_c + 1;
                             end if;
-                        elsif (N_SIZE > 256) then                      -- Other
+                        elsif (N_SIZE >= 32) then                      -- Other
                             if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
                                 cnt <= cnt;
                             elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
                                 sig_c <= sig_c;
                                 cnt <= cnt + 1;
-                                offst <= offst + 1;
-                            elsif (cnt >= 1) then
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                                if (cnt < 3) then
-                                    offst <= -4;
-                                else
-                                    offst <= offst + 1;
-                                end if;
-                            else
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                            end if;
-                        elsif (N_SIZE = 32) then                      -- Other
-                            if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
-                                cnt <= cnt;
-                            elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
-                                sig_c <= sig_c;
-                                cnt <= cnt + 1;
-                                if (PE_SIZE /= 8) then
-                                    offst <= offst + 1;
-                                else
-                                --offst <= offst + 1;       N=32,D=4,PE=8 No additional increment
-                                end if;
-                            elsif (cnt >= 1) then
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                                if (cnt < 3) then
-                                    offst <= -4;
-                                else
-                                    offst <= offst + 1;
-                                end if;
-                            else
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                            end if;
-                        elsif (N_SIZE = 64) then                      -- Other
-                            if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
-                                cnt <= cnt;
-                            elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
-                                sig_c <= sig_c;
-                                cnt <= cnt + 1;
-                                if (PE_SIZE = 8) then
-                                    offst <= -12;      -- N=64,D=4,PE=16 Subtract 12
+                                if (DIVIDE = 4 or (DIVIDE = 8 and (N_SIZE /= 32 or N_SIZE /= 64))) then
+                                    offst <= DIVIDE - PE_SIZE;
+                                elsif (DIVIDE = 16) then
+                                    offst <= offst - offst;
                                 else
                                     offst <= offst + 1;
                                 end if;
@@ -151,59 +111,11 @@ begin
                                 cnt <= cnt + 1;
                                 sig_c <= sig_c + 1;
                                 if (cnt < 3) then
-                                    offst <= -4;
-                                else
-                                    offst <= offst + 1;
-                                end if;
-                            else
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                            end if;
-                        elsif (N_SIZE = 128) then                      -- Other
-                            if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
-                                cnt <= cnt;
-                            elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
-                                sig_c <= sig_c;
-                                cnt <= cnt + 1;
-                                if (PE_SIZE = 32) then
-                                    offst <= -28;      -- N=128,D=4,PE=32 Subtract 28
-                                elsif (PE_SIZE = 16) then
-                                    offst <= -8;    -- N=128,D=8,PE=16 Subtract 8
-                                else
-                                    offst <= offst + 1;
-                                end if;
-                            elsif (cnt >= 1) then
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                                if (cnt < 3) then
-                                    offst <= -4;
-                                else
-                                    offst <= offst + 1;
-                                end if;
-                            else
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                            end if;
-                        elsif (N_SIZE = 256) then                      -- Other
-                            if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
-                                cnt <= cnt;
-                            elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
-                                sig_c <= sig_c;
-                                cnt <= cnt + 1;
-                                if (PE_SIZE = 64) then
-                                    offst <= -60;           -- N=256,D=4,PE=64 Subtract 60
-                                elsif (PE_SIZE = 32) then
-                                    offst <= -24;           -- N=256,D=8,PE=32 Subtract 24
-                                elsif (PE_SIZE = 16) then
-                                    offst <= 0;             -- N=256,D=16,PE=16 Offst = 0
-                                else
-                                    offst <= offst + 1;      
-                                end if;
-                            elsif (cnt >= 1) then
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                                if (cnt < 3) then
-                                    offst <= -4;
+                                    if (((N_SIZE = 256 or N_SIZE = 128) and DIVIDE = 8) or (N_SIZE = 256 and DIVIDE = 16)) then
+                                        offst <= -4 + (DIVIDE - PE_SIZE) + (8 - DIVIDE);
+                                    else
+                                        offst <= -4;
+                                    end if;
                                 else
                                     offst <= offst + 1;
                                 end if;
