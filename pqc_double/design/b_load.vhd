@@ -123,6 +123,18 @@ begin
                                 cnt <= cnt + 1;
                                 sig_c <= sig_c + 1;
                             end if;
+                        elsif (PE_SIZE = 2) then        -- PE_SIZE = 2
+                            if (cnt = (PE_SIZE*2)-1) then
+                                cnt <= cnt;
+                            elsif (sig_c = (PE_SIZE*2)-2) then
+                                sig_c <= sig_c;
+                                cnt <= cnt + 1;
+                                offst <= offst + 1;
+                            else
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                                offst <= offst + 1;
+                            end if;
                         else                            -- N_SIZE = 8,16
                             if (cnt = PE_SIZE-1) then
                                 cnt <= cnt;
