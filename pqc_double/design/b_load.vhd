@@ -79,6 +79,20 @@ begin
                         if (PE_SIZE*2 = N_SIZE) then -- DIVIDE = 2
                             cnt <= 0;
                             count <= count + 1;
+                        elsif (PE_SIZE = 2) then        -- PE_SIZE = 2
+                            if ((cnt + 1)*2 = N_SIZE) then
+                                cnt <= cnt;
+                            elsif ((sig_c + 2) * 2 = N_SIZE) then
+                                sig_c <= sig_c;
+                                cnt <= cnt + 1;
+                                offst <= offst + 1;
+                            else
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                                if (cnt >= 1) then
+                                    offst <= offst + 1;
+                                end if;
+                            end if;
                         elsif (N_SIZE > 16 and PE_SIZE = 4) then -- PE_SIZE = 4
                             if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
                                 cnt <= cnt;
@@ -122,18 +136,6 @@ begin
                             else
                                 cnt <= cnt + 1;
                                 sig_c <= sig_c + 1;
-                            end if;
-                        elsif (PE_SIZE = 2) then        -- PE_SIZE = 2
-                            if (cnt = (PE_SIZE*2)-1) then
-                                cnt <= cnt;
-                            elsif (sig_c = (PE_SIZE*2)-2) then
-                                sig_c <= sig_c;
-                                cnt <= cnt + 1;
-                                offst <= offst + 1;
-                            else
-                                cnt <= cnt + 1;
-                                sig_c <= sig_c + 1;
-                                offst <= offst + 1;
                             end if;
                         else                            -- N_SIZE = 8,16
                             if (cnt = PE_SIZE-1) then
