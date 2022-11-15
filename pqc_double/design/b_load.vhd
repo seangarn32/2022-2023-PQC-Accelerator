@@ -35,6 +35,7 @@ architecture rtl of b_load is
     signal count        :   integer := 0;
     signal sig_c        :   integer := 0;
     signal ecnt         :   integer := 0;
+    signal offst        :   integer := 0;
 
 
 
@@ -72,29 +73,98 @@ begin
                     sig_c <= 0;
                     count <= 0;
                     ecnt <= 0;
+                    offst <= 0;
                 elsif (load_b_ena = '1') then
                     if (enc_dec = '0') then
-                        if (cnt = PE_SIZE-1) then
-                            cnt <= cnt;
-                        elsif (sig_c = PE_SIZE-2) then
-                            sig_c <= sig_c;
-                            cnt <= cnt + 1;
-                        elsif (PE_SIZE*2 = N_SIZE) then
+                        if (PE_SIZE*2 = N_SIZE) then -- DIVIDE = 2
                             cnt <= 0;
                             count <= count + 1;
-                        else
-                            cnt <= cnt + 1;
-                            sig_c <= sig_c +1;
+                        elsif (PE_SIZE = 2) then        -- PE_SIZE = 2
+                            if ((cnt + 1)*2 = N_SIZE) then
+                                cnt <= cnt;
+                            elsif ((sig_c + 2) * 2 = N_SIZE) then
+                                sig_c <= sig_c;
+                                cnt <= cnt + 1;
+                                offst <= offst + 1;
+                            else
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                                if (cnt >= 1) then
+                                    offst <= offst + 1;
+                                end if;
+                            end if;
+                        elsif (N_SIZE > 16 and PE_SIZE = 4) then -- PE_SIZE = 4
+                            if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
+                                cnt <= cnt;
+                            elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
+                                sig_c <= sig_c;
+                                cnt <= cnt + 1;
+                                offst <= offst + 1;
+                            elsif (cnt >= 3) then
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                                offst <= offst + 1;
+                            else
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                            end if;
+                        elsif (N_SIZE >= 32) then                      -- Other
+                            if (cnt*PE_SIZE + PE_SIZE = N_SIZE) then
+                                cnt <= cnt;
+                            elsif ((sig_c*PE_SIZE) + (PE_SIZE*2) = N_SIZE) then
+                                sig_c <= sig_c;
+                                cnt <= cnt + 1;
+                                if (DIVIDE = 4 or (DIVIDE = 8 and (N_SIZE /= 32 or N_SIZE /= 64))) then
+                                    offst <= DIVIDE - PE_SIZE;
+                                elsif (DIVIDE = 16) then
+                                    offst <= offst - offst;
+                                else
+                                    offst <= offst + 1;
+                                end if;
+                            elsif (cnt >= 1) then
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                                if (cnt < 3) then
+                                    if (((N_SIZE = 256 or N_SIZE = 128) and DIVIDE = 8) or (N_SIZE = 256 and DIVIDE = 16)) then
+                                        offst <= -4 + (DIVIDE - PE_SIZE) + (8 - DIVIDE);
+                                    else
+                                        offst <= -4;
+                                    end if;
+                                else
+                                    offst <= offst + 1;
+                                end if;
+                            else
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c + 1;
+                            end if;
+                        else                            -- N_SIZE = 8,16
+                            if (cnt = PE_SIZE-1) then
+                                cnt <= cnt;
+                            elsif (sig_c = PE_SIZE-2) then
+                                sig_c <= sig_c;
+                                cnt <= cnt + 1;
+                            else
+                                cnt <= cnt + 1;
+                                sig_c <= sig_c +1;
+                            end if;
                         end if;
-                elsif (enc_dec = '1') then
-                    if(ecnt*(PE_SIZE*2) = N_SIZE) then
-                        ecnt <= ecnt;
-                    elsif(PE_SIZE*2 = N_SIZE) then
-                        ecnt <= 0;
-                    else
-                        ecnt <= ecnt + 2;
+                    elsif (enc_dec = '1') then
+                        if (PE_SIZE*2 = N_SIZE) then -- DIVIDE = 2
+                            ecnt <= 0;
+                        elsif (PE_SIZE*2 /= N_SIZE and PE_SIZE*4 /= N_SIZE) then
+                            if(ecnt*PE_SIZE + PE_SIZE*2 = N_SIZE) then -- DIVIDE = 8,16,32,etc
+                                ecnt <= ecnt;
+                            else
+                                ecnt <= ecnt + 2;
+                            end if;
+                        else
+                            if(ecnt*(PE_SIZE*2) = N_SIZE) then -- DIVIDE = 4
+                                ecnt <= ecnt;
+                            else
+                                ecnt <= ecnt + 2;
+                            end if;
+                        end if;
                     end if;
-                end if;
                 end if;
         end if;
     end process;
@@ -108,7 +178,7 @@ begin
         -- b_sec_even is the next even set of B values; the index is determined by sig_c
         b_sec_even(i) <= B_in((PE_SIZE)*sig_c + (2*i));
         -- b_sec_odd is the next odd set of B values; the index is determined by cnt
-        b_sec_odd(i) <= B_in((PE_SIZE-1)*cnt + 2*i);
+        b_sec_odd(i) <= B_in((PE_SIZE-1)*cnt + (2*i + offst));
     end generate LOAD_B_SEC;
 
     -- Generate statements for all decryption B values
@@ -128,7 +198,7 @@ begin
         -- p_sec_even is the next even set of P values; the index is determined by sig_c
         p_sec_even(i) <= P_in((PE_SIZE)*sig_c + (2*i));
         -- p_sec_odd is the next odd set of P values; the index is determined by cnt
-        p_sec_odd(i) <= P_in((PE_SIZE-1)*cnt + 2*i);
+        p_sec_odd(i) <= P_in((PE_SIZE-1)*cnt + (2*i + offst));
     end generate LOAD_P_SEC;
     
     -- This is the output mux for the B values; There are 7 possible outputs for this mux: 5 for encryption and 2 for decryption;

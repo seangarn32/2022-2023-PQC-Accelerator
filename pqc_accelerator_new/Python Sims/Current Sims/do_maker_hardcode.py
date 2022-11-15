@@ -30,7 +30,7 @@ def createFileHardcode(A, B, Z, filepath):
                 if i == 1:
                     num = np.binary_repr(int(B[j]), width=8)
                     if j == 0:
-                        file.write("\""+num+"\" "+str(T*(j+1)+15)+" ns")
+                        file.write("\""+num+"\" "+str(T*(j+1)+20)+" ns")
                     else:
                         file.write(", \""+num+"\" "+str(T*(j+1)+15)+" ns")
                 if i == 2:
