@@ -9,6 +9,7 @@ entity data_shift_out is
         rst     : in    std_logic;
         ena     : in    std_logic;
         enc_dec : in    std_logic;
+        
         c_in_0    : in    c_matrix;
         c_in_1    : in    c_matrix;
         c_in_2    : in    c_matrix;
@@ -56,7 +57,7 @@ begin
 
     REG_GEN_0 : for i in 0 to N_SIZE-2 generate
 
-        c_sel_0 <= c_enc_dec when shift_ena = '1' else c_nxt_0;
+        c_sel_0 <= c_enc_dec when shift_ena = '0' else c_nxt_0;
 
         REG : entity work.reg_8bit(rtl)
             port map(
@@ -79,7 +80,7 @@ begin
 
     REG_GEN_1 : for i in 0 to N_SIZE-2 generate
 
-        c_sel_1 <= c_in_1 when shift_ena = '1' else c_nxt_1;
+        c_sel_1 <= c_in_1 when shift_ena = '0' else c_nxt_1;
 
         REG : entity work.reg_8bit(rtl)
             port map(

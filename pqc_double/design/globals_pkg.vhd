@@ -6,9 +6,9 @@ use ieee.math_real."log2";
 package globals_pkg is
 
     -- N_SIZE -> Size of initial A vector 
-    constant N_SIZE : integer := 8;
+    constant N_SIZE : integer := 256;
     -- DIVIDE -> Number of times to divide down PEs for pipelining
-    constant DIVIDE : integer := 2;
+    constant DIVIDE : integer := 16;
     -- PE_SIZE -> Number of PEs used in design
     constant PE_SIZE : integer := N_SIZE/DIVIDE;
     
@@ -20,6 +20,7 @@ package globals_pkg is
 
     -- "matrix" -> 1 complete N_SIZE matrix of A, B, or C values
     type a_matrix is array (0 to N_SIZE-1) of a_vector;
+    type a_circ_hold_matrix is array (0 to N_SIZE) of a_vector;
     type b_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
     type c_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
 
@@ -28,5 +29,7 @@ package globals_pkg is
 
     -- "array" -> Array of wires to connect PEs/REGs
     type a_array is array (0 to PE_SIZE-1) of a_vector;
+
+    type b_section is array (0 to (PE_SIZE*2)-1) of std_logic_vector(7 downto 0);
 
 end package;

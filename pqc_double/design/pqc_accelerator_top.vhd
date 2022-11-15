@@ -24,7 +24,9 @@ architecture rtl of pqc_accelerator_top is
     signal A            : std_logic_vector(N_SIZE-1 downto 0);
     signal A0           : a_vector;
     signal B            : b_matrix;
+    signal B0           : b_matrix;
     signal P            : b_matrix;
+    signal P0            : b_matrix;
     signal C_0            : c_matrix;
     signal C_1            : c_matrix;
     signal C_accum_0      : c_matrix;
@@ -32,9 +34,14 @@ architecture rtl of pqc_accelerator_top is
     signal C_accum_2      : c_matrix;
 
     signal dsi_ena      : std_logic;
+    signal load_a_rst   : std_logic;
+    signal load_a_ena   : std_logic;
+    signal load_b_rst   : std_logic;
+    signal load_b_ena   : std_logic;
     signal pe_ena       : std_logic;
     signal accum_ena    : std_logic;
     signal dso_ena      : std_logic;
+    signal dso_rst      : std_logic;
 
 begin
 
@@ -43,11 +50,17 @@ begin
             clk,
             rst,
             ena,
+            enc_dec,
 
             dsi_ena,
+            load_a_rst,
+            load_a_ena,
+            load_b_rst,
+            load_b_ena,
             pe_ena,
             accum_ena,
-            dso_ena
+            dso_ena,
+            dso_rst
         );
 
     DSI : entity work.data_shift_in(rtl)
@@ -68,11 +81,25 @@ begin
     LOAD_A : entity work.load_a(rtl)
         port map(
             clk,
-            rst,
-            pe_ena,
+            load_a_rst,
+            load_a_ena,
+            enc_dec,
             A,
 
             A0
+        );
+
+    LOAD_B : entity work.load_b(rtl)
+        port map(
+            clk,
+            load_b_rst,
+            load_b_ena,
+            enc_dec,
+            B,
+            P,
+
+            B0,
+            P0
         );
 
     PE_CHAIN : entity work.pe_chain(rtl)
@@ -83,8 +110,8 @@ begin
             enc_dec,
 
             A0,
-            B,
-            P,
+            B0,
+            P0,
 
             C_0,
             C_1
@@ -107,7 +134,7 @@ begin
     DSO : entity work.data_shift_out(rtl)
         port map(
             clk,
-            rst,
+            dso_rst,
             dso_ena,
             enc_dec,
 
