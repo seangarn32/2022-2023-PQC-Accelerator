@@ -67,6 +67,7 @@ begin
                         if(count = N_SIZE) then
                             dsi_ena <= '0';
                             load_a_rst <= '1';
+                            load_b_rst <= '1';
                             load_a_ena <= '0';
                             pe_ena <= '0';
                             counter_rst <= '1';
@@ -101,7 +102,7 @@ begin
                                 dsi_ena <= '0';
                                 load_a_rst <= '0';
                                 if (count = 0) then
-                                    load_b_rst <= '1';
+                                    --load_b_rst <= '1';
                                     load_b_ena <= '1';
                                 else
                                     load_b_rst <= '0';
@@ -134,7 +135,7 @@ begin
                                 dsi_ena <= '0';
                                 load_a_rst <= '0';
                                 if (count = 0) then
-                                    load_b_rst <= '1';
+                                    --load_b_rst <= '1';
                                     load_b_ena <= '1';
                                 else
                                     load_b_rst <= '0';
@@ -145,6 +146,7 @@ begin
                                 counter_rst <= '0';
                             end if;
                         end if;
+                        load_b_rst <= '0';
 
                     when DATA_OUT =>
                         if(count = N_SIZE) then
