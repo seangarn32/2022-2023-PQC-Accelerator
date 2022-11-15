@@ -1,7 +1,9 @@
 WIDTH = 8;
 DEPTH = 256;
+
 ADDRESS_RADIX = UNS;
 DEPTH = UNS;
+
 CONTENT BEGIN
 	[0..255]  :   0;
 END;
