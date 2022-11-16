@@ -51,6 +51,8 @@ begin
                     if(count = NUM_B_SECTIONS-1 and c_index = NUM_C_SECTIONS-1) then
                         shift_ena <= '1';
                     end if;
+                else
+                    shift_ena <= '0';
                 end if;
             end if;
         end if;

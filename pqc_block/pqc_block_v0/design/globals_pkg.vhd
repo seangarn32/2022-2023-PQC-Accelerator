@@ -1,27 +1,31 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
-use ieee.math_real."log2";
+use ieee.math_real.log2;
 
 package globals_pkg is
 
     -- N_SIZE -> Size of initial A vector 
-    constant N_SIZE : integer := 8;
+    constant N_SIZE : integer := 256;
     
     -- ROWS/COLS -> Section size to process (i.e. 4x8)
-    constant ROWS : integer := 2;
+    constant ROWS : integer := 32;
     constant COLS : integer := 4;
+
+    -- CONSTANT ERROR VALUE (8-bit)
+    constant E : integer := 2;
 
     -- NUM_X_SECTIONS -> Number of sections to be processed, also number of cycles necessary (1 section/cycle)
     constant NUM_A_SECTIONS : integer := (N_SIZE*N_SIZE)/(ROWS*COLS);
     constant NUM_B_SECTIONS : integer := (N_SIZE/COLS);
     constant NUM_C_SECTIONS : integer := (N_SIZE/ROWS);
-    
+
     -- COUNTER_SIZE -> Bit length of counters
     constant COUNTER_SIZE_FSM : integer := integer(log2(real(N_SIZE)));
     constant COUNTER_SIZE_A : integer := integer(log2(real(NUM_A_SECTIONS)));
     constant COUNTER_SIZE_B : integer := integer(log2(real(NUM_B_SECTIONS)));
     constant COUNTER_SIZE_C : integer := integer(log2(real(NUM_C_SECTIONS)));
+    constant COUNTER_SIZE_ROWS : integer := integer(log2(real(ROWS)));
     
     constant A_INDEX_SIZE : integer := integer(log2(real(N_SIZE)));
 
