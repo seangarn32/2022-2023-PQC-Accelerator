@@ -9,6 +9,54 @@ force a_in 0
 force b_in "00000000"
 run 30 ns
 
+# Set A0(15)
+force a_in 0
+# Set B(15) 
+force b_in "00000001"
+run 20 ns
+
+# Set A0(14)
+force a_in 0
+# Set B(14) 
+force b_in "01111100"
+run 20 ns
+
+# Set A0(13)
+force a_in 0
+# Set B(13) 
+force b_in "01101111"
+run 20 ns
+
+# Set A0(12)
+force a_in 0
+# Set B(12) 
+force b_in "01011110"
+run 20 ns
+
+# Set A0(11)
+force a_in 1
+# Set B(11) 
+force b_in "00100011"
+run 20 ns
+
+# Set A0(10)
+force a_in 0
+# Set B(10) 
+force b_in "00000100"
+run 20 ns
+
+# Set A0(9)
+force a_in 1
+# Set B(9) 
+force b_in "01001101"
+run 20 ns
+
+# Set A0(8)
+force a_in 0
+# Set B(8) 
+force b_in "01101010"
+run 20 ns
+
 # Set A0(7)
 force a_in 0
 # Set B(7) 
@@ -58,5 +106,5 @@ force b_in "01101010"
 run 20 ns
 
 
-run 460 ns 
+run 1200 ns 
 
