@@ -5,7 +5,11 @@ import random
 from scipy.linalg import circulant
 from do_maker_hardcode import *
 
+<<<<<<< HEAD
 N = 32
+=======
+N = 8
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 MAXVAL = 128
 
 #Definition of ring method
@@ -18,7 +22,11 @@ def ring(value):
     return value
 
 #A[0] is the 0,0 element of the circular matrix
+<<<<<<< HEAD
 A = [0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1]
+=======
+A = [0,0,0,0,1,0,1,1]
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 #A = [random.randint(0, 1) for i in range(N)]
 
 matA = circulant(A)
@@ -32,7 +40,11 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
+<<<<<<< HEAD
 matB = [0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1]
+=======
+matB = [106,77,4,35,94,111,124,32]
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 #matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
@@ -50,11 +62,18 @@ print("\nMatrix C (", len(matC[:]), "x", len(matC[0]), "):\n", matC)
 Sums = matC[0]
 for i in range(N-1):
     Sums = matC[i+1]+Sums
-    for z in range(N):
-        Sums[z] = ring(Sums[z])
+    for k in range(N):
+        Sums[k] = ring(Sums[k])
 
-        
+#Z = np.zeros([N])
+Z = [1,0,1,0,1,0,1,0]
+#Z = [random.randint(0, 1) for i in range(N)]
+
+for z in range(N):
+        Sums[z] += Z[z]
+
+print("\nMatrix Z (Errors) (1 x ",len(Z),"):\n", Z)
 
 print("\nMatrix F (Final Accumulation) (1 x ",len(Sums),"):\n", Sums)
 
-createFileHardcode(matA, matB, "PE_checker_hardcode.do")
+createFileHardcode(matA, matB,Z, "PE_checker_hardcode.do")

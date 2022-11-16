@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use work.globals_pkg.all;
 
-entity load_b is
+entity load_b_final is
     port(
         clk         : in    std_logic;
         rst         : in    std_logic;
@@ -17,7 +17,7 @@ entity load_b is
     );
 end entity;
 
-architecture rtl of load_b is
+architecture rtl of load_b_final is
 
     signal b_tmp        :   b_matrix;
     signal p_tmp        :   b_matrix;
