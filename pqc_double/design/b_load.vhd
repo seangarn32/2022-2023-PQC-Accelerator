@@ -74,7 +74,7 @@ begin
                     count <= 0;
                     ecnt <= 0;
                     offst <= 0;
-                elsif (load_b_ena = '1') then
+                elsif (load_b_ena = '1') then   -- ENCRYPTION
                     if (enc_dec = '0') then
                         if (PE_SIZE*2 = N_SIZE) then -- DIVIDE = 2
                             cnt <= 0;
@@ -148,7 +148,7 @@ begin
                                 sig_c <= sig_c +1;
                             end if;
                         end if;
-                    elsif (enc_dec = '1') then
+                    elsif (enc_dec = '1') then  -- DECRYPTION
                         if (PE_SIZE*2 = N_SIZE) then -- DIVIDE = 2
                             ecnt <= 0;
                         elsif (PE_SIZE*2 /= N_SIZE and PE_SIZE*4 /= N_SIZE) then

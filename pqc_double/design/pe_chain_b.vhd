@@ -45,7 +45,7 @@ begin
     p_wire_0 <= B1;
     b_wire_0 <= B0;
 
-    WIRE_SELECT : entity work.mux2to1_B(rtl)
+    WIRE_SELECT : entity work.mux2to1_Bselect(rtl)
         port map (
             p_wire_0,
             b_wire_0,
