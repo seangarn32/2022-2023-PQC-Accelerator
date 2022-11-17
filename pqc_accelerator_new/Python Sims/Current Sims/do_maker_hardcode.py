@@ -1,7 +1,11 @@
 from ctypes.wintypes import INT
 import numpy as np
 
+<<<<<<< HEAD
+N = 32
+=======
 N = 8
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 T = 20
 Z_off = 315
 

@@ -5,7 +5,11 @@ import random
 from scipy.linalg import circulant
 from do_maker_hardcode import *
 
+<<<<<<< HEAD
+N = 32
+=======
 N = 8
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 MAXVAL = 128
 
 #Definition of ring method
@@ -18,7 +22,11 @@ def ring(value):
     return value
 
 #A[0] is the 0,0 element of the circular matrix
+<<<<<<< HEAD
+A = [0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1]
+=======
 A = [0,0,0,0,1,0,1,1]
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 #A = [random.randint(0, 1) for i in range(N)]
 
 matA = circulant(A)
@@ -32,7 +40,11 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
+<<<<<<< HEAD
+matB = [0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1]
+=======
 matB = [106,77,4,35,94,111,124,32]
+>>>>>>> 5cb8e4fae1be1a682600335962c31c741e12361d
 #matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
