@@ -9,7 +9,7 @@ package globals_pkg is
     constant N_SIZE : integer := 256;
     
     -- ROWS/COLS -> Section size to process (i.e. 4x8)
-    constant ROWS : integer := 32;
+    constant ROWS : integer := 64;
     constant COLS : integer := 4;
 
     -- CONSTANT ERROR VALUE (8-bit)

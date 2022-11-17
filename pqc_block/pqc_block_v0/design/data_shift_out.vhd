@@ -9,6 +9,8 @@ entity data_shift_out is
         rst     : in    std_logic;
         ena     : in    std_logic;
 
+        count_out : out std_logic_vector(COUNTER_SIZE_B-1 downto 0);
+
         C_in    : in    c_section;
         C_out   : out   std_logic_vector(7 downto 0)
     );
@@ -29,6 +31,7 @@ begin
 
     -- Count to NUM_B_SECTIONS-2 (Number of cycles needed to accumulate pipelined results)
     count_nxt <= count + '1' when count < NUM_B_SECTIONS-1 else (others=>'0');
+    count_out <= count;
 
     -- Take in values from accum, then shift
     shift_ena <= '0' when count = NUM_B_SECTIONS-1 else '1'; 

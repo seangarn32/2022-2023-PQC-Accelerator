@@ -15,7 +15,17 @@ entity pqc_accelerator_top is
 
         C_out   : out   std_logic_vector(7 downto 0);
         EN_out  : out   std_logic_vector(7 downto 0);
-        DE_out  : out   std_logic
+        DE_out  : out   std_logic;
+
+        a_val_index     : out   std_logic_vector(7 downto 0);
+        b_val_index     : out   std_logic_vector(7 downto 0);
+        z_val_index     : out   std_logic_vector(7 downto 0);
+        o_val_index     : out   std_logic_vector(7 downto 0);
+
+        dsi_ena_out     : out   std_logic;
+        pe_ena_out      : out   std_logic;
+        accum_ena_out   : out   std_logic;
+        dso_ena_out     : out   std_logic   
     );
 end entity;
 
@@ -34,6 +44,7 @@ architecture rtl of pqc_accelerator_top is
     signal accum_ena    : std_logic;
     signal dso_ena      : std_logic;
 
+    signal dso_count    : std_logic_vector(COUNTER_SIZE_B-1 downto 0);
     signal W            : std_logic_vector(7 downto 0);
 
 begin
@@ -44,13 +55,25 @@ begin
             rst,
             ena,
 
+            dso_count,
+
             a_sel,
 
             dsi_ena,
             pe_ena,
             accum_ena,
-            dso_ena
+            dso_ena,
+
+            a_val_index,
+            b_val_index,
+            z_val_index,
+            o_val_index
         );
+
+    dsi_ena_out <= dsi_ena;
+    pe_ena_out <= pe_ena;
+    accum_ena_out <= accum_ena;
+    dso_ena_out <= dso_ena;
 
     DSI : entity work.data_shift_in(rtl)
         port map(
@@ -95,6 +118,8 @@ begin
             clk,
             rst,
             dso_ena,
+
+            dso_count,
 
             c_accum2dso,
             W
