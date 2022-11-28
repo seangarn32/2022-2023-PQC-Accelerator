@@ -4,14 +4,15 @@ add wave -noupdate -divider Globals
 add wave -noupdate /pqc_accelerator_top/clk
 add wave -noupdate /pqc_accelerator_top/rst
 add wave -noupdate /pqc_accelerator_top/ena
+add wave -noupdate /pqc_accelerator_top/mode
 add wave -noupdate -divider Inputs
 add wave -noupdate /pqc_accelerator_top/A_in
 add wave -noupdate -radix decimal /pqc_accelerator_top/B_in
 add wave -noupdate -divider Indices
 add wave -noupdate -radix unsigned /pqc_accelerator_top/FSM/a_val_index
 add wave -noupdate -radix unsigned /pqc_accelerator_top/FSM/b_val_index
-add wave -noupdate -radix unsigned /pqc_accelerator_top/FSM/o_val_index
 add wave -noupdate -radix unsigned /pqc_accelerator_top/FSM/z_val_index
+add wave -noupdate -radix unsigned /pqc_accelerator_top/FSM/o_val_index
 add wave -noupdate -divider State
 add wave -noupdate -radix unsigned /pqc_accelerator_top/FSM/count
 add wave -noupdate /pqc_accelerator_top/FSM/state
@@ -19,6 +20,8 @@ add wave -noupdate /pqc_accelerator_top/dsi_ena
 add wave -noupdate /pqc_accelerator_top/pe_ena
 add wave -noupdate /pqc_accelerator_top/accum_ena
 add wave -noupdate /pqc_accelerator_top/dso_ena
+add wave -noupdate /pqc_accelerator_top/err_ena
+add wave -noupdate /pqc_accelerator_top/out_ena
 add wave -noupdate -divider LOAD_A
 add wave -noupdate -radix decimal /pqc_accelerator_top/DSI/a0
 add wave -noupdate -radix decimal /pqc_accelerator_top/DSI/aN
@@ -142,15 +145,16 @@ add wave -noupdate -radix decimal /pqc_accelerator_top/DSO/c_reg_out(63)
 add wave -noupdate -radix unsigned /pqc_accelerator_top/DSO/count
 add wave -noupdate -radix unsigned /pqc_accelerator_top/DSO/count_nxt
 add wave -noupdate /pqc_accelerator_top/DSO/shift_ena
+add wave -noupdate -radix decimal /pqc_accelerator_top/W
 add wave -noupdate -divider Outputs
 add wave -noupdate -radix hexadecimal /pqc_accelerator_top/C_out
 add wave -noupdate -radix hexadecimal /pqc_accelerator_top/EN_out
 add wave -noupdate /pqc_accelerator_top/DE_out
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {262300 ps} 0}
+WaveRestoreCursors {{Cursor 1} {6550000 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 340
-configure wave -valuecolwidth 432
+configure wave -valuecolwidth 167
 configure wave -justifyvalue left
 configure wave -signalnamewidth 0
 configure wave -snapdistance 10
@@ -163,4 +167,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {0 ps} {1443750 ps}
+WaveRestoreZoom {5315619 ps} {7284369 ps}

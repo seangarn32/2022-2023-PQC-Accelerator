@@ -6,9 +6,10 @@ use work.globals_pkg.all;
 
 entity control_unit is
     port ( 
-        clk : in  std_logic;
-        rst : in  std_logic;
-        ena : in  std_logic;
+        clk         : in    std_logic;
+        rst         : in    std_logic;
+        ena         : in    std_logic;
+        mode        : in    std_logic;
 
         dso_count   : in    std_logic_vector(COUNTER_SIZE_B-1 downto 0);
 
@@ -18,6 +19,8 @@ entity control_unit is
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
         dso_ena     : out   std_logic;
+        err_ena     : out   std_logic;
+        out_ena     : out   std_logic;
 
         a_val_index_out : out   std_logic_vector(7 downto 0);
         b_val_index_out : out   std_logic_vector(7 downto 0);
@@ -28,7 +31,7 @@ end control_unit;
 
 architecture rtl of control_unit is
 
-    type state_available is (SETUP, DSI, B_LOAD, PE_PIPE, PE_ACCUM, DSO);
+    type state_available is (SETUP, DSI, B_LOAD, PE_PIPE, PE_ACCUM, DSO, ERR, SAVE);
     signal state            : state_available := SETUP;
     signal state_nxt        : state_available;
 
@@ -50,24 +53,28 @@ architecture rtl of control_unit is
     signal b_val_index_nxt  : std_logic_vector(7 downto 0);
     signal z_val_index      : std_logic_vector(7 downto 0);
     signal z_val_index_nxt  : std_logic_vector(7 downto 0);
-    signal z_ena            : std_logic;
+    signal err_ena_hold     : std_logic;
     signal o_val_index      : std_logic_vector(7 downto 0);
     signal o_val_index_nxt  : std_logic_vector(7 downto 0);
-    signal o_ena            : std_logic;
+    signal out_ena_hold     : std_logic;
+
+    signal run_one          : std_logic;
 
 begin
 
-    count_nxt <= count + '1' when (state = DSO and count < ROWS) -- Should it be COLS-1?
+    count_nxt <= count + '1' when (state = DSO and count < ROWS-1) -- Should it be COLS-1?
                                or (state = DSI and count < N_SIZE-1)
                                or (state = PE_PIPE and count < COLS-1)
                                or (state = PE_ACCUM and count < NUM_A_SECTIONS-1)
                              else (others => '0');
 
-    state_nxt <= SETUP      when (state = DSO and count = ROWS) 
-            else DSI        when (state = SETUP and ena = '1' and rst = '0')
+    state_nxt <= SETUP      when (state = SAVE) 
+            else DSI        when (state = SETUP and ena = '1' and rst = '0' and (mode = '0' or (mode = '1' and run_one = '0')))
             else PE_PIPE    when (state = DSI and count = N_SIZE-1)
             else PE_ACCUM   when (state = PE_PIPE and count = COLS-1)
             else DSO        when (state = PE_ACCUM and count = NUM_A_SECTIONS-1)
+            else ERR        when (state = DSO and count = ROWS-1)
+            else SAVE       when (state = ERR)
             else state;
 
     dsi_ena_hold    <= '1' when state = DSI else '0';
@@ -90,6 +97,7 @@ begin
             end if;
         end if;
     end process;
+
 
     count_a_sel_nxt <= count_a_sel + '1' when (state = PE_PIPE or state = PE_ACCUM) 
                                           and (count_a_sel < NUM_B_SECTIONS-1)
@@ -115,8 +123,8 @@ begin
 
     a_val_index_nxt <= a_val_index + '1' when dsi_ena_hold = '1' and count < N_SIZE-1 else (others=>'0');
     b_val_index_nxt <= b_val_index + '1' when dsi_ena_hold = '1' and count < N_SIZE-1 else (others=>'0');
-    z_val_index_nxt <= z_val_index + '1' when z_ena = '1' else (others=>'0');
-    o_val_index_nxt <= o_val_index + '1' when o_ena = '1' else (others=>'0');
+    z_val_index_nxt <= z_val_index + '1' when err_ena_hold = '1' else (others=>'0');
+    o_val_index_nxt <= o_val_index + '1' when out_ena_hold = '1' else (others=>'0');
 
     process (clk)
     begin
@@ -125,22 +133,25 @@ begin
                 a_val_index <= (others=>'0');
                 b_val_index <= (others=>'0');
                 z_val_index <= (others=>'0');
-                z_ena <= '0';
+                err_ena_hold <= '0';
                 o_val_index <= (others=>'0');
-                o_ena <= '0';
+                out_ena_hold <= '0';
             else
                 if(ena = '1') then
                     if(dso_ena_hold = '1') then
-                        if(z_ena = '1') then
-                            o_ena <= '1';
-                        end if;
                         if(dso_count = NUM_B_SECTIONS-1) then
-                        z_ena <= '1';
+                            err_ena_hold <= '1';
+                        end if;
+                        if(err_ena_hold = '1') then
+                            out_ena_hold <= '1';
                         end if;
                     else
-                        z_ena <= '0';
-                        o_ena <= '0';
+                        if(err_ena_hold = '0') then
+                            out_ena_hold <= '0';
+                        end if;
+                        err_ena_hold <= '0';
                     end if;
+
                     a_val_index <= a_val_index_nxt;
                     b_val_index <= b_val_index_nxt;
                     z_val_index <= z_val_index_nxt;
@@ -150,9 +161,26 @@ begin
         end if;
     end process;
 
+    err_ena <= err_ena_hold;
+    out_ena <= out_ena_hold;
+
     a_val_index_out <= a_val_index;
     b_val_index_out <= b_val_index;
     z_val_index_out <= z_val_index;
     o_val_index_out <= o_val_index;
+
+
+    process(clk)
+    begin
+        if rising_edge(clk) then
+            if (rst = '1') then
+                run_one <= '0';
+            else
+                if (state = DSI) then
+                    run_one <= '1';
+                end if;
+            end if;
+        end if;
+    end process;
 
 end rtl;
