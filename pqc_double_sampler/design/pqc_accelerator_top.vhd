@@ -11,6 +11,7 @@ entity pqc_accelerator_top is
         enc_dec : in    std_logic;
 
         A_in    : in    std_logic;
+        s_in    : in    std_logic;
         B_in    : in    std_logic_vector(7 downto 0);
         P_in    : in    std_logic_vector(7 downto 0);
 
@@ -22,6 +23,7 @@ end entity;
 architecture rtl of pqc_accelerator_top is
 
     signal A            : std_logic_vector(N_SIZE-1 downto 0);
+    signal A_sel        : std_logic;
     signal A0           : a_vector;
     signal B            : b_matrix;
     signal B0           : b_matrix;
@@ -34,6 +36,9 @@ architecture rtl of pqc_accelerator_top is
     signal C_accum_2      : c_matrix;
 
     signal sampler_ena  : std_logic;
+    signal sampler_mode : std_logic := '1';
+    signal s_out        : std_logic;
+    signal rng          : std_logic_vector (31 downto 0);
     signal dsi_ena      : std_logic;
     signal load_a_rst   : std_logic;
     signal load_a_ena   : std_logic;
@@ -65,13 +70,32 @@ begin
             dso_rst
         );
 
+    SAMPLER : entity work.rng_n1024_r32_t5_k32_s1c48(rtl)
+        port map(
+            clk,
+            sampler_ena,
+            sampler_mode,
+            s_in,
+
+            s_out,
+            rng
+        );
+
+    MUX_2_to_1: entity work.mux2to1_1b(rtl)
+        port map(
+            rng(0),
+            A_in,
+            enc_dec,
+            A_sel
+        );
+
     DSI : entity work.data_shift_in(rtl)
         port map(
             clk,
             rst,
             dsi_ena,
 
-            A_in,
+            A_sel,
             B_in,
             P_in,
 

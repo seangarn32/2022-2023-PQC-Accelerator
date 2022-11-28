@@ -61,13 +61,13 @@ begin
                         pe_ena <= '0';
                         accum_ena <= '0';
                         dso_ena <= '0';
-                        counter_ena <= '0';
-                        counter_rst <= '1';
+                        counter_ena <= '1';
+                        counter_rst <= '0';
                         if(ena = '1' and sampler_preload = '1') then
                             state <= DATA_IN;
-                        else if (count = 496) then
+                            counter_rst <= '1';
+                        elsif (count = "1111011111") then
                             sampler_preload <= '1';
-                        else 
                         end if;
 
                     when DATA_IN =>
