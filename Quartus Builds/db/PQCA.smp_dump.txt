@@ -1,0 +1,7 @@
+
+State Machine - |pqc_accelerator_top|fsm:FSM|state
+Name state.DATA_OUT state.PE_PIPE state.DATA_IN state.SETUP 
+state.SETUP 0 0 0 0 
+state.DATA_IN 0 0 1 1 
+state.PE_PIPE 0 1 0 1 
+state.DATA_OUT 1 0 0 1 
