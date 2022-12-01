@@ -4,6 +4,7 @@ import numpy as np
 import random
 from scipy.linalg import circulant
 from do_maker_hardcode import *
+from mif_maker import *
 
 N = 32
 MAXVAL = 128
@@ -65,4 +66,9 @@ print("\nMatrix Z (Errors) (1 x ",len(Z),"):\n", Z)
 
 print("\nMatrix F (Final Accumulation) (1 x ",len(Sums),"):\n", Sums)
 
-createFileHardcode(matA, matB,Z, "PE_checker_hardcode.do")
+createFileHardcode(matA, matB, Z, "PE_checker_hardcode.do")
+
+createMif(matA, N, "A.mif")
+createMif(matB, N, "B.mif")
+createMif(Z, N, "error.mif")
+
