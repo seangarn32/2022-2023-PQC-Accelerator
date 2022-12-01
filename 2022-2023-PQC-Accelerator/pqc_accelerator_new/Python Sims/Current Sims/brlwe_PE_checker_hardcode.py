@@ -20,8 +20,8 @@ def ring(value):
 
 #A[0] is the 0,0 element of the circular matrix
 #A = [0,1,1,0,0,1,1,0,0,1,1,1,1,0,1,1,0,0,0,1,0,1,1,0,0,1,1,0,1,0,0,1,0,1,1,0,1,1,1,1,1,0,1,0,0,0,1,0,1,0,0,0,1,0,1,1,1,0,1,0,1,0,1,1,0,1,0,1,0,0,1,1,0,0,1,1,0,1,1,0,1,1,0,0,1,0,0,1,1,1,0,1,0,0,0,0,1,0,1,0,1,1,0,0,1,1,0,1,1,0,1,0,0,0,0,0,1,1,0,1,1,0,0,0,1,0,0,0,0,1,1,0,1,1,1,0,1,0,1,1,1,0,1,0,1,0,0,0,0,0,0,0,1,1,0,0,0,1,0,1,0,1,1,0,0,1,1,1,0,1,1,1,0,0,0,1,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,1,1,0,1,1,1,0,0,1,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,1,1,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1]
-A = [0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1]
-#A = [random.randint(0, 1) for i in range(N)]
+#A = [0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,1,1]
+A = [random.randint(0, 1) for i in range(N)]
 
 matA = circulant(A)
 print(matA[:,0])
@@ -34,8 +34,8 @@ print("\nMatrix A  (", len(matA[0]), "x", len(matA[0]), "):\n", matA)
 
 
 #Change this
-matB = [0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1]
-#matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
+#matB = [0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,1,0,1,0,1,0,1]
+matB = [random.randint(-1*(MAXVAL-1),MAXVAL-1) for i in range(N)]
 
 print("\nMatrix B  (", len(matB[:]), "x", len(matB), "):\n", matB)
 
@@ -56,8 +56,8 @@ for i in range(N-1):
         Sums[k] = ring(Sums[k])
 
 #Z = np.zeros([N])
-Z = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-#Z = [random.randint(0, 1) for i in range(N)]
+#Z = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+Z = [random.randint(0, 1) for i in range(N)]
 
 for z in range(N):
         Sums[z] += Z[z]
@@ -66,9 +66,9 @@ print("\nMatrix Z (Errors) (1 x ",len(Z),"):\n", Z)
 
 print("\nMatrix F (Final Accumulation) (1 x ",len(Sums),"):\n", Sums)
 
-createFileHardcode(matA, matB, Z, "PE_checker_hardcode.do")
+createFileHardcode(matA, matB, Z, N, "PE_checker_hardcode.do")
 
-createMif(matA, N, "A.mif")
+createMif(matA[:,0], N, "A.mif")
 createMif(matB, N, "B.mif")
 createMif(Z, N, "error.mif")
 

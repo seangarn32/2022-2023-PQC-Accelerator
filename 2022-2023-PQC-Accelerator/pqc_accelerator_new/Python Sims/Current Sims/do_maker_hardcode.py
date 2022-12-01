@@ -1,11 +1,9 @@
-from ctypes.wintypes import INT
 import numpy as np
 
-N = 32
 T = 20
 Z_off = 315
 
-def createFileHardcode(A, B, Z, filepath):
+def createFileHardcode(A, B, Z, N, filepath):
     file = open(filepath, 'w')
     try:
         file.write("restart -f\n")
