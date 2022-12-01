@@ -1,7 +1,7 @@
 from ctypes.wintypes import INT
 import numpy as np
 
-N = 256
+N = 32
 T = 20
 Z_off = 315
 

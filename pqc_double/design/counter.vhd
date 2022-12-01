@@ -20,7 +20,7 @@ architecture rtl of counter is
 
 begin
 
-    count_nxt <= count + '1' when count < N_SIZE
+    count_nxt <= count + '1' when count < N_SIZE + 1
                  else (others => '0');
 
     process (clk) 

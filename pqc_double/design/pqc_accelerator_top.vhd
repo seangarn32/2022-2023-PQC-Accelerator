@@ -15,7 +15,15 @@ entity pqc_accelerator_top is
         P_in    : in    std_logic_vector(7 downto 0);
 
         C_out_0   : out   std_logic_vector(7 downto 0);
-        C_out_1   : out   std_logic_vector(7 downto 0)
+        C_out_1   : out   std_logic_vector(7 downto 0);
+
+        a_index_out : out   std_logic_vector(7 downto 0);
+        b_index_out : out   std_logic_vector(7 downto 0);
+        p_index_out : out   std_logic_vector(7 downto 0);
+        --z_val_index_out : out   std_logic_vector(7 downto 0);
+        c_out_0_index_out : out   std_logic_vector(7 downto 0);
+        c_out_1_index_out : out   std_logic_vector(7 downto 0);
+        out_ena     : out   std_logic
     );
 end entity;
 
@@ -60,7 +68,13 @@ begin
             pe_ena,
             accum_ena,
             dso_ena,
-            dso_rst
+            dso_rst,
+            a_index_out,
+            b_index_out,
+            p_index_out,
+            c_out_0_index_out,
+            c_out_1_index_out,
+            out_ena
         );
 
     DSI : entity work.data_shift_in(rtl)

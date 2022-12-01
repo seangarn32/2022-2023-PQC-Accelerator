@@ -19,7 +19,14 @@ entity fsm is
         pe_ena      : out   std_logic;
         accum_ena   : out   std_logic;
         dso_ena     : out   std_logic;
-        dso_rst     : out   std_logic
+        dso_rst     : out   std_logic;
+
+        a_index_out : out   std_logic_vector(7 downto 0);
+        b_index_out : out   std_logic_vector(7 downto 0);
+        p_index_out : out   std_logic_vector(7 downto 0);
+        c_out_0_index_out : out   std_logic_vector(7 downto 0);
+        c_out_1_index_out : out   std_logic_vector(7 downto 0);
+        out_ena     : out   std_logic
     );
 end fsm;
 
@@ -31,7 +38,12 @@ architecture rtl of fsm is
     signal count            : std_logic_vector(COUNTER_SIZE downto 0);
     signal counter_ena      : std_logic := '0';
     signal counter_rst      : std_logic := '1';
+    signal a_index_out_hold : std_logic_vector(7 downto 0) := (others=>'0');
+    signal b_index_out_hold : std_logic_vector(7 downto 0) := (others=>'0');
+    signal p_index_out_hold : std_logic_vector(7 downto 0) := (others=>'0');
 
+    signal c_out_0_index_out_hold : std_logic_vector(7 downto 0) := (others=>'0');
+    signal c_out_1_index_out_hold : std_logic_vector(7 downto 0) := (others=>'0');
 begin
 
     STATE_COUNTER: entity work.counter(rtl)
@@ -58,9 +70,9 @@ begin
                         accum_ena <= '0';
                         dso_ena <= '0';
                         counter_ena <= '0';
-                        counter_rst <= '1';
                         if(ena = '1') then
                             state <= DATA_IN;
+                            counter_rst <= '1';
                         end if;
 
                     when DATA_IN =>
@@ -70,12 +82,18 @@ begin
                             load_b_rst <= '1';
                             load_a_ena <= '0';
                             pe_ena <= '0';
-                            counter_rst <= '1';
+                        elsif (count = N_SIZE + 1) then
                             state <= PE_PIPE;
+                            out_ena <= '0';
+                            counter_rst <= '1';
                         else
                             dsi_ena <= '1';
                             counter_ena <= '1';
                             counter_rst <= '0';
+                            a_index_out_hold <= a_index_out_hold + '1';
+                            b_index_out_hold <= b_index_out_hold + '1';
+                            p_index_out_hold <= p_index_out_hold + '1';
+                            out_ena <= '1';
                         end if;
 
                     when PE_PIPE =>
@@ -151,19 +169,31 @@ begin
                     when DATA_OUT =>
                         if(count = N_SIZE) then
                             dso_ena <= '0';
+                        elsif (count = N_SIZE + 1) then
                             counter_rst <= '1';
                             state <= SETUP;
+                            out_ena <= '0';
                         else
                             pe_ena <= '0';
                             accum_ena <= '0';
                             dso_ena <= '1';
                             dso_rst <= '0';
                             counter_rst <= '0';
+                            c_out_0_index_out_hold <= c_out_0_index_out_hold + '1';
+                            c_out_1_index_out_hold <= c_out_0_index_out_hold + '1';
+                            out_ena <= '1';
                         end if;
 
                 end case;
             end if;
         end if;
     end process;
+
+    a_index_out <= a_index_out_hold;
+    b_index_out <= b_index_out_hold;
+    p_index_out <= p_index_out_hold;
+
+    c_out_0_index_out <= c_out_0_index_out_hold;
+    c_out_1_index_out <= c_out_1_index_out_hold;
 
 end rtl;
