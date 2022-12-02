@@ -9,14 +9,14 @@ def createMif(MEM, N, FILEPATH):
     DEPTH = N
     file = open(FILEPATH, 'w')
     try:
+        file.write("DEPTH = "+str(DEPTH)+";\n")
         file.write("WIDTH = "+str(WIDTH)+";\n")
-        file.write("DEPTH = "+str(DEPTH)+";\n\n")
         file.write("ADDRESS_RADIX = "+ADDRESS_RADIX+";\n")
-        file.write("DEPTH = "+DATA_RADIX+";\n\n")
-        file.write("CONTENT BEGIN\n")
+        file.write("DATA_RADIX = "+DATA_RADIX+";\n")
+        file.write("CONTENT\nBEGIN\n")
         j = 0
         for i in MEM:
-            file.write("\t["+str(j)+"]  :   "+str(i)+";\n")
+            file.write("\t"+str(j)+"  :   "+str(i)+";\n")
             j+=1
         file.write("END;\n")
     finally:
