@@ -1,7 +1,7 @@
 from ctypes.wintypes import INT
 import numpy as np
 
-N = 32
+N = 256
 T = 20
 Z_off = 315
 
@@ -24,15 +24,15 @@ def createFileHardcode(A, B, Z, filepath):
                 if i == 0:
                     num = np.binary_repr(int(A[j][0]), width=1)
                     if j == 0:
-                        file.write(num+" "+str(T*(j+1)+19850)+" ns")
+                        file.write(num+" "+str(T*(j+1)+15)+" ns")
                     else:
-                        file.write(", "+num+" "+str(T*(j+1)+19850)+" ns")
+                        file.write(", "+num+" "+str(T*(j+1)+15)+" ns")
                 if i == 1:
                     num = np.binary_repr(int(B[j]), width=8)
                     if j == 0:
-                        file.write("\""+num+"\" "+str(T*(j+1)+19855)+" ns")
+                        file.write("\""+num+"\" "+str(T*(j+1)+20)+" ns")
                     else:
-                        file.write(", \""+num+"\" "+str(T*(j+1)+19855)+" ns")
+                        file.write(", \""+num+"\" "+str(T*(j+1)+20)+" ns")
                 if i == 2:
                     num = np.binary_repr(int(Z[j]), width=1)
                     if j == 0:
