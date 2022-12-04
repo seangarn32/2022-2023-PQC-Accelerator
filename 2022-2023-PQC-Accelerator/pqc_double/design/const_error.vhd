@@ -10,60 +10,62 @@ entity const_error is
         ena     : in    std_logic;
 
         W       : in    std_logic_vector(7 downto 0);
+        Y       : in    std_logic_vector(7 downto 0);
+        Z       : in    std_logic_vector(7 downto 0);
         e1      : in    std_logic_vector(7 downto 0);
         e2      : in    std_logic_vector(7 downto 0);
         c2      : in    std_logic_vector(7 downto 0);
-        Z       : in    std_logic;
 
-        C_out   : out   std_logic_vector(7 downto 0);
-        en      : out   std_logic_vector(7 downto 0);
-        de      : out   std_logic
-    );
+        Ci1      : out   std_logic_vector(7 downto 0);
+        Ci2      : out   std_logic_vector(7 downto 0);
+        D       : out   std_logic_vector(7 downto 0)
+    
+        );
 end const_error;
 
 architecture rtl of const_error is
 
-    signal sum_z    : std_logic_vector(7 downto 0);
-    signal sum_e    : std_logic_vector(7 downto 0);
-    signal de_nxt   : std_logic;
+    signal sum_c1   : std_logic_vector(7 downto 0);
+    signal sum_c2   : std_logic_vector(7 downto 0);
+    signal sum_d    : std_logic_vector(7 downto 0);
 
 begin
 
-    sum_z <= W + Z;
-    sum_e <= sum_z + E;
-    de_nxt <= sum_e(0) XOR sum_e(1);
+    sum_c1 <= W + e1;
+    sum_c2 <= Y + e2;
+    sum_d  <= Z + c2;
 
-    -- W + Z (8-bit)
-    REG_COUT : entity work.reg_8bit(rtl)
+    -- W + e1 (8-bit)
+    REG_Ci1 : entity work.reg_8bit(rtl)
         port map(
             clk,
             rst,
             ena,
 
-            sum_z,
-            C_out
+            sum_c1,
+            Ci1
         );
 
-    -- W + Z + E (8-bit)
-    REG_EN : entity work.reg_8bit(rtl)
+    -- Y + e2 (8-bit)
+    REG_Ci2 : entity work.reg_8bit(rtl)
         port map(
             clk,
             rst,
             ena,
 
-            sum_e,
-            en
+            sum_c2,
+            Ci2
         );
 
-    -- sum_e(0) XOR sum_e(1) (1-bit)
-    REG_DE : entity work.reg_1bit(rtl)
+    -- Z + c2 (8-bit)
+    REG_D : entity work.reg_8bit(rtl)
         port map(
             clk,
             rst,
             ena,
 
-            de_nxt,
-            de
+            sum_d,
+            D
         );
 
 end rtl;
