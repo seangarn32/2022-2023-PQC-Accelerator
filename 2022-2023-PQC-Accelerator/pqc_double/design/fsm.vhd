@@ -32,7 +32,7 @@ end fsm;
 
 architecture rtl of fsm is
 
-    type state_available is (SETUP, DATA_IN, PE_PIPE, DATA_OUT);  --type of state machine.
+    type state_available is (SETUP, DATA_IN, PE_PIPE, DATA_OUT, FINISHED);  --type of state machine.
     signal state            : state_available := SETUP;
     
     signal count            : std_logic_vector(COUNTER_SIZE downto 0);
@@ -171,7 +171,7 @@ begin
                             dso_ena <= '0';
                         elsif (count = N_SIZE + 1) then
                             counter_rst <= '1';
-                            state <= SETUP;
+                            state <= FINISHED;
                             out_ena <= '0';
                         else
                             pe_ena <= '0';
@@ -183,7 +183,8 @@ begin
                             c_out_1_index_out_hold <= c_out_0_index_out_hold + '1';
                             out_ena <= '1';
                         end if;
-
+                    
+                    when FINISHED =>
                 end case;
             end if;
         end if;
