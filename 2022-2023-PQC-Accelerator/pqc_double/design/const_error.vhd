@@ -27,7 +27,7 @@ architecture rtl of const_error is
 
     signal sum_c1   : std_logic_vector(7 downto 0);
     signal sum_c2   : std_logic_vector(7 downto 0);
-    signal tmp      : std_logic_vector(7 downto 0);
+    signal tmp      : std_logic;
 
 begin
 
