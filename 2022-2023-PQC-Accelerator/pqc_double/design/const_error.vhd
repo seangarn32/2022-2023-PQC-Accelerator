@@ -13,13 +13,13 @@ entity const_error is
         W       : in    std_logic_vector(7 downto 0);
         Y       : in    std_logic_vector(7 downto 0);
         
-        e1      : in    std_logic_vector(7 downto 0);
-        e2      : in    std_logic_vector(7 downto 0);
-        c2      : in    std_logic_vector(7 downto 0);
+        e1      : in    std_logic;
+        e2      : in    std_logic;
+        c2      : in    std_logic;
 
         Ci1      : out   std_logic_vector(7 downto 0);
         Ci2      : out   std_logic_vector(7 downto 0)
-        
+
         );
 end const_error;
 
