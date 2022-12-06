@@ -14,15 +14,23 @@ entity pqc_accelerator_top is
         B_in    : in    std_logic_vector(7 downto 0);
         P_in    : in    std_logic_vector(7 downto 0);
 
+        e1      : in    std_logic;
+        e2      : in    std_logic;
+        c2      : in    std_logic;
+
         C_out_0   : out   std_logic_vector(7 downto 0);
         C_out_1   : out   std_logic_vector(7 downto 0);
 
         a_index_out : out   std_logic_vector(7 downto 0);
         b_index_out : out   std_logic_vector(7 downto 0);
         p_index_out : out   std_logic_vector(7 downto 0);
-        --z_val_index_out : out   std_logic_vector(7 downto 0);
+
         c_out_0_index_out : out   std_logic_vector(7 downto 0);
         c_out_1_index_out : out   std_logic_vector(7 downto 0);
+
+        C_out_error_0     : out   std_logic_vector(7 downto 0);
+        C_out_error_1     : out   std_logic_vector(7 downto 0);
+
         out_ena     : out   std_logic
     );
 end entity;
@@ -50,6 +58,10 @@ architecture rtl of pqc_accelerator_top is
     signal accum_ena    : std_logic;
     signal dso_ena      : std_logic;
     signal dso_rst      : std_logic;
+    signal err_ena      : std_logic;
+
+    signal C_out_0_hold : std_logic_vector(7 downto 0);
+    signal C_out_1_hold : std_logic_vector(7 downto 0);
 
 begin
 
@@ -69,6 +81,8 @@ begin
             accum_ena,
             dso_ena,
             dso_rst,
+            err_ena,
+
             a_index_out,
             b_index_out,
             p_index_out,
@@ -156,8 +170,29 @@ begin
             C_accum_1,
             C_accum_2,
 
-            C_out_0, -- will be either cyphertext 1 or the decrypted plaintext
-            C_out_1  -- will be either cyphertext 2 or random data
+            C_out_0_hold, -- will be either cyphertext 1 or the decrypted plaintext
+            C_out_1_hold  -- will be either cyphertext 2 or random data
         );
+
+    ERR : entity work.const_error(rtl)
+        port map(
+            clk,
+            rst,
+            err_ena,
+            enc_dec,
+
+            C_out_0_hold, -- will be either cyphertext 1 or the decrypted plaintext
+            C_out_1_hold, -- will be either cyphertext 2 or random data
+
+            e1,
+            e2,
+            c2,
+
+            C_out_error_0,
+            C_out_error_1
+        );
+
+    C_out_0 <= C_out_0_hold;
+    C_out_1 <= C_out_1_hold;
 
 end architecture;

@@ -20,6 +20,7 @@ entity fsm is
         accum_ena   : out   std_logic;
         dso_ena     : out   std_logic;
         dso_rst     : out   std_logic;
+        err_ena     : out   std_logic;
 
         a_index_out : out   std_logic_vector(7 downto 0);
         b_index_out : out   std_logic_vector(7 downto 0);
@@ -173,10 +174,12 @@ begin
                             counter_rst <= '1';
                             state <= FINISHED;
                             out_ena <= '0';
+                            err_ena <= '0';
                         else
                             pe_ena <= '0';
                             accum_ena <= '0';
                             dso_ena <= '1';
+                            err_ena <= '1';
                             dso_rst <= '0';
                             counter_rst <= '0';
                             c_out_0_index_out_hold <= c_out_0_index_out_hold + '1';

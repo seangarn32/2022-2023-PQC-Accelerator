@@ -2,7 +2,7 @@ import numpy as np
 
 N = 256
 T = 20
-Z_off = 315
+Z_off = 5970
 
 def createFileHardcode(A, B, Z, N, filepath):
     file = open(filepath, 'w')
