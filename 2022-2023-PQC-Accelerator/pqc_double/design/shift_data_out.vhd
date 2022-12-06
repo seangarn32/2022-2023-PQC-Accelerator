@@ -55,7 +55,18 @@ begin
             c_enc_dec
         );
 
-    REG_GEN_0 : for i in 0 to N_SIZE-2 generate
+        c_sel_0(0) <= c_enc_dec(0) when shift_ena = '0' else c_nxt_0(0);
+
+        REG_N_0 : entity work.reg_8bit(rtl)
+            port map(
+                clk,
+                rst,
+                ena,
+                c_sel_0(0),
+                c_out_0
+            );
+
+    REG_GEN_0 : for i in 1 to N_SIZE-1 generate
 
         c_sel_0(i) <= c_enc_dec(i) when shift_ena = '0' else c_nxt_0(i);
 
@@ -65,22 +76,23 @@ begin
                 rst,
                 ena,
                 c_sel_0(i),
-                c_nxt_0(i+1)
+                c_nxt_0(i-1)
             );
     end generate REG_GEN_0;
 
-    c_sel_0(N_SIZE-1) <= c_enc_dec(N_SIZE-1) when shift_ena = '0' else c_nxt_0(N_SIZE-1);
+    c_sel_1(0) <= c_in_1(0) when shift_ena = '0' else c_nxt_1(0);
 
-    REG_N_0 : entity work.reg_8bit(rtl)
+    REG_N_1 : entity work.reg_8bit(rtl)
         port map(
             clk,
             rst,
             ena,
-            c_sel_0(N_SIZE-1),
-            c_out_0
+            c_sel_1(0),
+            c_out_1
         );
 
-    REG_GEN_1 : for i in 0 to N_SIZE-2 generate
+
+    REG_GEN_1 : for i in 1 to N_SIZE-1 generate
 
         c_sel_1(i) <= c_in_1(i) when shift_ena = '0' else c_nxt_1(i);
 
@@ -90,19 +102,12 @@ begin
                 rst,
                 ena,
                 c_sel_1(i),
-                c_nxt_1(i+1)
+                c_nxt_1(i-1)
             );
     end generate REG_GEN_1;
 
-    c_sel_1(N_SIZE-1) <= c_in_1(N_SIZE-1) when shift_ena = '0' else c_nxt_1(N_SIZE-1);
 
-    REG_N_1 : entity work.reg_8bit(rtl)
-        port map(
-            clk,
-            rst,
-            ena,
-            c_sel_1(N_SIZE-1),
-            c_out_1
-        );
+
+
 
 end rtl;
