@@ -27,39 +27,37 @@ architecture rtl of load_b is
     signal p_odd      :   b_matrix;
     signal b_dec        : b_matrix;
     signal count      :  integer := 0;
+    signal count_hold      :  integer := 0;
     signal count_2      :  integer := 0;
+    signal count_2_hold      :  integer := 0;
     signal count_enc        :  integer := 0;
+    signal count_enc_hold        :  integer := 0;
     signal count_dec        :  integer := 0;
+    signal count_dec_hold        :  integer := 0;
     signal b_init       :  std_logic;
 
     begin
+        b_init <= '1' when (rst = '0' and load_b_ena = '1') else '0';
+        count_hold <= count + 1 when (rst = '0' and load_b_ena = '1' and ((enc_dec = '0' and count < 2) or (enc_dec = '1' and count <= 0))) else 0;
+        count_enc_hold <= count_enc + 1 when (rst = '0' and load_b_ena = '1' and (enc_dec = '0' and count >= 2));
+        count_2_hold <= count_2 + 1 when (rst = '0' and load_b_ena = '1' and enc_dec = '0') else 0;
+        count_dec_hold <= count_dec + 1 when (rst = '0' and load_b_ena = '1' and enc_dec = '1' and count > 0);
+
         process(clk)
         begin
             if(rising_edge(clk)) then
-                if(rst = '1') then
-                    b_init <= '0';
+                if (rst = '0' and load_b_ena = '1' and enc_dec = '0' and count >= 2) then
+                    count <= 1;
                 else 
-                    if(load_b_ena = '1') then
-                        b_init <= '1';
-                        if (enc_dec = '0') then
-                            if (count < 2) then
-                                count <= count + 1;
-                            else 
-                                count <= 1;
-                                count_enc <= count_enc + 1;
-                            end if;
-                            count_2 <= count_2 + 1;
-                        else
-                            if (count > 0) then
-                                count_dec <= count_dec + 1;
-                            else
-                                count <= count + 1;
-                            end if;
-                        end if;
-                    else
-                        b_init <= '0';
-                    end if;
+                    count <= count_hold;
                 end if;
+                if (load_b_ena = '0') then
+                    count_enc <= count_enc;
+                else 
+                    count_enc <= count_enc_hold;
+                end if;
+                count_2 <= count_2_hold;
+                count_dec <= count_dec_hold;
             end if;
         end process;
 
