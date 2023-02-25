@@ -5,9 +5,9 @@ use ieee.numeric_std.all;
 use work.globals_pkg.all;
 
 entity mux2to1_B is
-	port( b0,b1, b2, b3		: in b_matrix;
+	port( b0,b1, b2, b3		: in b_hold_matrix;
 	      sel		: in STD_LOGIC;
-	      res_0, res_1		: out b_matrix
+	      res_0, res_1		: out b_hold_matrix
 );
 end mux2to1_B;
 

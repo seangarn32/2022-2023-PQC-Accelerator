@@ -11,8 +11,8 @@ entity pe_chain is
         enc_dec : in    std_logic;
 
         A0      : in    a_vector;
-        B0      : in    b_matrix;
-        B1      : in    b_matrix;
+        B0      : in    b_hold_matrix;
+        B1      : in    b_hold_matrix;
 
         C_out_0   : out   c_matrix;
         C_out_1   : out   c_matrix
@@ -22,13 +22,13 @@ end entity;
 architecture rtl of pe_chain is
 
     signal a_wire       : a_array;
-    signal b_wire       : b_matrix;
-    signal b_wire_temp       : b_matrix;
-    signal b_wire_0       : b_matrix;
-    signal b_wire_1       : b_matrix;
-    signal p_wire       : b_matrix;
-    signal p_wire_0       : b_matrix;
-    signal p_wire_1       : b_matrix;
+    signal b_wire       : b_hold_matrix;
+    signal b_wire_temp       : b_hold_matrix;
+    signal b_wire_0       : b_hold_matrix;
+    signal b_wire_1       : b_hold_matrix;
+    signal p_wire       : b_hold_matrix;
+    signal p_wire_0       : b_hold_matrix;
+    signal p_wire_1       : b_hold_matrix;
     signal c0_wire      : c_array;
     signal c1_wire      : c_array;
 

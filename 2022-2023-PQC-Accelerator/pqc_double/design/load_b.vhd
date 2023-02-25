@@ -12,20 +12,20 @@ entity load_b is
 
         B_in        : in    b_matrix;
         P_in        : in    b_matrix;
-        B_out       : out   b_matrix;
-        P_out       : out   b_matrix
+        B_out       : out   b_hold_matrix;
+        P_out       : out   b_hold_matrix
     );
 end entity;
 
 architecture rtl of load_b is
 
-    signal b_tmp        :   b_matrix;
-    signal p_tmp        :   b_matrix;
-    signal b_even        :   b_matrix;
-    signal b_odd      :   b_matrix;
-    signal p_even        :   b_matrix;
-    signal p_odd      :   b_matrix;
-    signal b_dec        : b_matrix;
+    signal b_tmp        :   b_hold_matrix;
+    signal p_tmp        :   b_hold_matrix;
+    signal b_even        :   b_hold_matrix;
+    signal b_odd      :   b_hold_matrix;
+    signal p_even        :   b_hold_matrix;
+    signal p_odd      :   b_hold_matrix;
+    signal b_dec        : b_hold_matrix;
     signal count      :  integer := 0;
     signal count_hold      :  integer := 0;
     signal count_2      :  integer := 0;

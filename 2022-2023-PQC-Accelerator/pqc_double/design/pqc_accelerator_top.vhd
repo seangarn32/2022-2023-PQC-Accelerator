@@ -40,9 +40,9 @@ architecture rtl of pqc_accelerator_top is
     signal A            : std_logic_vector(N_SIZE-1 downto 0);
     signal A0           : a_vector;
     signal B            : b_matrix;
-    signal B0           : b_matrix;
+    signal B0           : b_hold_matrix;
     signal P            : b_matrix;
-    signal P0            : b_matrix;
+    signal P0            : b_hold_matrix;
     signal C_0            : c_matrix;
     signal C_1            : c_matrix;
     signal C_accum_0      : c_matrix;

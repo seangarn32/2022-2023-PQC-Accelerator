@@ -8,7 +8,7 @@ package globals_pkg is
     -- N_SIZE -> Size of initial A vector 
     constant N_SIZE : integer := 256;
     -- DIVIDE -> Number of times to divide down PEs for pipelining
-    constant DIVIDE : integer := 128;
+    constant DIVIDE : integer := 64;
     -- PE_SIZE -> Number of PEs used in design
     constant PE_SIZE : integer := N_SIZE/DIVIDE;
     
@@ -21,6 +21,8 @@ package globals_pkg is
     -- "matrix" -> 1 complete N_SIZE matrix of A, B, or C values
     type a_matrix is array (0 to N_SIZE-1) of a_vector;
     type a_circ_hold_matrix is array (0 to PE_SIZE*2) of a_vector;
+    type b_hold_matrix is array (0 to PE_SIZE*2 - 1) of std_logic_vector(7 downto 0);
+    type b_matrix_two is array (0 to PE_SIZE - 1) of std_logic_vector(7 downto 0);
     type b_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
     type c_matrix is array (0 to N_SIZE-1) of std_logic_vector(7 downto 0);
 
