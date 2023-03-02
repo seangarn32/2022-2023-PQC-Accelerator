@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use work.globals_pkg.all;
 
-entity load_a is
+entity load_a_cpy is
     port(
         clk     : in    std_logic;
         rst     : in    std_logic;
@@ -15,37 +15,30 @@ entity load_a is
     );
 end entity;
 
-architecture rtl of load_a is
+architecture rtl of load_a_cpy is
 
     signal a0          : a_vector;
     signal a_nxt         : a_circ_hold_matrix;
     signal tmp         : a_vector;
     signal a_reg         : a_vector;
     signal a_init       : std_logic;
+    signal a_init_hold       : std_logic;
     
     signal count        : std_logic := '0';
+    signal count_hold   : std_logic := '0';
     
 begin
+
+    a_init_hold <= '1' when (rst = '0' and load_a_ena = '1') else '0';
+    count_hold <= count xor '1' when (a_init_hold = '1' and count = '0') else '0';
+    
     process(clk)
     begin
         if(rising_edge(clk)) then
-            if(rst = '1') then
-                a_init <= '0';
-            else 
-                if(load_a_ena = '1') then
-                    a_init <= '1';
-                    if (count = '0') then
-                        count <= '1';
-                    else 
-                        count <= '0';
-                    end if;
-                else
-                    a_init <= '0';
-                end if;
-            end if;
+            a_init <= a_init_hold;
+            count <= count_hold;
         end if;
     end process;
-    
 
     -- Sign A_in to create A0
     SIGNED : for i in 0 to N_SIZE-1 generate
