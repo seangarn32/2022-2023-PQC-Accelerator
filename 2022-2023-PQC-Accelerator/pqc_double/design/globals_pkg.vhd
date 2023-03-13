@@ -11,6 +11,11 @@ package globals_pkg is
     constant DIVIDE : integer := 64;
     -- PE_SIZE -> Number of PEs used in design
     constant PE_SIZE : integer := N_SIZE/DIVIDE;
+
+    -- SET_SIZE -> Number used for loading a values into PEs
+    constant SET_SIZE : integer := PE_SIZE * 2;
+    -- NUM_SETS -> Number of sets of SET_SIZE in N_SIZE
+    constant NUM_SETS : integer := N_SIZE / SET_SIZE;
     
     -- COUNTER_SIZE -> Bit length of fsm counter
     constant COUNTER_SIZE : integer := integer(log2(real(N_SIZE)));

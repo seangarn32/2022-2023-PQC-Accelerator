@@ -56,15 +56,15 @@ begin
     -- complete
     count_nxt <= count + '1' when (state = DATA_OUT and count < N_SIZE + 1)
                                or (state = DATA_IN and count < N_SIZE + 1)
-                               or (state = PE_PIPE and ((count < PE_SIZE + (N_SIZE/PE_SIZE) + 1 and enc_dec = '0') 
-                                                     or (count < PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2 and enc_dec = '1')))
+                               or (state = PE_PIPE and ((count < PE_SIZE + (DIVIDE) + 1 and enc_dec = '0') 
+                                                     or (count < PE_SIZE + NUM_SETS + 2 and enc_dec = '1')))
                              else (others => '0');
     -- complete
     state_nxt <= SETUP      when (state = FINISHED) 
                              else DATA_IN    when (state = SETUP and ena = '1' and rst = '0')
                              else PE_PIPE    when (state = DATA_IN and count = N_SIZE + 1)
-                             else DATA_OUT   when (state = PE_PIPE and ((count = PE_SIZE + (N_SIZE/PE_SIZE) + 1 and enc_dec = '0') 
-                                                                     or (count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2 and enc_dec = '1')))
+                             else DATA_OUT   when (state = PE_PIPE and ((count = PE_SIZE + (DIVIDE) + 1 and enc_dec = '0') 
+                                                                     or (count = PE_SIZE + NUM_SETS + 2 and enc_dec = '1')))
                              else FINISHED   when (state = DATA_OUT and count = N_SIZE + 1)
                              else state;
     
@@ -82,16 +82,16 @@ begin
     
 
     -- PE PIPE
-    accum_ena <= '1'        when (state = PE_PIPE and ((count <= PE_SIZE + (N_SIZE/PE_SIZE) and enc_dec = '0') 
-                                                    or (count <= PE_SIZE + (N_SIZE/(PE_SIZE * 2)) and enc_dec = '1'))) else '0';
-    pe_ena <= '1'           when (state = PE_PIPE and ((count /= PE_SIZE + (N_SIZE/PE_SIZE) + 1 and enc_dec = '0')
-                                                    or (count /= PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2 and enc_dec = '1'))) else '0';
-    load_a_ena <= '1'       when (state = PE_PIPE and ((count < (N_SIZE / PE_SIZE) and enc_dec = '0')
-                                                    or (count < (N_SIZE / (PE_SIZE * 2)) and enc_dec = '1'))) else '0';
-    load_b_ena <= '1'       when (state = PE_PIPE and ((count < (N_SIZE / PE_SIZE) and enc_dec = '0') 
-                                                    or (count < (N_SIZE / (PE_SIZE * 2)) and enc_dec = '1'))) else '0';
-    dso_rst <= '1'     when (state = PE_PIPE and ((count = PE_SIZE + (N_SIZE/PE_SIZE) + 1 and enc_dec = '0') 
-                                                    or (count = PE_SIZE + N_SIZE / (PE_SIZE * 2) + 2 and enc_dec = '1'))) else '0';
+    accum_ena <= '1'        when (state = PE_PIPE and ((count <= PE_SIZE + (DIVIDE) and enc_dec = '0') 
+                                                    or (count <= PE_SIZE + (NUM_SETS) and enc_dec = '1'))) else '0';
+    pe_ena <= '1'           when (state = PE_PIPE and ((count /= PE_SIZE + (DIVIDE) + 1 and enc_dec = '0')
+                                                    or (count /= PE_SIZE + NUM_SETS + 2 and enc_dec = '1'))) else '0';
+    load_a_ena <= '1'       when (state = PE_PIPE and ((count < (DIVIDE) and enc_dec = '0')
+                                                    or (count < (NUM_SETS) and enc_dec = '1'))) else '0';
+    load_b_ena <= '1'       when (state = PE_PIPE and ((count < (DIVIDE) and enc_dec = '0') 
+                                                    or (count < (NUM_SETS) and enc_dec = '1'))) else '0';
+    dso_rst <= '1'     when (state = PE_PIPE and ((count = PE_SIZE + (DIVIDE) + 1 and enc_dec = '0') 
+                                                    or (count = PE_SIZE + NUM_SETS + 2 and enc_dec = '1'))) else '0';
     
     -- DSO
     dso_ena <= '1'     when (state = DATA_OUT and count < N_SIZE) else '0';

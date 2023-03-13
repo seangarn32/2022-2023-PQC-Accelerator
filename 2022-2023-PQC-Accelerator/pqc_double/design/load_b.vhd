@@ -35,13 +35,12 @@ architecture rtl of load_b is
     begin
         b_init <= '1' when (rst = '0' and load_b_ena = '1') else '0';
         count_hold <= count + "01" when (rst = '0' and load_b_ena = '1' and ((enc_dec = '0' and count < "10") or (enc_dec = '1' and count <= "00"))) else "00";
-        set_idx_hold <= set_idx + PE_SIZE * 2 when (rst = '0' and load_b_ena = '1' and ((enc_dec = '0' and count = "10")
+        set_idx_hold <= set_idx + SET_SIZE when (rst = '0' and load_b_ena = '1' and ((enc_dec = '0' and count = "10")
                                                                                      or (enc_dec = '1' and count > "00")));
 
         LOAD_B_P_ENC : for i in 0 to PE_SIZE-1 generate
             b_even(i) <= B_in(set_idx + i*2);
             b_odd(i) <= B_in(set_idx + i*2 + 1);
---
             p_even(i) <= P_in(set_idx + i*2);
             p_odd(i) <= P_in(set_idx + i*2 + 1);
         end generate LOAD_B_P_ENC;

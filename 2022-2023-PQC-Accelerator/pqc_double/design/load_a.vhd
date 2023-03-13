@@ -19,7 +19,6 @@ architecture rtl of load_a is
 
     signal a0          : a_vector;
     signal a_nxt_set          : a_circ_hold_matrix;
-    --signal a_nxt         : a_circ_hold_matrix;
     signal tmp         : a_vector;
     signal a_reg         : a_vector;
     signal a_init       : std_logic;
@@ -34,14 +33,12 @@ begin
 
     a_init_hold <= '1' when (rst = '0' and load_a_ena = '1') else '0';
     count_hold <= count xor '1' when (a_init_hold = '1' and count = '0') else '0';
-    --count_2_hold <= count_2 + 1 when (a_init_hold = '1' and count_2 < 2) else 0;
     
     process(clk)
     begin
         if(rising_edge(clk)) then
             a_init <= a_init_hold;
             count <= count_hold;
-            --count_2 <= count_2_hold;
         end if;
     end process;
 
@@ -76,6 +73,7 @@ begin
 
         a_reg
     );
+    
     a_nxt_set(0) <= a_reg when ((count = '1') or (enc_dec = '1' and a_init = '1'));
     A_out <= a_reg;
 
