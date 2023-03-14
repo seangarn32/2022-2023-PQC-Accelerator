@@ -19,15 +19,15 @@ architecture rtl of reg_1bit is
 begin
     process(clk)
 	begin
-        if (rising_edge(clk)) then
-            if (rst = '1') then
-                q <= '0';    
-            else
+        if (rst = '1') then
+            q <= '0';
+        else
+            if (rising_edge(clk)) then
                 if (ena = '1') then
-                    q <= d;		 
+                    q <= d;
                 end if; 
             end if;
-	  	end if;
+        end if;
 	end process;
 end rtl;
 
