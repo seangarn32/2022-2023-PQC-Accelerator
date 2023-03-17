@@ -4,7 +4,7 @@ use ieee.std_logic_unsigned.all;
 use ieee.numeric_std.all;
 use work.globals_pkg.all;
 
-entity fsm is
+entity fsm_latch is
     port ( 
         clk : in  std_logic;
         rst : in  std_logic;
@@ -29,9 +29,9 @@ entity fsm is
         c_out_1_index_out : out   std_logic_vector(7 downto 0) := (others=>'0');
         out_ena     : out   std_logic
     );
-end fsm;
+end fsm_latch;
 
-architecture rtl of fsm is
+architecture rtl of fsm_latch is
 
     type state_available is (SETUP, DATA_IN, PE_PIPE, DATA_OUT, FINISHED);  --type of state machine.
     signal state            : state_available := SETUP;
