@@ -68,32 +68,32 @@ begin
     begin
         state_nxt_v := state;
         count_nxt <= count + '1';-- when (count < N_SIZE + 1) else (others => '0');
+
+        dsi_ena <= '0';
+        out_ena <= '0';
+        load_a_rst <= '0';
+        load_b_rst <= '0';
+        accum_ena <= '0';
+        pe_ena <= '0';
+        load_a_ena <= '0';
+        load_b_ena <= '0';
+        dso_rst <= '0';
+        dso_ena <= '0';
+        err_ena <= '0';
+        a_index_val_hold <= (others=>'0');
+        b_index_val_hold <= (others=>'0');
+        p_index_val_hold <= (others=>'0');
+        c_out_0_index_val_hold <= (others=>'0');
+        c_out_1_index_val_hold <= (others=>'0');
+
         case state is
             when SETUP =>
-                dsi_ena <= '0';
-                a_index_val_hold <= (others=>'0');
-                b_index_val_hold <= (others=>'0');
-                p_index_val_hold <= (others=>'0');
-                out_ena <= '0';
-                load_a_rst <= '0';
-                load_b_rst <= '0';
-                accum_ena <= '0';
-                pe_ena <= '0';
-                load_a_ena <= '0';
-                load_b_ena <= '0';
-                dso_rst <= '0';
-                dso_ena <= '0';
-                err_ena <= '0';
-                c_out_0_index_val_hold <= (others=>'0');
-                c_out_1_index_val_hold <= (others=>'0');
                 if (ena = '1' and rst = '0') then
                     state_nxt_v := DATA_IN;
                     count_nxt <= (others=>'0');
                 end if;
             when DATA_IN =>
-                if (count >= N_SIZE) then
-                    dsi_ena <= '0';
-                else
+                if (count < N_SIZE) then
                     dsi_ena <= '1';
                 end if;
                 a_index_val_hold <= a_index_val + '1';
@@ -104,8 +104,8 @@ begin
                     state_nxt_v := PE_PIPE;
                     count_nxt <= (others=>'0');
                     out_ena <= '0';
-                    load_a_rst <= '0';
-                    load_b_rst <= '0';
+                    --load_a_rst <= '0';
+                    --load_b_rst <= '0';
                 elsif (count = N_SIZE) then
                     load_a_rst <= '1';
                     load_b_rst <= '1';
@@ -115,9 +115,6 @@ begin
                     if (count < DIVIDE) then
                         load_a_ena <= '1';
                         load_b_ena <= '1';
-                    else
-                        load_a_ena <= '0';
-                        load_b_ena <= '0';
                     end if;
                     if (count <= PE_SIZE + (DIVIDE)) then
                         accum_ena <= '1';
@@ -126,8 +123,6 @@ begin
                         state_nxt_v := DATA_OUT;
                         count_nxt <= (others=>'0');
                         dso_rst <= '1';
-                        accum_ena <= '0';
-                        pe_ena <= '0';
                     else
                         pe_ena <= '1';
                     end if;
@@ -135,26 +130,19 @@ begin
                     if (count < NUM_SETS) then
                         load_a_ena <= '1';
                         load_b_ena <= '1';
-                    else
-                        load_a_ena <= '0';
-                        load_b_ena <= '0';
                     end if;
                     if (count <= PE_SIZE + (NUM_SETS)) then
                         accum_ena <= '1';
-                    else
-                        accum_ena <= '0';
                     end if;
                     if (count = PE_SIZE + NUM_SETS + 2) then
                         state_nxt_v := DATA_OUT;
                         count_nxt <= (others=>'0');
                         dso_rst <= '1';
-                        pe_ena <= '0';
                     else
                         pe_ena <= '1';
                     end if;
                 end if;
             when DATA_OUT =>
-                dso_rst <= '0';
                 out_ena <= '1';
                 if (count < N_SIZE) then
                     dso_ena <= '1';
@@ -171,8 +159,6 @@ begin
             when FINISHED =>
                 -- do nothing
                 count_nxt <= (others=>'0');
-                dso_ena <= '0';
-                err_ena <= '0';
                 c_out_0_index_val_hold <= (others=>'0');
                 c_out_1_index_val_hold <= (others=>'0');
         end case;
@@ -216,13 +202,22 @@ begin
             if rising_edge(clk) then
                 if (rst = '1' or ena = '0') then
                     state <= SETUP;
-                    --count <= (others => '0');
+                    count <= (others => '0');
+
                     a_index_out <= (others=>'0');
                     b_index_out <= (others=>'0');
                     p_index_out <= (others=>'0');
+                    c_out_0_index_out <= (others=>'0');
+                    c_out_1_index_out <= (others=>'0');
                 else
                     state <= state_nxt;
                     count <= count_nxt;
+
+                    a_index_val <= a_index_val_hold;
+                    b_index_val <= b_index_val_hold;
+                    p_index_val <= p_index_val_hold;
+                    c_out_0_index_val <= c_out_0_index_val_hold;
+                    c_out_1_index_val <= c_out_1_index_val_hold;
 
                     a_index_out <= a_index_val_hold;
                     b_index_out <= b_index_val_hold;

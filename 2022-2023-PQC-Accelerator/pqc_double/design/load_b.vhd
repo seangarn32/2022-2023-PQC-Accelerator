@@ -27,8 +27,6 @@ architecture rtl of load_b is
     signal p_odd      :   b_hold_matrix;
     signal b_dec        : b_hold_matrix;
     signal count      :  std_logic_vector (1 downto 0) := "00";
-    signal count_hold      :  std_logic_vector (1 downto 0) := "00";
-    signal b_init       :  std_logic;
     signal set_idx            :  integer := 0;
     signal set_idx_hold            :  integer := 0;
 
@@ -72,6 +70,7 @@ architecture rtl of load_b is
             else 
                 if (rising_edge(clk)) then
                     if (load_b_ena = '1') then
+                        set_idx <= set_idx;
                         --b_init <= '1';
                         if (enc_dec = '0') then
                             if (count < "01") then

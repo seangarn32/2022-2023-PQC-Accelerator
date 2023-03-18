@@ -13,10 +13,10 @@ end entity;
 
 architecture rtl of signed_set_shift is
 
-    signal set_offset   : std_logic_vector(COUNTER_SIZE - 1 downto 0);
+    --signal set_offset   : std_logic_vector(COUNTER_SIZE - 1 downto 0);
 
 begin
-    set_offset <= std_logic_vector(to_unsigned(SET_SIZE, set_offset'length));
+    --set_offset <= std_logic_vector(to_unsigned(SET_SIZE, set_offset'length));
     
     SHIFT_BEGINNING : for i in 0 to SET_SIZE - 1 generate
         A_nxt_set(i) <= NOT(A_in(N_SIZE - SET_SIZE + i)) + 1;

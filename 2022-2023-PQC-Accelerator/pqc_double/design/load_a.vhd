@@ -17,7 +17,7 @@ end entity;
 
 architecture rtl of load_a is
 
-    signal a0, zero          : a_vector;
+    signal a0          : a_vector;
     signal a_nxt_set          : a_circ_hold_matrix;
     signal tmp         : a_vector;
     signal a_reg         : a_vector;
@@ -25,9 +25,6 @@ architecture rtl of load_a is
     signal count        : std_logic := '1';
     
 begin
-    zero_a_vector :for i in 0 to N_SIZE-1 generate
-        zero(i) <= (others => '0');
-    end generate;
 
     seq_logic: process(clk, rst)
     begin
@@ -42,6 +39,7 @@ begin
                 if (count = '1') then
                     count <= '0';
                     if (enc_dec = '0') then
+                        a_nxt_set(0) <= a_nxt_set(0);
                         tmp <= a_nxt_set(1);
                     else
                         a_nxt_set(0) <= a_nxt_set(2);
