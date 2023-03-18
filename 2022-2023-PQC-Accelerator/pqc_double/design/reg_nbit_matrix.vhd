@@ -24,8 +24,10 @@ begin
                 q(i) <= (others => '0');
             end loop;
 		else		
-			if (clk'event and clk = '1' and ena = '1') then             
-		  		q <= d;		 
+			if (rising_edge(clk)) then
+                if (ena = '1') then           
+		  		    q <= d;
+                end if;	 
             end if;
 	  	end if;
 	end process;
