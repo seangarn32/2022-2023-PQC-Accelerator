@@ -32,10 +32,6 @@ architecture rtl of load_b is
     signal set_idx_hold   :  integer := 0;
 
     begin
-        --b_init <= '1' when (rst = '0' and load_b_ena = '1') else '0';
-        --count_hold <= count + "01" when (rst = '0' and load_b_ena = '1' and ((enc_dec = '0' and count < "10") or (enc_dec = '1' and count <= "00"))) else "00";
-        --set_idx_hold <= set_idx + SET_SIZE when (rst = '0' and load_b_ena = '1' and ((enc_dec = '0' and count = "10")
-                                                                                     --or (enc_dec = '1' and count > "00")));
 
         LOAD_B_P_ENC : for i in 0 to PE_SIZE-1 generate
             b_even(i) <= B_in(set_idx + i*2);
@@ -48,15 +44,6 @@ architecture rtl of load_b is
             b_dec(i) <= B_in(set_idx + i);
         end generate LOAD_B_DEC;
 
-        --b_tmp <= (others => (others => '0')) when (rst = '1' and b_init = '0') else
-            --b_even when (enc_dec = '0' and b_init = '1' and count = "01") else
-            --b_odd when (enc_dec = '0' and b_init = '1' and count = "10") else 
-            --b_dec when (enc_dec = '1' and b_init = '1');
-
-        --p_tmp <= (others => (others => '0')) when (rst = '1' and b_init = '0') else
-        --    p_even when (enc_dec = '0' and b_init = '1' and count = "01") else
-        --    p_odd when (enc_dec = '0' and b_init = '1' and count = "10");   
-
         process(load_b_ena, count)
         begin
             count_nxt <= count xor '1';
@@ -65,14 +52,7 @@ architecture rtl of load_b is
                 if (enc_dec = '0') then
                     if (count = '0') then
                         set_idx_hold <= set_idx;
-                        --b_tmp <= b_even;
-                        --p_tmp <= p_even;
-                    --else
-                    --    b_tmp <= b_odd;
-                    --    p_tmp <= p_odd;
                     end if;
-                --else
-                --    b_tmp <= b_dec;
                 end if;
                 if (set_idx = N_SIZE - SET_SIZE) then
                     set_idx_hold <= set_idx;
@@ -94,7 +74,6 @@ architecture rtl of load_b is
                         set_idx <= set_idx_hold;
                         if (enc_dec = '0') then
                             if (count = '0') then
-                                --set_idx_hold <= set_idx;
                                 b_tmp <= b_even;
                                 p_tmp <= p_even;
                             else
