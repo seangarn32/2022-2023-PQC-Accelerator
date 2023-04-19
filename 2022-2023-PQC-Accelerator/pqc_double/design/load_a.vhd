@@ -18,9 +18,11 @@ end entity;
 architecture rtl of load_a is
 
     signal a0          : a_vector;
-    signal a_nxt_set          : a_circ_hold_matrix;
-    signal tmp         : a_vector;
-    signal a_reg         : a_vector;
+    signal a_nxt_set   : a_circ_hold_matrix := (others=>(others=>(others=>'0')));
+    signal A_reg_in         : a_vector := (others=>(others=>'0'));
+    signal A_set_0         : a_vector := (others=>(others=>'0'));
+    signal A_set_0_hold         : a_vector := (others=>(others=>'0'));
+    signal A_reg_out        : a_vector;
     
     signal count        : std_logic := '1';
     
@@ -29,25 +31,28 @@ begin
     seq_logic: process(clk, rst)
     begin
       if (rst = '1') then
-        --A_out <= zero;
-        tmp <= a0;
-        a_nxt_set(0) <= a0;
+        A_set_0 <= a0;
+        A_reg_in <= a0;
+        count <= '1';
       else
         if (rising_edge(clk)) then
             if (load_a_ena = '1') then
-                tmp <= a_nxt_set(2);
-                if (count = '1') then
-                    count <= '0';
-                    if (enc_dec = '0') then
-                        a_nxt_set(0) <= a_nxt_set(0);
-                        tmp <= a_nxt_set(1);
+                if (enc_dec = '0') then
+                    if (count = '1') then
+
+                        A_set_0 <= a_nxt_set(0);
+                        A_reg_in <= a_nxt_set(1);
                     else
-                        a_nxt_set(0) <= a_nxt_set(2);
+
+                        A_set_0 <= a_nxt_set(2);
+                        A_reg_in <= a_nxt_set(2);
                     end if;
                 else
-                    count <= '1';
-                    a_nxt_set(0) <= a_nxt_set(2);
+
+                    A_set_0 <= a_nxt_set(2);
+                    A_reg_in <= a_nxt_set(2);
                 end if;
+                count <= count xor '1'; 
             end if;
         end if;
       end if;
@@ -75,12 +80,13 @@ begin
         clk,
         rst,
         load_a_ena,
-        tmp,
+        A_reg_in,
 
-        a_reg
+        A_reg_out
     );
 
-    --a_nxt_set(0) <= a_reg when (count = '1');
-    A_out <= a_reg;
+    A_set_0_hold <= A_set_0;
+    a_nxt_set(0) <= A_set_0;
+    A_out <= A_reg_out;
 
 end rtl;

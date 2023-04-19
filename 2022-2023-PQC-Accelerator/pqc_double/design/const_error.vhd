@@ -32,7 +32,7 @@ architecture rtl of const_error is
 begin
 
 
-    tmp <= e1 when (enc_dec = '0') else c2 when (enc_dec = '1');
+    tmp <= e1 when (enc_dec = '0') else c2 when (enc_dec = '1') else '0';
 
     sum_c1 <= W + tmp;
 

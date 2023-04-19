@@ -20,9 +20,7 @@ begin
     process(clk)
 	begin
         if (rst = '1') then
-            for i in 0 to N_SIZE-1 loop
-                q(i) <= (others => '0');
-            end loop;
+            q <= (others=>(others=>'0'));
 		else		
 			if (rising_edge(clk)) then
                 if (ena = '1') then             
