@@ -1,3 +1,8 @@
+-- This file contains the accumulation cell that is attached at the end of the PE CHAIN
+-- The accumulator cell has two accumulators, a reverse shift cell, and adder
+-- The reverse shift cell is used to shift up the bottom output line, which is used in encryption
+-- The adder is used to combine both results for decryption
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

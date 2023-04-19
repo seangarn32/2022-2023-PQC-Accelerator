@@ -1,3 +1,7 @@
+-- This file contains the final component of the design, where either the errors or the secret key is added
+-- If it is encryption, then the two errors e1 and e2 are added the c1 and c2 and stored in registers
+-- If it is decryption, then the output of the accumulation cell is added with the secret key and stored in the register
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
