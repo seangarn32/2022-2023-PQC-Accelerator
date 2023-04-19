@@ -1,4 +1,5 @@
 -- Description:
+--
 -- Load A supplies the first PE in the PE chain the correct input vector. It does so in accordance to set notation,
 -- where a set size equals the number of PE's in the PE chain multiplied by 2.  For example, four PE's will have a 
 -- set size of 8 (0 through 7).
