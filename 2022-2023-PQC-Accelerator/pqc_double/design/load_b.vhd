@@ -2,13 +2,14 @@
 --
 -- Read Load A description to gain sense of processing.
 --
--- Load B supplies the correct B values to the PE chain to match a set being processed.
+-- Load B supplies the correct B values to the PE chain to match the A vector set being processed.
 --
 -- For decryption, Load B supplies the entire set of B index values after each clock cylce.
 --      Ex: B(0..7), B(8..15), B(16..23), B(24..31) ... B((N - PE_SIZE * 2)..(N - 1))
 --
 -- For encryption, Load B supplies the even B and P index values, then the odd B and P index values, of the entire set 
--- after each clock cylce.  Then, it will supply it the next even and odd B and P index values of the next set.
+-- after each clock cylce.  Then, it will supply it the next even and odd B and P index values of the next set.  It
+-- supplies B and P simultaneously 
 --      Ex: B(0, 2, 4, 6), B(1, 3, 5, 7), B(8, 10, 12, 14), B(9, 11, 13, 15) ...
 --      Ex: P(0, 2, 4, 6), P(1, 3, 5, 7), P(8, 10, 12, 14), P(9, 11, 13, 15) ...
 

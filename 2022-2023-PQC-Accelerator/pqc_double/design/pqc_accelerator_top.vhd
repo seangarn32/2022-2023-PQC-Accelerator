@@ -1,3 +1,9 @@
+-- Description:
+--
+-- The pqc_accelerator_top is the top level file that integrates the subcomponents together.
+-- The top level components are the following:
+-- FSM, DSI, LOAD_A, LOAD_B, PE_CHAIN, ACCUM, DSO, and ERR
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -21,6 +27,7 @@ entity pqc_accelerator_top is
         C_out_0   : out   std_logic_vector(7 downto 0);
         C_out_1   : out   std_logic_vector(7 downto 0);
 
+        -- Indexs that control the registers in the top level Quartus project
         a_index_out : out   std_logic_vector(7 downto 0);
         b_index_out : out   std_logic_vector(7 downto 0);
         p_index_out : out   std_logic_vector(7 downto 0);
@@ -65,6 +72,7 @@ architecture rtl of pqc_accelerator_top is
 
 begin
 
+    -- Controls when the control signals are set
     FSM : entity work.fsm(rtl)
         port map(
             clk,
@@ -91,6 +99,8 @@ begin
             out_ena
         );
 
+    -- Shifts in the input vectors A0, B, and P, which are stored within the system registers in the 
+    -- top level Quartus project
     DSI : entity work.data_shift_in(rtl)
         port map(
             clk,
@@ -105,7 +115,8 @@ begin
             B,
             P
         );
-    
+
+    -- Supplies PE_CHAIN with the correct input vector in accordance to set notation
     LOAD_A : entity work.load_a(rtl)
         port map(
             clk,
@@ -117,6 +128,8 @@ begin
             A0
         );
 
+    -- Supplies PE_CHAIN with the correct B and P index values that matches the A vector
+    -- set being processed
     LOAD_B : entity work.load_b(rtl)
         port map(
             clk,
@@ -130,6 +143,7 @@ begin
             P0
         );
 
+    -- Computes the matrix multiplication of A x B and/or A x P
     PE_CHAIN : entity work.pe_chain(rtl)
         port map(
             clk,
@@ -145,6 +159,8 @@ begin
             C_1
         );
 
+    -- Accumulates the results that are pushed out of the last PE in the PE chain
+    -- This is part of the matrix multiplication
     ACCUM : entity work.accumulator_cell(rtl)
         port map(
             clk,
@@ -154,11 +170,12 @@ begin
             C_0,
             C_1,
 
-            C_accum_0,
-            C_accum_1,
-            C_accum_2
+            C_accum_0,  -- Cyphertext 1
+            C_accum_1,  -- Cyphertext 2
+            C_accum_2   -- Decrypted plaintext, which is C_accum_0 + C_accum_1
         );
 
+    -- Shifts the matrix multiplication out of the system's registers
     DSO : entity work.data_shift_out(rtl)
         port map(
             clk,
@@ -170,10 +187,11 @@ begin
             C_accum_1,
             C_accum_2,
 
-            C_out_0_hold, -- will be either cyphertext 1 or the decrypted plaintext
-            C_out_1_hold  -- will be either cyphertext 2 or random data
+            C_out_0_hold, -- Encryption: Cyphertext 1, Decryption: Decrypted plaintext
+            C_out_1_hold  -- Encryption: Cyphertext 2, Decryption: Don't care
         );
 
+    -- Adds the error vectors to A x B and/or A x P
     ERR : entity work.const_error(rtl)
         port map(
             clk,
@@ -181,8 +199,8 @@ begin
             err_ena,
             enc_dec,
 
-            C_out_0_hold, -- will be either cyphertext 1 or the decrypted plaintext
-            C_out_1_hold, -- will be either cyphertext 2 or random data
+            C_out_0_hold, -- Encryption: Cyphertext 1, Decryption: Decrypted plaintext
+            C_out_1_hold  -- Encryption: Cyphertext 2, Decryption: Don't care
 
             e1,
             e2,
