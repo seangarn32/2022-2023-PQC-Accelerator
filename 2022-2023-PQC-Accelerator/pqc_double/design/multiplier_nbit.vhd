@@ -1,3 +1,7 @@
+-- Description:
+--
+-- AND gates within a PE that multiplies an A vector by a B or P index value
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
