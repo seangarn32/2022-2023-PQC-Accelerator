@@ -1,3 +1,9 @@
+-- This is the intermediate pe element in the chain
+-- similar function to processing_element_i however:
+-- the input for the a vector is from the output of processing_element_i
+-- two additional inputs C_in_0 and C_in_1 which are from the output of the registers from processing_element_i
+-- inbetween the multiplication and registers the results from the previous pe is added with the result from the current multiplication
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

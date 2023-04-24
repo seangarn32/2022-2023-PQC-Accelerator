@@ -1,3 +1,17 @@
+-- Takes in input values from load_a and load_b
+-- First, it will determine what values are needed for the b values in the WIRE_SELECT section:
+-- if it is encryption then it will use the two seperate vectors B and P
+-- if it is decryption then it will split the B vector into an even vector and an odd vector
+
+-- The a_wire, b_wire, p_wire are used for the inputs of the PEs
+-- The c0_wire, c1_wire are used to link together results of the PEs
+
+-- The wires allow for the inputs and results to be linked together so that they can be used in other components dynamically
+-- The registers are used to delay the input values for the B/P values until they are needed-# of registers = # of cycles delayed
+-- The registers_links are used to link the inputs and outputs of the registers together
+
+-- Only the final element of each c_wires needs to be outputted as this is the final accumulated sum of the computation
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

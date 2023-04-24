@@ -1,3 +1,12 @@
+-- This is the first processing element in the chain
+-- It takes in a column of the a matrix from load_a as well as the set of b/p values from load_b
+-- It will it will do the multiplication of the a vector with the first set of b/p values and store the result in a register
+-- It will then take the a vector and shift it to the next column
+-- The result will be sent to the enc_dec mux which if it is encryption it will output the shifted vector; if it is decryption it will sign invert the top element
+-- That resultant vector will be then multiplied with the second set of values of b/p values and stored in a register
+-- Next, the original input a vector will be shifted and sign inverted twice and outputted of the pe 
+-- Finally both values in the registers are outputted of the pe as well
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

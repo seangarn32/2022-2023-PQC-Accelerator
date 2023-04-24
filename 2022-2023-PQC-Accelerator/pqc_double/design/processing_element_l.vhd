@@ -1,3 +1,7 @@
+-- This is the final pe element in the chain
+-- similar function to processing_element_n however there is no computation for the next a vector
+-- reference comments from processing_element_i and processing_element_n
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

@@ -1,3 +1,8 @@
+-- Data Shift in takes in a(1-bit), b(8-bit), p(8-bit)
+-- For a, it will store the input in the first register and then each clock cycle, shift the value to the next register
+-- For b/p, it will store the input in the last register and then eahc clock cycle, shift the value down a register
+-- For outputs, a will be a n_size vector and b/p will be a b_matrix
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
