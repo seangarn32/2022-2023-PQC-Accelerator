@@ -1,3 +1,9 @@
+-- Description:
+--
+-- The finite state machine (fsm) controls the logic of the design.
+-- The design goes through the following states in order:
+--      SETUP, DATA_IN, PE_PIPE, DATA_OUT, FINISHED
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -41,6 +47,7 @@ architecture rtl of fsm is
     signal count_nxt        : std_logic_vector(COUNTER_SIZE downto 0) := (others=>'0');
     signal counter_rst      : std_logic := '1';
 
+    -- index values used for accessing the registers in the top level Quartus project
     signal a_index_val      : std_logic_vector(7 downto 0) := (others=>'0');
     signal b_index_val      : std_logic_vector(7 downto 0) := (others=>'0');
     signal p_index_val      : std_logic_vector(7 downto 0) := (others=>'0');
@@ -52,22 +59,14 @@ architecture rtl of fsm is
     signal c_out_0_index_val_hold : std_logic_vector(7 downto 0) := (others=>'0');
     signal c_out_1_index_val_hold : std_logic_vector(7 downto 0) := (others=>'0');
 begin
-    -- complete
-    --count_nxt <= count + '1' when (count < N_SIZE + 1) else (others => '0');
-    -- complete
-    --state_nxt <= SETUP      when (state = FINISHED) 
-    --                         else DATA_IN    when (state = SETUP and ena = '1' and rst = '0')
-    --                         else PE_PIPE    when (state = DATA_IN and count = N_SIZE + 1)
-    --                         else DATA_OUT   when (state = PE_PIPE and ((count = PE_SIZE + (DIVIDE) + 1 and enc_dec = '0') 
-    --                                                                 or (count = PE_SIZE + NUM_SETS + 2 and enc_dec = '1')))
-    --                         else FINISHED   when (state = DATA_OUT and count = N_SIZE + 1)
-    --                         else state;
 
     comb_logic: process(ena, rst, enc_dec, state, count)
     variable state_nxt_v: state_available;
     begin
+        -- signals will be zero unless stated otherwise
+        -- prevents latches from being inferred in Quartus compilation process
         state_nxt_v := state;
-        count_nxt <= count + '1';-- when (count < N_SIZE + 1) else (others => '0');
+        count_nxt <= count + '1';
 
         dsi_ena <= '0';
         out_ena <= '0';
@@ -92,6 +91,7 @@ begin
                     state_nxt_v := DATA_IN;
                     count_nxt <= (others=>'0');
                 end if;
+
             when DATA_IN =>
                 if (count < N_SIZE) then
                     dsi_ena <= '1';
@@ -104,12 +104,12 @@ begin
                     state_nxt_v := PE_PIPE;
                     count_nxt <= (others=>'0');
                     out_ena <= '0';
-                    --load_a_rst <= '0';
-                    --load_b_rst <= '0';
                 elsif (count = N_SIZE) then
+                    -- resets load a and b before moving to PE_PIPE
                     load_a_rst <= '1';
                     load_b_rst <= '1';
                 end if;
+                
             when PE_PIPE =>
                 if (enc_dec = '0') then
                     if (count < DIVIDE) then
@@ -117,6 +117,7 @@ begin
                         load_b_ena <= '1';
                     end if;
                     if (count <= PE_SIZE + (DIVIDE)) then
+                        -- accumulator is enabled when the first a vector is being processed in the last PE of the PE chain
                         accum_ena <= '1';
                     end if;
                     if (count = PE_SIZE + (DIVIDE) + 1) then
@@ -132,6 +133,7 @@ begin
                         load_b_ena <= '1';
                     end if;
                     if (count <= PE_SIZE + (NUM_SETS)) then
+                        -- accumulator is enabled when the first a vector is being processed in the last PE of the PE chain
                         accum_ena <= '1';
                     end if;
                     if (count = PE_SIZE + NUM_SETS + 2) then
@@ -142,6 +144,7 @@ begin
                         pe_ena <= '1';
                     end if;
                 end if;
+
             when DATA_OUT =>
                 out_ena <= '1';
                 if (count < N_SIZE) then
@@ -156,51 +159,24 @@ begin
                     state_nxt_v := FINISHED;
                     count_nxt <= (others=>'0');
                 end if;
+
             when FINISHED =>
                 -- do nothing
                 count_nxt <= (others=>'0');
                 c_out_0_index_val_hold <= (others=>'0');
                 c_out_1_index_val_hold <= (others=>'0');
         end case;
+
         state_nxt <= state_nxt_v;
+
     end process comb_logic;
     
-    -- DSI
-    --dsi_ena <= '1'      when (state = DATA_IN and count < N_SIZE) else '0';
-    --a_index_val_hold <= a_index_val + '1' when (state = DATA_IN and count < N_SIZE) else (others=>'0');
-    --b_index_val_hold <= b_index_val + '1' when (state = DATA_IN and count < N_SIZE) else (others=>'0');
-    --p_index_val_hold <= p_index_val + '1' when (state = DATA_IN and count < N_SIZE) else (others=>'0');
-
-    --out_ena <= '1'          when ((state = DATA_IN and count < N_SIZE + 1) 
-    --                              or (state = DATA_OUT and count < N_SIZE + 1)) else '0';
-
-    --load_a_rst <= '1'       when (state = DATA_IN and count = N_SIZE) else '0';
-    --load_b_rst <= '1'       when (state = DATA_IN and count = N_SIZE) else '0';
-    
-
-    -- PE PIPE
-    --accum_ena <= '1'        when (state = PE_PIPE and ((count <= PE_SIZE + (DIVIDE) and enc_dec = '0') 
-    --                                                or (count <= PE_SIZE + (NUM_SETS) and enc_dec = '1'))) else '0';
-    --pe_ena <= '1'           when (state = PE_PIPE and ((count /= PE_SIZE + (DIVIDE) + 1 and enc_dec = '0')
-    --                                                or (count /= PE_SIZE + NUM_SETS + 2 and enc_dec = '1'))) else '0';
-    --load_a_ena <= '1'       when (state = PE_PIPE and ((count < (DIVIDE) and enc_dec = '0')
-    --                                                or (count < (NUM_SETS) and enc_dec = '1'))) else '0';
-    --load_b_ena <= '1'       when (state = PE_PIPE and ((count < (DIVIDE) and enc_dec = '0') 
-    --                                                or (count < (NUM_SETS) and enc_dec = '1'))) else '0';
-    --dso_rst <= '1'     when (state = PE_PIPE and ((count = PE_SIZE + (DIVIDE) + 1 and enc_dec = '0') 
-    --                                                or (count = PE_SIZE + NUM_SETS + 2 and enc_dec = '1'))) else '0';
-    
-    -- DSO
-    --dso_ena <= '1'     when (state = DATA_OUT and count < N_SIZE) else '0';
-    --err_ena <= '1'          when (state = DATA_OUT and count < N_SIZE + 1) else '0';
-    --c_out_0_index_val_hold <= c_out_0_index_val + '1' when (state = DATA_OUT and count < N_SIZE) else (others=>'0');
-    --c_out_1_index_val_hold <= c_out_1_index_val + '1' when (state = DATA_OUT and count < N_SIZE) else (others=>'0');
-
 
     process (clk)
         begin
             if rising_edge(clk) then
                 if (rst = '1' or ena = '0') then
+                    -- initial state is SETUP
                     state <= SETUP;
                     count <= (others => '0');
 
@@ -210,6 +186,7 @@ begin
                     c_out_0_index_out <= (others=>'0');
                     c_out_1_index_out <= (others=>'0');
                 else
+                    -- enters the next state
                     state <= state_nxt;
                     count <= count_nxt;
 
