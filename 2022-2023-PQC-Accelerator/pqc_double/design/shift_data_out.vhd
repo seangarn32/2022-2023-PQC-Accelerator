@@ -1,3 +1,10 @@
+-- Description:
+--
+-- Data Shift out takes in cyphertext 1 and 2 as well as the decrypted text.
+-- A mux assigns c_enc_dec c_in_0 for encryption, or c_in_2 for decryption.
+-- The stored cyphertexts or the decrypted text is then sequentially shifted out
+-- of the design.
+
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
@@ -44,7 +51,7 @@ begin
         end if;
     end process;
 
-    -- assigns c_enc_dec c_in_0 for encryption, or c_in_2 for decryption
+    -- Assigns c_enc_dec c_in_0 for encryption, or c_in_2 for decryption
     C_SELECT : entity work.mux2to1_C(rtl) 
         port map (
             c_in_0,
