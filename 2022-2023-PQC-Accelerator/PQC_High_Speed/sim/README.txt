@@ -31,3 +31,11 @@ include the PQC_High_Speed vhdl files and they must be compiled.
 1.) Run top_lvl_wave.do to display signals
 2.) if simulating a singular element run either PE_i.do, PE_n.do
 3.) if simulating whole pe_chain run PE_chain_new.do
+
+* Data Shift IN:
+1.) Run top_lvl_wave.do to display signals
+2.) For simulation use dsin.do
+
+* Data Shift OUT:
+1.) Run top_lvl_wave.do to display signals
+2.) For simulation use dso.do
