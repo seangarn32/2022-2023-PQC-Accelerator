@@ -33,9 +33,11 @@ include the PQC_High_Speed vhdl files and they must be compiled.
 3.) if simulating whole pe_chain run PE_chain_new.do
 
 * Data Shift IN:
-1.) Run top_lvl_wave.do to display signals
-2.) For simulation use dsin.do
+1.) Compile top level design with N_SIZE = 8 in global_pkg.vhd
+2.) Run top_lvl_wave.do to display signals
+3.) For simulation use dsin.do
 
 * Data Shift OUT:
-1.) Run top_lvl_wave.do to display signals
-2.) For simulation use dso.do
+1.) Compile top level design with N_SIZE = 8 in global_pkg.vhd
+2.) Run top_lvl_wave.do to display signals
+3.) For simulation use dso.do
